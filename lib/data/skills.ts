@@ -38,6 +38,7 @@ export const skills: SkillCategory[] = [
       "Node.js",
       "Express.js",
       "NestJS",
+      "Next.js",
       "REST APIs",
     ],
   },

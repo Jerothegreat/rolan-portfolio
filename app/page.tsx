@@ -7,9 +7,9 @@ import { Whoami } from "@/components/sections/Whoami";
 import { Skills } from "@/components/sections/Skills";
 import { Experience } from "@/components/sections/Experience";
 import { Projects } from "@/components/sections/Projects";
-import { OpenSource } from "@/components/sections/OpenSource";
+//import { OpenSource } from "@/components/sections/OpenSource";
 import { Competitions } from "@/components/sections/Competitions";
-import { Events } from "@/components/sections/Events";
+//import { Events } from "@/components/sections/Events"; // No events to show yet; will add back when I have some!
 import { Certifications } from "@/components/sections/Certifications";
 import { Contact } from "@/components/sections/Contact";
 
@@ -94,9 +94,9 @@ export default function Home() {
                 <Skills />
                 <Experience />
                 <Projects />
-                <OpenSource />
+                {/*<OpenSource />  No open-source projects to show yet; will add back when I have some! */}
                 <Competitions />
-                <Events />
+                {/*<Events />  No events to show yet; will add back when I have some! */}
                 <Certifications />
                 <Contact />
 

@@ -16,14 +16,14 @@ const NAV_GROUPS = [
     label: "Work",
     items: [
       { command: "$ projects --pinned", id: "projects" },
-      { command: "$ open-source", id: "open-source" },
+      //{ command: "$ open-source", id: "open-source" },
     ],
   },
   {
     label: "Community",
     items: [
       { command: "$ competitions --awards", id: "competitions" },
-      { command: "$ events", id: "events" },
+      //{ command: "$ events", id: "events" },
     ],
   },
   {

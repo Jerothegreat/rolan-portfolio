@@ -1,4 +1,4 @@
-import { projects } from "@/lib/data/projects";
+{/*import { projects } from "@/lib/data/projects";
 import { profile } from "@/lib/data/profile";
 import { Badge } from "@/components/ui/Badge";
 import { SectionHeader } from "@/components/SectionHeader";
@@ -34,7 +34,7 @@ export function OpenSource() {
           </div>
         ))}
 
-        {/* GitHub link */}
+        //github link change to bracketed later on 
         <div className={nonPinned.length > 0 ? "pt-2" : ""}>
           <a
             href={profile.links.github}
@@ -49,3 +49,4 @@ export function OpenSource() {
     </section>
   );
 }
+*/}

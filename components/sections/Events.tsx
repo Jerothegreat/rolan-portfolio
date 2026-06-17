@@ -1,4 +1,4 @@
-import { events } from "@/lib/data/events";
+/*import { events } from "@/lib/data/events";
 import { SectionHeader } from "@/components/SectionHeader";
 
 export function Events() {
@@ -23,3 +23,4 @@ export function Events() {
     </section>
   );
 }
+*/

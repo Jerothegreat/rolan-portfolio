@@ -35,10 +35,10 @@ export const profile: Profile = {
   location: "Makati, NCR",
   links: {
     github: "https://github.com/Jerothegreat",
-    linkedin: "[LINKEDIN URL]",
+    linkedin: "https://www.linkedin.com/in/rolan-jero-pinton-3aa046391/",
     email: "rolanjerorarelapinton@gmail.com",
   },
-  avatar: "[PROFILE IMAGE]",
+  avatar: "/profileimg.jpg",
   resume: "/resume.pdf",
   education: {
     school: "University of Makati",

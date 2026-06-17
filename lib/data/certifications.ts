@@ -6,8 +6,14 @@ export interface Certification {
 
 export const certifications: Certification[] = [
   {
-    name: "[CERT NAME]",
-    issuer: "[ISSUER]",
-    year: "[YEAR]",
+    "name": "Introduction to Node.js",
+    "issuer": "Frontend Masters",
+    "year": "2026"
   },
+  {
+    "name": "AWS Certified AI Practitioner Challenge",
+    "issuer": "Amazon Web Services (AWS) @Udacity",
+    "year": "2026"
+  }
+
 ];
