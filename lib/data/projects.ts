@@ -24,7 +24,7 @@ export const projects: Project[] = [
   "name": "Airplane Ticketing System",
   "type": "fullstack",
   "description": "A desktop application built to handle airline flight reservations and ticketing. It streamlines passenger bookings, flight scheduling, and seat management for airline staff.",
-  "stack": [".NET", "C#", "WPF"],
+  "stack": [".NET", "C#", "WPF","MYSQL"],
   "pinned": true,
   "url": "[AIRPLANE TICKETING URL]"
   },

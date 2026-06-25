@@ -32,7 +32,7 @@ export function Whoami() {
             </div>
             <div className="font-mono text-xs text-text-dim leading-relaxed">
               <span className="text-text-dim">edu: </span>
-              <span>BS Computer Science (App Dev) · {education.school} · expected {education.expected}</span>
+              <span>BS Computer Science (App Dev) · {education.school} {education.expected}</span>
             </div>
           </div>
 

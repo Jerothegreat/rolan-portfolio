@@ -32,7 +32,7 @@ export const awards: Award[] = [
 
 export const hackathons: Hackathon[] = [
   {
-  "event": "Developer Camp Manila",
+  "event": "Developer Camp Manila (ACSADIANS)",
   "year": "2026",
   "product": "Pulsify",
   "description": "App + IoT smartwatch built under time pressure alongside developers nationwide. Engineered a synchronized mobile and Wear OS ecosystem capable of live session tracking, pedometer data aggregation, and persistent cloud storage via Supabase.",
@@ -46,7 +46,7 @@ export const hackathons: Hackathon[] = [
   ]
   },
   {
-  "event": "Agora",
+  "event": "Agora (DIO-GENES)",
   "year": "2026",
   "product": "Mayari Voice Agent (combined with Haliya)",
   "description": "A real-time bilingual (Taglish) AI voice agent for Philippine medical clinics. It automates patient intake by collecting symptoms, assessing medical urgency via Groq-powered LLMs, applying strict safety guardrails, and autonomously routing appointments to reduce staff overload.",
@@ -60,7 +60,7 @@ export const hackathons: Hackathon[] = [
   "stack": ["AI Security", "Cybersecurity", "Deepfake Detection", "Threat Analysis", "Media Forensics"]
   },
   {
-  "event": "Devkada",
+  "event": "Devkada (THEBOYS)",
   "year": "2026",
   "product": "Haliya",
   "description": "A web-based AI triage system built to prevent ER overcrowding and delayed treatments. It accurately assesses patient symptom severity in real time and directs them to the appropriate level of care, from self-management to emergency services.",

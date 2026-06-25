@@ -1,7 +1,6 @@
 import { experience } from "@/lib/data/experience";
 import { profile } from "@/lib/data/profile";
 import { Card } from "@/components/ui/Card";
-import { Badge } from "@/components/ui/Badge";
 import { SectionHeader } from "@/components/SectionHeader";
 
 export function Experience() {
@@ -47,11 +46,6 @@ export function Experience() {
             </div>
             <div className="font-mono text-xs text-text-secondary mb-3">
               {education.school} · {education.location}
-            </div>
-            <div className="flex flex-wrap gap-1.5">
-              {education.coursework.map((course) => (
-                <Badge key={course} variant="tech">{course}</Badge>
-              ))}
             </div>
           </Card>
         </div>

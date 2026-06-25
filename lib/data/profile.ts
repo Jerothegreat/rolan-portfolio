@@ -9,7 +9,6 @@ export interface Education {
   degree: string;
   expected: string;
   location: string;
-  coursework: string[];
 }
 
 export interface Profile {
@@ -30,7 +29,7 @@ export interface Profile {
 export const profile: Profile = {
   name: "Rolan Jero Pinton",
   title: "AI Engineer & Full-Stack Developer",
-  bio: "CS student at the University of Makati (BS in Application Development, expected 2027) building AI applications, RAG systems, and full-stack products. Champion in Java Programming at Infotechnolympics 2025 and UMak representative at the 14th IT Skills Olympics. Currently an AI & QA Intern at Sofi AI Tech Solution Inc., building AI-powered automation and testing production chatbots.",
+  bio: "Computer Science student at University of Makati (BSCS in Application Development, expected 2027) building AI applications, RAG systems, and full-stack products. Champion in Java Programming at Infotechnolympics 2025 and UMak representative at the 14th IT Skills Olympics. Currently an AI & QA Intern at Sofi AI Tech Solution Inc., building AI-powered systems and testing production chatbots.",
   availability: "open",
   location: "Makati, NCR",
   links: {
@@ -45,15 +44,5 @@ export const profile: Profile = {
     degree: "BS Computer Science — Application Development",
     expected: "2027",
     location: "Makati City, PH",
-    coursework: [
-      "Data Structures & Algorithms",
-      "Discrete Mathematics",
-      "Automata Theory & Formal Languages",
-      "Object-Oriented Programming (C#)",
-      "Software Engineering",
-      "Information Assurance & Security",
-      "Human-Computer Interaction",
-      "Structure of Programming Languages",
-    ],
   },
 };
