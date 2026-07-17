@@ -13,6 +13,7 @@ export const skills: SkillCategory[] = [
     items: [
       "Python",
       "LangChain",
+      "LangGraph",
       "RAG",
       "Prompt Engineering",
       "LLM Integration",

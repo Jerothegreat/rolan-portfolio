@@ -18,7 +18,7 @@ export const projects: Project[] = [
       "Web-based restaurant seat reservation system — browse tables, pick time slots, confirm bookings, database-backed workflow.",
     stack: ["HTML", "CSS", "PHP", "MySQL"],
     pinned: true,
-    url: "[RESTAURANT WEB URL]",
+    url: "https://github.com/Jerothegreat/RestaurantWeb-QWERTY",
   },
   {
   "name": "Airplane Ticketing System",
@@ -26,10 +26,10 @@ export const projects: Project[] = [
   "description": "A desktop application built to handle airline flight reservations and ticketing. It streamlines passenger bookings, flight scheduling, and seat management for airline staff.",
   "stack": [".NET", "C#", "WPF","MYSQL"],
   "pinned": true,
-  "url": "[AIRPLANE TICKETING URL]"
+  "url": "https://github.com/Jerothegreat/AirlineTicketing"
   },
   {
-    name: "CCED-Admin-web",
+    name: "CCED-Admin-web [IN PROGRESS]",
     type: "fullstack",
     description:
       "Admin portal for UMak community-extension programs — volunteer records, events, role-based access, dashboard analytics.",
@@ -38,7 +38,7 @@ export const projects: Project[] = [
     url: "[CCED ADMIN URL]",
   },
   {
-    name: "UMak Kalinga App",
+    name: "UMak Kalinga App [IN PROGRESS]",
     type: "fullstack",
     description:
       "Community in-kind donation platform — campaign creation, inventory tracking, volunteer coordination, real-time Firestore sync. Supported 100+ UMak students.",
