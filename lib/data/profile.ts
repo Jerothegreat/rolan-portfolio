@@ -29,7 +29,7 @@ export interface Profile {
 export const profile: Profile = {
   name: "Rolan Jero Pinton",
   title: "AI Engineer & Full-Stack Developer",
-  bio: "Computer Science student at University of Makati (BSCS in Application Development, expected 2027) building AI applications, RAG systems, and full-stack products. Champion in Java Programming at Infotechnolympics 2025 and UMak representative at the 14th IT Skills Olympics. Currently an AI & QA Intern at Sofi AI Tech Solution Inc., building AI-powered systems and testing production chatbots.",
+  bio: "Computer Science student at University of Makati (BSCS in Application Development, expected 2027) building AI applications, RAG systems, and full-stack products. Champion in Java Programming at Infotechnolympics 2025 and UMak representative at the 14th IT Skills Olympics. Currently an intern at Globe Telecom PH, building automation systems in their google workspace.",
   availability: "open",
   location: "Makati, NCR",
   links: {
