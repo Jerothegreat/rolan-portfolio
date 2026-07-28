@@ -16,6 +16,12 @@ export interface Hackathon {
 
 export const awards: Award[] = [
   {
+    name: "eGovPH Hackathon 2026",
+    placement: "TOP 10 FINALIST — Hackathon",
+    rank: "finalist",
+    year: 2026,
+  },
+  {
     name: "Infotechnolympics 2025",
     placement: "Champion — Java Programming",
     rank: "1st",
@@ -31,6 +37,21 @@ export const awards: Award[] = [
 ];
 
 export const hackathons: Hackathon[] = [
+  {
+  "event": "eGovPH Hackathon 2026",
+  "year": "2026",
+  "product": "HANDA",
+  "description": "An integrated disaster incident reporting and household assessment module for the eGovPH Super App[cite: 2]. HANDA enables barangay officials to rapidly discover affected households and identify immediate post-disaster needs through citizen check-ins, automated household deduplication, and non-respondent tracking for targeted field outreach[cite: 2].",
+  "stack": [
+    "Supabase",
+    "TypeScript",
+    "React",
+    "Vite",
+    "Vitest",
+    "Tailwind CSS",
+    "eGovPH SSO / OIDC Authentication"
+  ]
+  },
   {
   "event": "Developer Camp Manila (ACSADIANS)",
   "year": "2026",
