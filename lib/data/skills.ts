@@ -50,6 +50,7 @@ export const skills: SkillCategory[] = [
       "Docker",
       "Docker Compose",
       "Firebase / Firestore",
+      "Google Workspace",
       "PostgreSQL",
       "MySQL",
       "Git",
