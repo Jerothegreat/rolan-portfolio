@@ -9,7 +9,7 @@ export const experience: Experience[] = [
   {
     role: "Intern (Data & Analytics, Google Workspace, Automation)",
     company: "Globe Telecom",
-    dates: "August 2026 – Present",
+    dates: "July 2026 – Present",
     bullets: [
       "Architected automated workflows and dynamic operational dashboards within Google Workspace to support 1,000+ internal users across enterprise teams.",
       "Engineered large-scale data processing pipelines using Google Apps Script and Google BigQuery to manage, transform, and visualize over 30 million data cells seamlessly.",

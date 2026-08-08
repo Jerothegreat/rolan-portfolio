@@ -17,9 +17,10 @@ export interface Hackathon {
 export const awards: Award[] = [
   {
     name: "eGovPH Hackathon 2026",
-    placement: "TOP 10 FINALIST — Hackathon",
-    rank: "finalist",
+    placement: "TOP 10 — Champion Award",
+    rank: "1st",
     year: 2026,
+    note: "Awarded Champion within the Top 10 finalists.",
   },
   {
     name: "Infotechnolympics 2025",
