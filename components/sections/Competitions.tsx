@@ -26,7 +26,7 @@ export function Competitions() {
       {/* Awards */}
       <div className="space-y-3 mb-8">
         {sortedAwards.map((a) => {
-          const isWin = a.rank === "1st";
+          const isWin = a.rank === "1st"  ||  a.rank === "finalist";
           return (
             <div
               key={a.name}

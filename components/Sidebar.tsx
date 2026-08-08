@@ -53,9 +53,6 @@ export function Sidebar() {
     >
       {/* Top: site identity */}
       <div className="px-5 pt-7 pb-5 border-b border-border">
-        <p className="font-mono text-xs text-text-dim uppercase tracking-widest mb-1">
-          terminal
-        </p>
         <p className="font-mono text-sm text-text leading-snug">
           {profile.name.split(" ")[0].toLowerCase()}.portfolio
         </p>

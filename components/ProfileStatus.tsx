@@ -59,7 +59,7 @@ export function ProfileStatus() {
           {/* Active */}
           <div className="text-text-dim">
             Active: <span className="text-status-open">active (running)</span>
-            <span className="text-text-secondary">; expected graduating {profile.education.expected}</span>
+            <span className="text-text-secondary">; Anticipated Graduation: {profile.education.expected}</span>
           </div>
 
           {/* Notify */}
