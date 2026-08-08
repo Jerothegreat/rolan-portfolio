@@ -17,16 +17,17 @@ export interface Hackathon {
 export const awards: Award[] = [
   {
     name: "eGovPH Hackathon 2026",
-    placement: "TOP 10 — Champion Award",
-    rank: "1st",
+    placement: "Top 10 (30) Finalist — ₱100,000 Cash Prize Winner",
+    rank: "finalist",
     year: 2026,
-    note: "Awarded Champion within the Top 10 finalists.",
+    note: "Awarded a ₱100,000 cash prize as a Top 30 finalist out of 200+ teams and 1,500+ participants.",
   },
   {
     name: "Infotechnolympics 2025",
     placement: "Champion — Java Programming",
     rank: "1st",
     year: 2025,
+    note: "Competed among top students in Java Programming; hosted by UMak CCIS.",
   },
   {
     name: "14th IT Skills Olympics 2025",
@@ -39,10 +40,10 @@ export const awards: Award[] = [
 
 export const hackathons: Hackathon[] = [
   {
-  "event": "eGovPH Hackathon 2026",
+"event": "eGovPH Hackathon 2026",
   "year": "2026",
   "product": "HANDA",
-  "description": "An integrated disaster incident reporting and household assessment module for the eGovPH Super App. HANDA enables barangay officials to rapidly discover affected households and identify immediate post-disaster needs through citizen check-ins, automated household deduplication, and non-respondent tracking for targeted field outreach.",
+  "description": "An integrated disaster incident reporting and household assessment module for the eGovPH Super App. Integrated with eReport for real-time incident submissions and powered by eGov AI, HANDA enables barangay officials to rapidly discover affected households, analyze post-disaster needs through citizen check-ins, perform automated household deduplication, and execute non-respondent tracking for targeted field outreach. It also provides public APIs, allowing third-party developers to embed HANDA's real-time disaster and assessment data directly into external applications—similar to a weather API integration.",
   "stack": [
     "Supabase",
     "TypeScript",
@@ -50,7 +51,10 @@ export const hackathons: Hackathon[] = [
     "Vite",
     "Vitest",
     "Tailwind CSS",
-    "eGovPH SSO / OIDC Authentication"
+    "eGovPH SSO / OIDC Authentication",
+    "eGov AI",
+    "eReport Integration",
+    "RESTful API / Public Integration API"
   ]
   },
   {
