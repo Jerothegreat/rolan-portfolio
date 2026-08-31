@@ -12,6 +12,7 @@ export interface Hackathon {
   product: string;      // pitched/developed product
   description: string;  // user fills — use a [TOKEN] when unknown
   stack: string[];      // user fills — use ["[TECH STACK]"] when unknown
+  url?: string;         // live demo or project link
 }
 
 export const awards: Award[] = [
@@ -43,6 +44,7 @@ export const hackathons: Hackathon[] = [
 "event": "eGovPH Hackathon 2026",
   "year": "2026",
   "product": "HANDA",
+  "url": "https://e-handa.vercel.app/",
   "description": "An integrated disaster incident reporting and household assessment module for the eGovPH Super App. Integrated with eReport for real-time incident submissions and powered by eGov AI, HANDA enables barangay officials to rapidly discover affected households, analyze post-disaster needs through citizen check-ins, perform automated household deduplication, and execute non-respondent tracking for targeted field outreach. It also provides public APIs, allowing third-party developers to embed HANDA's real-time disaster and assessment data directly into external applications—similar to a weather API integration.",
   "stack": [
     "Supabase",

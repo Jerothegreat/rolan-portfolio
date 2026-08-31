@@ -79,7 +79,20 @@ export function Competitions() {
               <span className="font-mono text-xs text-text-dim shrink-0">{h.year}</span>
             </div>
 
-            <p className="font-mono text-xs text-accent mb-2">{h.product}</p>
+            <p className="font-mono text-xs text-accent mb-2">
+              {h.url ? (
+                <a
+                  href={h.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:underline focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent rounded-sm"
+                >
+                  {h.product} ↗
+                </a>
+              ) : (
+                h.product
+              )}
+            </p>
 
             <p className="font-mono text-xs text-text-secondary leading-relaxed mb-3">
               {h.description}
