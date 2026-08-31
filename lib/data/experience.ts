@@ -11,7 +11,7 @@ export const experience: Experience[] = [
     company: "Globe Telecom",
     dates: "July 2026 – Present",
     bullets: [
-      "Architected automated workflows and dynamic operational dashboards within Google Workspace to support 1,000+ internal users across enterprise teams.",
+      "Architected dynamic operational dashboards and automated workflows in Google Workspace to track critical VIP service metrics, adopted by multiple departments as the standard basis for their team operations.",
       "Engineered large-scale data processing pipelines using Google Apps Script and Google BigQuery to manage, transform, and visualize over 30 million data cells seamlessly.",
       "Optimized Google Sheets and Data Studio/Looker Studio integrations, improving dashboard load times and data reporting efficiency for high-volume enterprise analytics.",
     ],
