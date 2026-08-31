@@ -62,4 +62,14 @@ export const projects: Project[] = [
   "pinned": true,
   "url": "[AI PIPELINES URL]"
   },
+  {
+    name: "HANDA — E-Gov Hackathon",
+    type: "fullstack",
+    description:
+      "Disaster incident reporting and household assessment module for the eGovPH Super App — real-time incident intake via eReport, citizen check-in needs analysis, household deduplication, non-respondent tracking, and public APIs for third-party integration.",
+    stack: ["React", "TypeScript", "Vite", "Supabase", "Tailwind CSS", "OIDC SSO", "Public REST API"],
+    pinned: true,
+    impact: "Top 10 finalist (of 200+ teams) — ₱100,000 cash prize, eGovPH Hackathon 2026.",
+    url: "https://e-handa.vercel.app/",
+  },
 ];
