@@ -1,7 +1,7 @@
 import { Button } from "@/components/button";
 import { Card } from "@/components/card";
 import { Pill } from "@/components/pill";
-import { ThemeToggle } from "@/components/theme-toggle";
+import { CopyEmail } from "@/components/copy-email";
 import { site } from "@/lib/site";
 import { siteConfig } from "@/lib/site-config";
 
@@ -12,7 +12,6 @@ export default function Home() {
   return (
     <main className="mx-auto max-w-page px-4 py-16 sm:px-6 lg:py-24">
       <header>
-        <ThemeToggle className="float-right" />
         <h1 className="text-h1">{siteConfig.name}</h1>
         <p className="mt-3 text-body text-ink-muted">{siteConfig.role}</p>
         {latestInternship?.company ? (
@@ -98,6 +97,27 @@ export default function Home() {
         <p className="mt-8">
           <Button href="#projects" variant="ghost">
             See all {projectCount} {projectCount === 1 ? "project" : "projects"} →
+          </Button>
+        </p>
+      </section>
+
+      <section id="contact" aria-labelledby="contact-heading" className="mt-16 lg:mt-24">
+        <h2 id="contact-heading" className="text-h2">
+          Get in touch
+        </h2>
+        <p className="mt-3 text-body text-ink-muted">Email is the fastest way to reach me.</p>
+        <p className="mt-6">
+          <CopyEmail email={siteConfig.email} />
+        </p>
+        <p className="mt-6 flex flex-wrap items-center gap-6">
+          <Button href={siteConfig.github} variant="ghost">
+            GitHub
+          </Button>
+          <Button href={siteConfig.linkedin} variant="ghost">
+            LinkedIn
+          </Button>
+          <Button href={siteConfig.resume} variant="secondary" download>
+            Download resume
           </Button>
         </p>
       </section>

@@ -86,6 +86,10 @@
 }
 
 @layer base {
+  html {
+    scroll-padding-top: 6rem;
+  }
+
   body {
     background: var(--bg);
     color: var(--ink);
@@ -104,5 +108,27 @@
   :focus-visible {
     outline: 3px solid var(--ink);
     outline-offset: 3px;
+  }
+}
+
+/* Email copy confetti: a few spans flying outward. Hidden under reduced motion. */
+.confetti-bit {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border: 2px solid var(--ink);
+  animation: confetti-fly 600ms ease-out forwards;
+}
+
+@keyframes confetti-fly {
+  to {
+    transform: translate(var(--dx), var(--dy)) rotate(180deg);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .confetti-bit {
+    display: none;
   }
 }
