@@ -1,6 +1,6 @@
 # Plan 01: Foundation
 
-**Status:** Planned (spec final; next: `to-tickets`)
+**Status:** Planned (spec final; 9 tickets indexed in `tasks.md`; next: `implement` ticket 01)
 **Owner:** apps/web
 **Dependencies:** Plan 00 gate passed
 **Requirements:** PG-01, SF-03, SF-04, CM-01, CM-02, CM-03, CM-04, NFR-02, NFR-04
