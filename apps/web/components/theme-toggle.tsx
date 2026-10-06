@@ -37,25 +37,27 @@ function subscribe(onChange: () => void) {
 
 const isDark = () => document.documentElement.classList.contains("dark");
 
+// Shared with the terminal's `theme` command.
+export function toggleTheme() {
+  const dark = isDark();
+  try {
+    localStorage.setItem(KEY, dark ? "light" : "dark");
+  } catch {
+    // Storage unavailable: the choice still applies for this page view.
+    document.documentElement.classList.toggle("dark", !dark);
+    return;
+  }
+  applyTheme();
+}
+
 export function ThemeToggle({ className = "" }: { className?: string }) {
   const dark = useSyncExternalStore(subscribe, isDark, () => false);
-
-  function toggle() {
-    try {
-      localStorage.setItem(KEY, dark ? "light" : "dark");
-    } catch {
-      // Storage unavailable: the choice still applies for this page view.
-      document.documentElement.classList.toggle("dark", !dark);
-      return;
-    }
-    applyTheme();
-  }
 
   return (
     <Button
       variant="secondary"
       className={className}
-      onClick={toggle}
+      onClick={toggleTheme}
       aria-label={dark ? "Switch to light theme" : "Switch to dark theme"}
     >
       {dark ? "Light" : "Dark"}

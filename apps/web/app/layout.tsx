@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import { Bricolage_Grotesque, Inter, JetBrains_Mono } from "next/font/google";
 import { Footer } from "@/components/footer";
 import { Nav } from "@/components/nav";
+import { Terminal } from "@/components/terminal";
+import { site } from "@/lib/site";
 import { siteConfig } from "@/lib/site-config";
+import type { TerminalContext } from "@/lib/terminal";
 import "./globals.css";
 
 const bricolage = Bricolage_Grotesque({
@@ -31,6 +34,23 @@ export const metadata: Metadata = {
   description: `${siteConfig.name} builds AI apps, wins hackathons, and writes about what broke.`,
 };
 
+// Built on the server; only listed projects reach the client. Drafts and unlisted projects are
+// absent, so hiddenSlugs is left out rather than shipping their slugs to every visitor.
+const terminalContext: TerminalContext = {
+  name: siteConfig.name,
+  role: siteConfig.role,
+  bio: "I build AI apps and write about what broke.",
+  contact: { email: siteConfig.email, github: siteConfig.github, linkedin: siteConfig.linkedin },
+  projects: site.listedProjects.map((p) => ({
+    slug: p.slug,
+    title: p.title,
+    oneLiner: p.oneLiner,
+    status: p.status,
+    demoUrl: p.demoUrl,
+    repoUrl: p.repoUrl,
+  })),
+};
+
 // Runs before first paint so the page never flashes the wrong theme.
 const themeScript = `(function(){var s=null;try{s=localStorage.getItem("theme")}catch(e){}var d=s==="dark"||(s!=="light"&&matchMedia("(prefers-color-scheme: dark)").matches);document.documentElement.classList.toggle("dark",d)})()`;
 
@@ -52,6 +72,7 @@ export default function RootLayout({
         <Nav />
         {children}
         <Footer />
+        <Terminal context={terminalContext} />
       </body>
     </html>
   );
