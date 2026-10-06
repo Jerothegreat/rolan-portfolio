@@ -67,7 +67,8 @@ pnpm dev              # Next.js dev server (apps/web)
 pnpm typecheck        # tsc --noEmit
 pnpm lint             # eslint
 pnpm build            # production build
-pnpm check:workspace  # typecheck + lint + build
+pnpm test             # vitest (content model, terminal)
+pnpm check:workspace  # typecheck + lint + test + build
 ```
 
 CI (Plan 05) adds the chat eval and link check (NFR-06).

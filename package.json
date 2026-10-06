@@ -7,8 +7,9 @@
   "scripts": {
     "dev": "pnpm --filter web dev",
     "build": "pnpm --filter web build",
-    "typecheck": "pnpm --filter web exec tsc --noEmit",
+    "typecheck": "pnpm --filter web typecheck",
     "lint": "pnpm --filter web lint",
-    "check:workspace": "pnpm typecheck && pnpm lint && pnpm build"
+    "test": "pnpm --filter web test",
+    "check:workspace": "pnpm typecheck && pnpm lint && pnpm test && pnpm build"
   }
 }

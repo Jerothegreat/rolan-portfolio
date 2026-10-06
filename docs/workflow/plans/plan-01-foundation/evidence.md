@@ -2,5 +2,4 @@
 
 | Task | Evidence | Status |
 | --- | --- | --- |
-
-No execution yet.
+| `FD-02` (ticket 01) | Tag `legacy-terminal-site` created at `4fbf761` before removal. Legacy components, `lib/data`, `lib/hooks`, `content.md`, and starter SVGs removed. Velite 0.4 and Vitest 5 added; `esbuild` build script allowed in `pnpm-workspace.yaml`. TDD at the content-model seam: "returns the single spotlight project" (red: module missing → green); "rejects no spotlight, naming files" (red → green); "rejects two spotlights, naming only competing files" (passed on first run; it guards behaviour introduced in the previous step). `pnpm check:workspace`: typecheck pass, lint pass (the 7 legacy errors are gone with the legacy files), `vitest run` 3/3 pass, `next build` pass (`/` static). Built `index.html` contains "Rolan Jero Pinton", the role, "Spotlight", "Alunsina", the one-liner, and "team project". Integration check: a temporary second spotlight file made `next build` fail with `ContentRuleError: Content needs exactly one spotlight project, found 2. Check: projects/alunsina, projects/zz-test`; the file was then removed. Known: `pnpm peers check` reports `@types/node` 20 vs Vitest's wanted ^22 (types only; runtime is Node 25). | Verified |

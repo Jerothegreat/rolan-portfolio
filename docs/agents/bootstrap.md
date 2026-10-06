@@ -27,10 +27,11 @@ Run the checks that do not require a running service:
 ```text
 pnpm typecheck
 pnpm lint
+pnpm test
 pnpm build
 ```
 
-`pnpm check:workspace` runs all three in order. Start the dev server (`pnpm dev`) only after explicit approval for that session.
+`pnpm check:workspace` runs all four in order. Each app script runs `velite build` first, so content types exist before type checking. Start the dev server (`pnpm dev`) only after explicit approval for that session.
 
 Completion criterion: each command has an observed pass, skip, or failure recorded; skipped checks are blockers or limitations, not passing evidence.
 
