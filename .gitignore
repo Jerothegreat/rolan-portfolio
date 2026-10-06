@@ -1,41 +1,34 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
-/node_modules
-/.pnp
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
-
-# testing
-/coverage
-
-# next.js
-/.next/
-/out/
-
-# production
-/build
-
-# misc
-.DS_Store
-*.pem
-
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnpm-debug.log*
-
-# env files (can opt-in for committing if needed)
-.env*
-
-# vercel
-.vercel
-
-# typescript
+# Dependencies & build output
+node_modules/
+.pnpm-store/
+.next/
+out/
+build/
+dist/
+coverage/
 *.tsbuildinfo
 next-env.d.ts
+.vercel/
+
+# Logs and OS
+*.log
+.DS_Store
+Thumbs.db
+*.stackdump
+
+# Environment variables (commit only .env.example)
+.env
+.env.*
+!.env.example
+
+# IDE (keep shared settings)
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+
+# Local agent state and machine-specific package-manager overrides
+.agents/
+.claude/
+.scratch/
+.npmrc
+graphify-out/
