@@ -6,7 +6,7 @@ import { site } from "@/lib/site";
 import { siteConfig } from "@/lib/site-config";
 
 export default function Home() {
-  const { spotlight, projectCount } = site;
+  const { spotlight, projectCount, latestInternship } = site;
   const recent = site.recentProjects(2);
 
   return (
@@ -15,6 +15,11 @@ export default function Home() {
         <ThemeToggle className="float-right" />
         <h1 className="text-h1">{siteConfig.name}</h1>
         <p className="mt-3 text-body text-ink-muted">{siteConfig.role}</p>
+        {latestInternship?.company ? (
+          <p className="mt-4">
+            <Pill variant="neutral">ex-intern @ {latestInternship.company}</Pill>
+          </p>
+        ) : null}
         <Button href="#projects" className="mt-8">
           See my work
         </Button>
