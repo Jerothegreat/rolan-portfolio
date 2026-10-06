@@ -1,1 +1,103 @@
 @import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Design tokens: docs/standards/design-brief.md. Light values on :root, dark on .dark. */
+:root {
+  --bg: #fff8ec;
+  --surface: #ffffff;
+  --ink: #111111;
+  --ink-muted: #5c5c5c;
+  --gold: #ffc940;
+  --lilac: #b9a7ff;
+  --mint: #7ee0b5;
+  --coral: #ff7a59;
+  /* Text on gold, mint, or lilac is always #111111, in both themes. */
+  --on-accent: #111111;
+
+  --fs-h1: 36px;
+  --fs-h2: 28px;
+  --fs-h3: 20px;
+  --fs-body: 16px;
+  --fs-mono: 13px;
+}
+
+.dark {
+  --bg: #141414;
+  --surface: #1f1f1f;
+  --ink: #f5f0e6;
+  --ink-muted: #b5b0a6;
+  --lilac: #8f7bea;
+  --mint: #4cc495;
+  --coral: #ff8a6c;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --fs-h1: 56px;
+    --fs-h2: 36px;
+    --fs-h3: 24px;
+    --fs-body: 18px;
+    --fs-mono: 14px;
+  }
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-gold: var(--gold);
+  --color-lilac: var(--lilac);
+  --color-mint: var(--mint);
+  --color-coral: var(--coral);
+  --color-on-accent: var(--on-accent);
+
+  --font-display: var(--font-bricolage), system-ui, sans-serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+
+  --text-h1: var(--fs-h1);
+  --text-h1--line-height: 1.1;
+  --text-h2: var(--fs-h2);
+  --text-h2--line-height: 1.15;
+  --text-h3: var(--fs-h3);
+  --text-h3--line-height: 1.25;
+  --text-body: var(--fs-body);
+  --text-body--line-height: 1.6;
+  --text-mono: var(--fs-mono);
+  --text-mono--line-height: 1.5;
+
+  --radius-card: 16px;
+  --radius-button: 12px;
+  --radius-input: 10px;
+  --radius-pill: 999px;
+
+  --shadow-rest: 4px 4px 0 var(--ink);
+  --shadow-hover: 6px 6px 0 var(--ink);
+  --shadow-pressed: 0 0 0 var(--ink);
+
+  --container-page: 1120px;
+}
+
+@layer base {
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: var(--fs-body);
+    line-height: 1.6;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 800;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--ink);
+    outline-offset: 3px;
+  }
+}

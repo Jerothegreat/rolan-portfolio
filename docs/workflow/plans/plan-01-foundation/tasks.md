@@ -5,7 +5,7 @@ Detailed tickets live in `.scratch/plan-01-foundation/issues/` (local, git-ignor
 - [x] `FD-00` Resolve open decisions (`grill-with-docs`, 2026-10-07) and finalize `plan.md` (`to-spec`).
 - [x] `FD-01` Slice `plan.md` into tickets (`to-tickets`).
 - [x] `FD-02` Ticket 01: tracer, Alunsina Spotlight on a new Home. Blocked by: none.
-- [ ] `FD-03` Ticket 02: design tokens, fonts, and core components. Blocked by: 01.
+- [x] `FD-03` Ticket 02: design tokens, fonts, and core components. Blocked by: 01.
 - [ ] `FD-04` Ticket 03: theme (system default, toggle, no flash). Blocked by: 02.
 - [ ] `FD-05` Ticket 04: project rules and full project migration. Blocked by: 02.
 - [ ] `FD-06` Ticket 05: competitions, milestones, and the internship badge. Blocked by: 02.
