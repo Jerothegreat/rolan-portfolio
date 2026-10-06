@@ -6,6 +6,8 @@ Thick ink borders and hard offset shadows like classic neobrutalism, softened wi
 
 **Personality:** playful, honest, builder, warm. **Never:** chaotic, corporate, glassy.
 
+**No AI-slop styling:** no glows, neon, gradients, pulsing dots, or blurred halos. Status badges (`live`, `building`, `archived`) are flat pills: solid fill, ink border, ink text.
+
 ## Colors
 
 | Token | Light | Dark | Use |

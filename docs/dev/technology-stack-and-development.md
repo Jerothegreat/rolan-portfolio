@@ -11,7 +11,8 @@ Everything runs on free tiers. Swap a piece only through an ADR.
 | Framework | Next.js (App Router) + TypeScript in `apps/web` | static pages + API routes in one repo; recruiters recognize it | Astro |
 | Styling | Tailwind CSS + CSS variables for tokens | fast; theme tokens for light/dark | CSS modules |
 | UI kit | hand-built components, borrowing from RetroUI / neobrutalism.dev | soft-neobrutal look | shadcn/ui restyled |
-| Content | MDX in `content/{projects,hackathons,posts,milestones}` + Velite or next-mdx-remote | no CMS; git = history | Notion or Sanity later |
+| Content | MDX in `content/{projects,competitions,posts,milestones}` + Velite (schema-checked, typed collections; chosen over next-mdx-remote in Plan 01 because it validates and types content out of the box) | no CMS; git = history | Notion or Sanity later |
+| Tests | Vitest for content rules and the terminal interpreter | fast, TypeScript-native, no browser needed | Playwright later if UI flows need it |
 | Motion | CSS transitions + Motion (Framer Motion) for a few pieces | small; respects reduced motion | CSS only |
 | AI chat | Vercel AI SDK, streaming; LLM API of choice | streaming UI + tool calls built in | LangChain JS |
 | Vector store | Postgres + pgvector (Supabase or Neon free tier) | same skill as Alunsina | Upstash Vector |
@@ -69,4 +70,4 @@ pnpm build            # production build
 pnpm check:workspace  # typecheck + lint + build
 ```
 
-CI (Plan 04) adds the chat eval and link check (NFR-06).
+CI (Plan 05) adds the chat eval and link check (NFR-06).

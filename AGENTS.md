@@ -7,7 +7,7 @@ This file governs AI-assisted work in the `portfolio-profile` checkout: the 1mil
 ## Workspace Map
 
 - `apps/web/` contains the Next.js (App Router) + TypeScript + Tailwind site, including its API routes (AI chat). There is no separate backend service; see `docs/adr/0001-nextjs-only-no-separate-api.md`.
-- `content/` is the single content source: `projects/`, `hackathons/`, `posts/`, `milestones/` (MDX), plus legacy prose `*.md` files awaiting conversion.
+- `content/` is the single content source: `projects/`, `competitions/`, `posts/`, `milestones/` (MDX), plus legacy prose `*.md` files awaiting conversion.
 - `ingestion/` will hold the build-step chunk/embed/upsert pipeline for the site chat.
 - `evals/` will hold the fixed chat evaluation set and runner.
 - `docs/workflow/` is the canonical execution hierarchy. Read the roadmap and the active plan's `plan.md`, `tasks.md`, `evidence.md`, and `gate.md` before implementation.

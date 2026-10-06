@@ -61,7 +61,7 @@ The medium-reasoning default is normal. Stronger models are explicit task-level 
 - Pure documentation or configuration changes do not require `tdd`, but their links and configuration must be verified.
 - If no executable seam exists, record that fact rather than inventing a test.
 - Non-trivial code changes end with focused verification (`pnpm typecheck`, `pnpm lint`, `pnpm build`) and `code-review`.
-- Chat changes additionally require the fixed chat eval set to pass once it exists (Plan 04).
+- Chat changes additionally require the fixed chat eval set to pass once it exists (Plan 05).
 - Do not duplicate a plan, specification, ticket, decision, or status across durable files.
 
 ## Inactive Skills

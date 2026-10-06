@@ -15,7 +15,7 @@ Completion criterion: the agent can identify the package manager, app environmen
 
 1. Verify Node.js and pnpm are available with `node --version` and `pnpm --version`. The pinned pnpm version is the `packageManager` field in the root `package.json`.
 2. Run one sequential `pnpm install` at the repository root. Do not use watch mode during bootstrap.
-3. Copy each required `.env.example` to a local `.env.local` and fill only local values. Keep env files untracked. Until the chat lands (Plan 04) the site needs no environment variables.
+3. Copy each required `.env.example` to a local `.env.local` and fill only local values. Keep env files untracked. Until the chat security plan (Plan 04) the site needs no environment variables.
 4. Install the skills named by `skills-lock.json` with `npx skills experimental_install` (or the developer's supported agent tooling). The repository records the manifest, not vendored copies of installed skills.
 
 Completion criterion: dependencies resolve, local environment files exist where needed, and no credential or machine-specific installation directory is staged.
