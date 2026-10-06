@@ -6,7 +6,8 @@ import { site } from "@/lib/site";
 import { siteConfig } from "@/lib/site-config";
 
 export default function Home() {
-  const { spotlight } = site;
+  const { spotlight, projectCount } = site;
+  const recent = site.recentProjects(2);
 
   return (
     <main className="mx-auto max-w-page px-4 py-16 sm:px-6 lg:py-24">
@@ -59,6 +60,41 @@ export default function Home() {
             </p>
           ) : null}
         </Card>
+
+        {recent.length > 0 ? (
+          <ul className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2">
+            {recent.map((project) => {
+              const href = project.demoUrl ?? project.repoUrl;
+              return (
+                <li key={project.slug}>
+                  <Card className="relative h-full p-6">
+                    <h3 className="text-h3">
+                      {href ? (
+                        <a href={href} className="underline-offset-4 hover:underline after:absolute after:inset-0">
+                          {project.title}
+                        </a>
+                      ) : (
+                        project.title
+                      )}
+                    </h3>
+                    <p className="mt-2 text-body">{project.oneLiner}</p>
+                    <p className="mt-4">
+                      <Pill variant="status" status={project.status}>
+                        {project.status}
+                      </Pill>
+                    </p>
+                  </Card>
+                </li>
+              );
+            })}
+          </ul>
+        ) : null}
+
+        <p className="mt-8">
+          <Button href="#projects" variant="ghost">
+            See all {projectCount} {projectCount === 1 ? "project" : "projects"} →
+          </Button>
+        </p>
       </section>
     </main>
   );
