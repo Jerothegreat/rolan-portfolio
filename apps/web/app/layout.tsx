@@ -29,6 +29,9 @@ export const metadata: Metadata = {
   description: `${siteConfig.name} builds AI apps, wins hackathons, and writes about what broke.`,
 };
 
+// Runs before first paint so the page never flashes the wrong theme.
+const themeScript = `(function(){var s=null;try{s=localStorage.getItem("theme")}catch(e){}var d=s==="dark"||(s!=="light"&&matchMedia("(prefers-color-scheme: dark)").matches);document.documentElement.classList.toggle("dark",d)})()`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -37,8 +40,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${bricolage.variable} ${inter.variable} ${jetbrainsMono.variable}`}
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className="min-h-screen antialiased">{children}</body>
     </html>
   );

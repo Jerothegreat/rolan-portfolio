@@ -1,6 +1,7 @@
 import { Button } from "@/components/button";
 import { Card } from "@/components/card";
 import { Pill } from "@/components/pill";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { site } from "@/lib/site";
 import { siteConfig } from "@/lib/site-config";
 
@@ -10,6 +11,7 @@ export default function Home() {
   return (
     <main className="mx-auto max-w-page px-4 py-16 sm:px-6 lg:py-24">
       <header>
+        <ThemeToggle className="float-right" />
         <h1 className="text-h1">{siteConfig.name}</h1>
         <p className="mt-3 text-body text-ink-muted">{siteConfig.role}</p>
         <Button href="#projects" className="mt-8">

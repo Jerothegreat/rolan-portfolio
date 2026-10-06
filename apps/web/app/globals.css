@@ -22,7 +22,12 @@
   --fs-mono: 13px;
 }
 
+:root {
+  color-scheme: light;
+}
+
 .dark {
+  color-scheme: dark;
   --bg: #141414;
   --surface: #1f1f1f;
   --ink: #f5f0e6;
