@@ -12,6 +12,13 @@ _Avoid_: Score, rank, earnings.
 One dated, logged achievement (blog post, hackathon joined/placed/won, project shipped, internship/job, graduation) stored as one file under `content/milestones/`.
 _Avoid_: Event (reserved for hackathons), achievement badge.
 
+**Highlight**:
+A milestone shown as news: Rolan's dated achievements and events (wins, internships, certifications, talks and meetups attended), newest first. Every milestone is a highlight; a highlight may carry a photo, a one-to-two-line summary, and a source link.
+_Avoid_: Event when the whole dated list is meant; news post (posts are blog entries).
+
+**Featured highlight**:
+The single highlight Rolan hand-picks for the home page's "In the news" card. Exactly one at a time; it replaces a separate win badge.
+
 **Zero-point milestone**:
 A milestone with 0 points (for example a notable certification or event). It appears on the timeline and `/1mil` list but does not move the counter.
 
