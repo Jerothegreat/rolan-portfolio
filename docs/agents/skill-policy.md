@@ -33,6 +33,17 @@ Flash-tier models implement; they do not plan, decide, or approve.
 - Do not commit, push, edit `docs/` (other than appending the ticket's evidence row), or change `AGENTS.md`, `CONTEXT.md`, ADRs, or the design brief.
 - A stronger model (review tier) checks the diff against the ticket before it is committed.
 
+### Handoffs To The Flash Tier
+
+Every handoff that queues work for a flash-tier model includes a paste-ready prompt per ticket, so the owner never has to compose one. Each prompt:
+
+- opens with "Read AGENTS.md, then follow "Flash-Tier Rules" in docs/agents/skill-policy.md." and names exactly one ticket path plus only the context sections it needs;
+- asks the model to reply first with the files it will touch, the tests it will write (in order), and the source of any content fact, then wait for "go";
+- lists the ticket-specific guardrails (facts it must not invent, files it must not touch, test-first with a red/green log where a seam exists);
+- ends with "Finish with `pnpm check:workspace` and paste the result lines. Do not commit. Do not edit docs/."
+
+The handoff also includes the review-tier prompt the owner pastes into Claude Code after each ticket (review the diff against the ticket, rerun checks, record evidence, commit, report how many fixes were needed).
+
 ## Trigger Matrix
 
 | Situation | Required skill or action |
