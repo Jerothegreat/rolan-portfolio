@@ -31,7 +31,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: `${siteConfig.name} · ${siteConfig.role}`,
-  description: `${siteConfig.name} builds AI apps, wins hackathons, and writes about what broke.`,
+  description: siteConfig.tagline,
 };
 
 // Built on the server; only listed projects reach the client. Drafts and unlisted projects are
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
 const terminalContext: TerminalContext = {
   name: siteConfig.name,
   role: siteConfig.role,
-  bio: "I build AI apps and write about what broke.",
+  bio: siteConfig.tagline,
   contact: { email: siteConfig.email, github: siteConfig.github, linkedin: siteConfig.linkedin },
   projects: site.listedProjects.map((p) => ({
     slug: p.slug,

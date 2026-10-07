@@ -130,7 +130,7 @@ export function Terminal({ context }: { context: TerminalContext }) {
       <div className="flex h-full flex-col">
         <div className="flex items-center justify-between border-b-2 border-ink px-4 py-2">
           <span className="font-bold">Terminal</span>
-          <Button variant="secondary" className="px-3 py-1" onClick={() => dialog.current?.close()} aria-label="Close terminal">
+          <Button variant="secondary" onClick={() => dialog.current?.close()} aria-label="Close terminal">
             Close
           </Button>
         </div>
@@ -160,7 +160,7 @@ export function Terminal({ context }: { context: TerminalContext }) {
             spellCheck={false}
             enterKeyHint="send"
             // 16px keeps iOS from zooming the page when the input is focused.
-            className="min-w-0 flex-1 bg-transparent font-mono text-body text-ink outline-none"
+            className="min-w-0 flex-1 bg-transparent font-mono text-body text-ink"
           />
         </form>
       </div>

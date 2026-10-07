@@ -3,6 +3,7 @@
 export const siteConfig = {
   name: "Rolan Jero Pinton",
   role: "AI engineer & full-stack developer",
+  tagline: "I build AI apps, win hackathons, and write about what broke.",
   email: "rolanjerorarelapinton@gmail.com",
   github: "https://github.com/Jerothegreat",
   linkedin: "https://www.linkedin.com/in/rolan-jero-pinton-3aa046391/",

@@ -32,7 +32,7 @@ export default function Home() {
 
       <Reveal className="mt-16 lg:mt-24">
         <section id="projects" aria-labelledby="spotlight-heading">
-          <Pill variant="placement">Spotlight</Pill>
+          <Pill variant="neutral">Spotlight</Pill>
           <Card className="mt-6 p-6 sm:p-12">
             <h2 id="spotlight-heading" className="text-h2">
               {spotlight.title}

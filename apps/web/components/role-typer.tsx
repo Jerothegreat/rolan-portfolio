@@ -1,27 +1,12 @@
 "use client";
 
-import { useEffect, useState, useSyncExternalStore } from "react";
+import { useEffect, useState } from "react";
+import { useReducedMotion } from "@/lib/use-reduced-motion";
 
 const WORDS = ["AI engineer", "builder", "hackathon goblin"];
 const TYPE_MS = 60;
 const HOLD_MS = 1400;
 const GAP_MS = 300;
-const QUERY = "(prefers-reduced-motion: reduce)";
-
-function subscribe(onChange: () => void) {
-  const media = matchMedia(QUERY);
-  media.addEventListener("change", onChange);
-  return () => media.removeEventListener("change", onChange);
-}
-
-// The server and the first client render are static (reduced = true); animation starts after hydration.
-function useReducedMotion() {
-  return useSyncExternalStore(
-    subscribe,
-    () => matchMedia(QUERY).matches,
-    () => true,
-  );
-}
 
 type Step = { word: number; length: number; deleting: boolean };
 

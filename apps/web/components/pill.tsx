@@ -17,7 +17,7 @@ function tone(props: PillProps) {
 export function Pill(props: PillProps) {
   return (
     <span
-      className={`inline-block rounded-pill border-2 border-ink px-3 py-0.5 font-mono text-mono font-bold ${tone(props)} ${props.className ?? ""}`}
+      className={`inline-block rounded-pill border-2 border-ink px-3 py-1 font-mono text-mono font-bold ${tone(props)} ${props.className ?? ""}`}
     >
       {props.children}
     </span>

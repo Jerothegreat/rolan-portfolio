@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, type ReactNode } from "react";
+import { prefersReducedMotion } from "@/lib/use-reduced-motion";
 
 // Fades and rises content once when it first scrolls into view. Content is visible by default
 // (no JS, SSR, reduced motion); the hidden state is applied from the DOM only after hydration,
@@ -10,7 +11,7 @@ export function Reveal({ className = "", children }: { className?: string; child
 
   useEffect(() => {
     const el = ref.current;
-    if (!el || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!el || prefersReducedMotion()) return;
     if (el.getBoundingClientRect().top < innerHeight) return;
     const observer = new IntersectionObserver(
       ([entry]) => {

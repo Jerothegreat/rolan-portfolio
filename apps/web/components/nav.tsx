@@ -9,10 +9,9 @@ const links = [
   { href: "/#contact", label: "Contact" },
 ];
 
-// Both buttons are slots: ticket 08 wires them via [data-terminal-trigger].
-function TerminalButton({ className = "" }: { className?: string }) {
+function TerminalButton() {
   return (
-    <Button variant="secondary" className={className} aria-label="Open terminal" data-terminal-trigger="terminal">
+    <Button variant="secondary" aria-label="Open terminal" data-terminal-trigger="terminal">
       <span aria-hidden="true" className="font-mono">
         {">_"}
       </span>
@@ -20,9 +19,9 @@ function TerminalButton({ className = "" }: { className?: string }) {
   );
 }
 
-function AskButton({ className = "" }: { className?: string }) {
+function AskButton() {
   return (
-    <Button className={className} data-terminal-trigger="ask">
+    <Button data-terminal-trigger="ask">
       Ask my AI
     </Button>
   );

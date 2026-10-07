@@ -32,7 +32,6 @@ export function MobileMenu({ children }: { children: ReactNode }) {
     <div ref={root} className="sm:hidden">
       <Button
         variant="secondary"
-        className="px-4 py-2"
         aria-expanded={open}
         aria-controls="mobile-menu"
         onClick={show}
@@ -47,7 +46,12 @@ export function MobileMenu({ children }: { children: ReactNode }) {
         onClick={onClick}
         className="fixed inset-x-0 bottom-0 top-auto m-0 w-full max-w-none rounded-t-card border-2 border-b-0 border-ink bg-bg p-0 text-ink backdrop:bg-ink/50"
       >
-        <div className="flex flex-col gap-4 p-6 pb-8">{children}</div>
+        <div className="flex flex-col gap-4 p-6 pb-8">
+          {children}
+          <Button variant="secondary" onClick={() => dialog.current?.close()}>
+            Close
+          </Button>
+        </div>
       </dialog>
     </div>
   );

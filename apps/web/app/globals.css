@@ -87,7 +87,7 @@
 
 @layer base {
   html {
-    scroll-padding-top: 6rem;
+    scroll-padding-top: calc(var(--spacing) * 24); /* 96px, on the 4px scale */
   }
 
   body {

@@ -2,16 +2,17 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/button";
+import { prefersReducedMotion } from "@/lib/use-reduced-motion";
 
 const confetti = [
-  ["-48px", "-36px", "var(--lilac)"],
-  ["-24px", "-52px", "var(--mint)"],
-  ["0px", "-58px", "var(--coral)"],
-  ["24px", "-52px", "var(--lilac)"],
-  ["48px", "-36px", "var(--mint)"],
-  ["-36px", "-18px", "var(--coral)"],
-  ["36px", "-18px", "var(--coral)"],
-  ["0px", "-34px", "var(--mint)"],
+  ["-48px", "-36px", "var(--surface)"],
+  ["-24px", "-52px", "var(--ink)"],
+  ["0px", "-58px", "var(--surface)"],
+  ["24px", "-52px", "var(--ink)"],
+  ["48px", "-36px", "var(--surface)"],
+  ["-36px", "-18px", "var(--ink)"],
+  ["36px", "-18px", "var(--surface)"],
+  ["0px", "-34px", "var(--ink)"],
 ];
 
 export function CopyEmail({ email }: { email: string }) {
@@ -30,7 +31,7 @@ export function CopyEmail({ email }: { email: string }) {
       return;
     }
     setCopied(true);
-    setBurst(!matchMedia("(prefers-reduced-motion: reduce)").matches);
+    setBurst(!prefersReducedMotion());
     clearTimeout(timer.current);
     timer.current = setTimeout(() => {
       setCopied(false);
