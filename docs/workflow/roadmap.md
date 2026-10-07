@@ -3,7 +3,7 @@
 **Status:** Active master roadmap
 **Canonical requirements:** `docs/product/requirements-engineering.md`
 
-**Active plan:** [Plan 01 foundation](plans/plan-01-foundation/plan.md): tickets 01–09 done; review fix tickets 10–11 open. [Plan 00](plans/plan-00-workflow-monorepo/plan.md) complete. **Next:** Plan 02 proof (grilling in progress).
+**Active plan:** [Plan 01 foundation](plans/plan-01-foundation/plan.md): tickets 01–09 done; review fix tickets 10–11 open. [Plan 00](plans/plan-00-workflow-monorepo/plan.md) complete. **Next:** [Plan 02 proof](plans/plan-02-proof/plan.md) (spec final; next step `to-tickets`).
 
 ## Goal
 
@@ -38,12 +38,13 @@ Use `docs/agents/skill-policy.md` for skill routing, model routing, and completi
 
 ### Plan 02: Proof
 
-**Requirements supported:** PG-02 (with timeline view), PG-03, PG-04, PG-01 (skills, toolbox, competition strip, win badge), CM-05, SF-06, NFR-05
-**Outcome:** `/work` with filters and timeline; case-study pages for listed projects (Alunsina with showcase video and evals, linking to its team-owned product site); demos on subdomains with the `by 1mil.dev` badge; Hackathons & contests page with the Infotechnolympics 2025 champion badge on Home; skills + AI toolbox linked to projects.
+**Detailed plan:** `plans/plan-02-proof/plan.md`
+**Requirements supported:** PG-01 (skills, AI toolbox, In the news), PG-02, PG-03, PG-04, PG-07 (list), CM-02, CM-04, CM-05, NFR-05
+**Outcome:** Skills registry with computed "used in"; `/work` with tag filters and a dots-and-line timeline; case studies that appear once written (Alunsina with screenshots, architecture, and evals); `/hackathons` with results, year-only dates, and flip cards; highlights with a featured "In the news" card on Home and the full list on `/1mil`. SF-06 deferred.
 
 ### Plan 03: Voice
 
-**Requirements supported:** PG-05, PG-06, PG-07, SF-02, NFR-03
+**Requirements supported:** PG-05, PG-06, PG-07 (counter), SF-02, NFR-03
 **Outcome:** Blog with til/thoughts, RSS, OG images; first 3 posts (a hackathon recap, a RAG til, why 1mil); About page with timeline and now-learning box; 1mil tracker + `/1mil`.
 
 ### Plan 04: Chat Security
@@ -61,7 +62,13 @@ Use `docs/agents/skill-policy.md` for skill routing, model routing, and completi
 **Requirements supported:** none in v1 (learning showcase, governed by ADR 0003)
 **Outcome:** A read-only, rate-limited MCP server over public site content, then a key-gated A2A agent (manually issued keys, small quotas), with its own project page.
 
+## Content Owed By The Owner
+
+Hidden until supplied (never invented): eGovPH award photo; Alunsina screenshots and architecture image; which skills are `daily`; Problem / What I built / Lessons write-ups per project; remaining competition months, placements, and results; certification months; "Sumakses" (May 2025).
+
 ## Deferred
+
+- SF-06 demo badge and subdomains, until a demo Rolan controls exists.
 
 - SF-05 command palette (after v1).
 - New showcase projects (including a public policy-bot-style assistant) are added as content when built; the two unlisted placeholders track them.

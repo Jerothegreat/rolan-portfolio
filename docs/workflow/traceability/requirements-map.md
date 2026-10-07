@@ -10,18 +10,18 @@ Current requirement-to-implementation status. Update a row only after the owning
 | PG-04 | Hackathons & contests | 02 | Planned | |
 | PG-05 | Blog | 03 | Planned | |
 | PG-06 | About | 03 | Planned | |
-| PG-07 | 1mil page | 03 | Planned | |
+| PG-07 | 1mil page | 02 (list), 03 (counter) | Planned | |
 | SF-01 | Ask my AI | 05 | Planned | |
 | SF-02 | 1mil tracker | 03 | Planned | |
 | SF-03 | Terminal easter egg | 01, 05 | Partial | Browser-only commands verified (plan-01 FD-08, FD-09, FD-10); AI chat inside it is Plan 05. |
 | SF-04 | Dark mode | 01 | Ready for independent review | plan-01 FD-04, FD-10. |
 | SF-05 | Command palette | — | Deferred | |
-| SF-06 | Demo subdomains | 02 | Planned | |
+| SF-06 | Demo subdomains | — | Deferred | Until a demo Rolan controls exists (Plan 02 decision). |
 | SF-07 | Ask page `/ask` | 05 | Planned | |
 | CM-01 | Project schema | 01 | Ready for independent review | plan-01 FD-02, FD-05. |
-| CM-02 | Competition schema | 01 | Ready for independent review | plan-01 FD-06. |
+| CM-02 | Competition schema | 01, 02 | Partial | Base schema plan-01 FD-06; result and year-only dates in Plan 02. |
 | CM-03 | Post schema | 01 | Ready for independent review | plan-01 FD-06 (schema only; no posts). |
-| CM-04 | Milestone schema | 01 | Ready for independent review | plan-01 FD-06. |
+| CM-04 | Milestone schema | 01, 02 | Partial | Base schema plan-01 FD-06; highlight fields (photo, summary, featured) in Plan 02. |
 | CM-05 | Skill / Tool | 02 | Planned | |
 | AI-01 | Ingestion build step | 05 | Planned | |
 | AI-02 | Retrieval request | 05 | Planned | |

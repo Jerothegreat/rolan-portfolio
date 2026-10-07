@@ -36,15 +36,15 @@
 
 | ID | Page | Requirements |
 | --- | --- | --- |
-| PG-01 | Home `/` | The system shall show a hero with name, role, the most recent internship badge, and the 1mil tracker. The system shall show the Spotlight project as a large, distinct card with its video or gif, followed by the 2 newest listed projects as compact cards and a "See all N projects" link. The system shall show skills, a competition strip, the AI toolbox, a chat teaser, the latest 3 posts, and contact. The system shall show the top competition win as a badge. |
-| PG-02 | Work `/work` | The system shall list every listed project as a card. The system shall filter cards by tag (AI, full-stack, hackathon). The system shall offer a timeline view drawn from each project's build span. Unlisted and draft projects shall not appear. |
-| PG-03 | Project `/work/[slug]` | The system shall show problem, demo gif/video, try-demo and repo buttons, Rolan's role, stack, architecture diagram, tradeoffs, evals (when present), and lessons. For a team project the system shall state Rolan's part. The system shall link related posts. |
-| PG-04 | Hackathons & contests `/hackathons` | The system shall show a wins counter and one card per competition, newest first: name, date, kind, placement, prize (with amount and source link when present), and photo. Hackathon cards shall also show hours, team role, what was built, and demo and recap links, and shall flip to "what we built in X hours". |
+| PG-01 | Home `/` | The system shall show a hero with name, role, the most recent internship badge, and the 1mil tracker. The system shall show the Spotlight project as a large, distinct card with its video or gif, followed by the 2 newest listed projects as compact cards and a "See all N projects" link. The system shall show an "In the news" card for the featured highlight (photo when present, headline, date, summary, source link), the 3 most recent other highlights with a link to `/1mil`, skills grouped by area with usage level and links to the projects that use them, the AI toolbox as flip cards, a chat teaser, the latest 3 posts, and contact. The featured highlight replaces a separate win badge; there is no competition strip. |
+| PG-02 | Work `/work` | The system shall list every listed project as a card. The system shall filter cards by tag (AI, full-stack, hackathon). The system shall keep the active tag filter in the URL. The system shall offer a timeline view (kept in the URL) drawn as dots on a connected line grouped by year from each project's build span, with `building` projects extending to now. Unlisted and draft projects shall not appear. |
+| PG-03 | Project `/work/[slug]` | The system shall generate a case study only for a listed project whose write-up has Problem, What I built, and Lessons sections; otherwise the project card links to its demo or repository and the build lists the missing write-up. A case study shall show problem, demo gif/video, try-demo and repo buttons, Rolan's role, stack, architecture diagram, tradeoffs, evals (when present), and lessons. Stack shall come from the skills registry. Screenshots, video, and a product-site link appear only when present. For a team project the system shall state Rolan's part. The system shall link related posts. |
+| PG-04 | Hackathons & contests `/hackathons` | The system shall show a wins counter and one card per competition, newest first (year-only dates sort within their year): name, date, kind, placement, result, prize (with amount and source link when present), and photo. Hackathon cards shall also show hours, team role, what was built, and demo and recap links, and shall flip to "what we built in X hours". |
 | PG-05 | Blog `/blog`, `/blog/[slug]` | The system shall list posts with tag filter (all, til, thoughts), date, title, one-line summary, and reading time. A post page shall use a 68ch text column, show date and tag, end with a related project card, and link next/previous posts. The system shall publish an RSS feed. |
 | PG-06 | About `/about` | The system shall show a short story, photo, now-learning box, skills, AI toolbox, timeline (school, Globe, wins), and a resume download. |
-| PG-07 | 1mil `/1mil` | The system shall show the big counter, the milestone list newest first, and "why 1mil" in 3 sentences. |
+| PG-07 | 1mil `/1mil` | The system shall list every highlight (milestone) newest first with date, label, summary, and link (Plan 02), and shall show the big counter and "why 1mil" in 3 sentences. |
 
-Every page shall offer a next step (no dead ends). Navigation: Home, Work, Hackathons, Blog, About, plus the gold Ask my AI button.
+Every page shall offer a next step (no dead ends). Navigation: Home, Work, Hackathons, Blog, About, plus the gold Ask my AI button (pages join the nav as they ship).
 
 ### Site-Wide Features
 
@@ -55,7 +55,7 @@ Every page shall offer a next step (no dead ends). Navigation: Home, Work, Hacka
 | SF-03 | Terminal easter egg | Pressing `~`, a visible `>_` nav button, or Ask my AI (until SF-01 ships) shall open a soft-neobrutal terminal panel (cream panel, ink border, mono font). The footer shall hint "press ~" on desktop. Browser-only commands (`help`, `whoami`, `projects`, `open`, `theme`, `contact`, `clear`) shall work before the chat exists; `ask` shall reply that chat is coming. Once SF-01 ships, the chat runs inside it. The old terminal UI is retired. |
 | SF-04 | Dark mode | The system shall follow the system color scheme and provide a toggle. |
 | SF-05 | Command palette | *Deferred (later):* `Ctrl/Cmd + K` jumps anywhere. |
-| SF-06 | Demo subdomains | Each demo shall live at `<name>.1mil.dev`, show the `by 1mil.dev ↗` badge linking to `1mil.dev/work/<slug>`, share favicon, accent, and font, and show a notice when it runs on a free tier or sample data. Exception: Alunsina has its own team-owned product site; its case-study page links there and the product site carries a footer credit instead of the badge. |
+| SF-06 | Demo subdomains | *Deferred until a demo Rolan controls exists.* Each demo shall live at `<name>.1mil.dev`, show the `by 1mil.dev ↗` badge linking to `1mil.dev/work/<slug>`, share favicon, accent, and font, and show a notice when it runs on a free tier or sample data. Exception: Alunsina has its own team-owned product site; its case-study page links there and the product site carries a footer credit instead of the badge. Exception: eHanda stays on its government host with no badge; its case study links out. |
 | SF-07 | Ask page `/ask` | The system shall provide a shareable full-screen chat page at `/ask` for recruiters. A sticky header shall show Rolan's name and role, a one-line explanation, and a gold "View full site →" button visible on all screen sizes. Typing `home` shall return to `/`. Answers shall show source chips. The page ships only with the working AI chat (SF-01). |
 
 ### Content Model
@@ -64,11 +64,11 @@ One content file feeds every surface: adding one file updates pages, cards, trac
 
 | ID | Type | Fields |
 | --- | --- | --- |
-| CM-01 | Project | slug, title, oneLiner, tags[], skills[], role, team (bool), status (`live` / `building` / `archived`), started (month), ended (month; required unless `building`, forbidden when `building`), spotlight (bool; exactly one project), unlisted (bool), draft (bool), demoUrl, repoUrl, cover (gif/png), video (optional), architectureImg, evals (optional) |
-| CM-02 | Competition | slug, name, kind (`hackathon` / `contest`), date, placement, prize (optional, with amount), prizeSourceUrl (optional), photo, draft; hackathon only: hours, teamSize, role, built, demoUrl, recapPost |
+| CM-01 | Project | slug, title, oneLiner, tags[] (`ai` / `full-stack` / `hackathon`), skills[] (skills registry ids), role, team (bool), status (`live` / `building` / `archived`), started (month), ended (month; required unless `building`, forbidden when `building`), spotlight (bool; exactly one project), unlisted (bool), draft (bool), demoUrl, repoUrl, cover (gif/png), screenshots[] (co-located images), video (optional), siteUrl (optional product site), architectureImg, evals (optional); case-study sections live in the MDX body |
+| CM-02 | Competition | slug, name, kind (`hackathon` / `contest`), date (`YYYY-MM` or `YYYY`), placement (display text), result (`won` / `placed` / `finalist` / `joined`), prize (optional, with amount), prizeSourceUrl (optional), photo, draft; hackathon only: hours, teamSize, role, built, demoUrl, recapPost |
 | CM-03 | Post | slug, title, tag (til / thoughts), date, summary, related[], draft |
-| CM-04 | Milestone | date, type, label, points (0 or more; 0 for certifications and events), link |
-| CM-05 | Skill / Tool | name, group, level (daily / used in project / experimenting), usedIn[] (computed from projects) |
+| CM-04 | Milestone (Highlight) | date, ended (optional), type, label, company (optional), points (0 or more; 0 for certifications and events), link, photo (optional, co-located), summary (optional), featured (bool; exactly one) |
+| CM-05 | Skill / Tool | One registry entry each: id, name, kind (`skill` / `tool`), group (ai / frontend / backend / mobile / tools), level (daily / used in project / experimenting), usedFor (tools), usedIn[] (computed from listed projects). An unknown skill id on a project fails the build. |
 
 Content files shall be validated against these schemas at build time; an invalid file fails the build. Draft files shall be hidden from every page and the chat, and the build shall report their missing facts. Unlisted projects shall be reachable only by direct link and marked noindex.
 
@@ -78,7 +78,7 @@ Content files shall be validated against these schemas at build time; an invalid
 | --- | --- |
 | Blog post | 1,000 |
 | Hackathon joined | 10,000 |
-| Competition (hackathon or contest) placed / won | 50,000 / 100,000 |
+| Competition (hackathon or contest) placed or finalist / won (from `result`) | 50,000 / 100,000 |
 | Project shipped with live demo | 50,000 |
 | Internship / job | 150,000 |
 | Graduation | 200,000 |
