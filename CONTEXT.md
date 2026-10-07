@@ -51,7 +51,14 @@ One competition Rolan joined, of one of two kinds. A **hackathon** is a timed te
 _Avoid_: Event when the competition record is meant; calling a contest a hackathon.
 
 **Placement**:
-The result of a competition (for example champion, finalist, participant). Wins render with the gold badge.
+The display text of how Rolan finished in a competition (for example "Champion, Java Programming", "Top 10 Finalist").
+
+**Result**:
+The comparable outcome behind a placement: `won`, `placed`, `finalist`, or `joined`. Points and the gold win badge follow the result, not the placement text. A Top 10 finish at eGovPH 2026 counts as `won`.
+_Avoid_: Inferring a win from placement wording.
+
+**Competition date**:
+When a competition happened, to month precision when known and year precision otherwise. Year-only competitions sort within their year.
 
 **Prize**:
 A publicly announced competition award, including its cash amount. Prizes may be shown; they are not personal earnings (salary, client income), which are never shown.
@@ -84,8 +91,18 @@ _Avoid_: Chatbot (ambiguous with the pet chatbot project).
 **Source chip**:
 A link chip under a chat answer pointing to the page a retrieved chunk came from.
 
+**Skill / Tool**:
+One entry in the single skills registry: a **skill** (a language, framework, or technique such as React or RAG) or a **tool** (a product Rolan uses, such as Claude Code or Qdrant). Each has a group and a usage level; tools also say what Rolan used them for. Projects refer to registry entries, never to free-text skill names.
+_Avoid_: Tech, stack item.
+
+**AI toolbox**:
+The AI tools from the skills registry, shown as flip cards with what Rolan used each for.
+
 **Usage level**:
 How a skill or tool relates to Rolan: `daily`, `used in project`, or `experimenting`. `usedIn` is computed from projects, never written by hand.
+
+**Case study**:
+A listed project's own page. Every case study states the problem, what Rolan built, and lessons; architecture, tradeoffs, and evals appear only when written. Its stack comes from the project's registry skills.
 
 **Terminal**:
 The `~` easter egg: a soft-neobrutal terminal panel with the chat inside. The old terminal UI is retired.
