@@ -18,4 +18,4 @@
 
 ## Review
 
-Implementation and evidence are recorded. Committed on `test`; not pushed. Independent review is pending.
+Implementation and evidence are recorded. Committed on `test`; not pushed. Independent review (2026-10-08, see Plan 01 gate Review) passed with doc-only fixes, applied in 699f8b3.
