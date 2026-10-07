@@ -109,7 +109,7 @@ The AI tools from the skills registry, shown as flip cards with what Rolan used 
 How a skill or tool relates to Rolan: `daily`, `used in project`, or `experimenting`. `usedIn` is computed from projects, never written by hand.
 
 **Case study**:
-A listed project's own page. Every case study states the problem, what Rolan built, and lessons; architecture, tradeoffs, and evals appear only when written. Its stack comes from the project's registry skills.
+A listed project's own page. It exists only once the project states the problem, what Rolan built, and lessons; until then the project's card links to its demo or repository instead. Architecture, tradeoffs, and evals appear only when written. Its stack comes from the project's registry skills.
 
 **Terminal**:
 The `~` easter egg: a soft-neobrutal terminal panel with the chat inside. The old terminal UI is retired.
