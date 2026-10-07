@@ -9,4 +9,4 @@
 - [x] `WM-07` Verify install, typecheck, lint, build, links, stale references, and staging.
 - [x] `WM-08` Remove `backend/` (archive outside repo) and `frontend/` leftovers after user approval.
 - [x] `WM-09` Commit on `test` after user approval.
-- [ ] `WM-10` Independent review (separate session, high-reasoning model).
+- [x] `WM-10` Independent review (separate session, high-reasoning model).

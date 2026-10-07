@@ -1,6 +1,6 @@
 # Plan 00: Workflow And Monorepo Shell
 
-**Status:** Complete but evidence pending
+**Status:** Complete
 **Owner:** Repository workflow
 **Dependencies:** Alunsina workflow at `C:\a` (reference only); "1mil.dev — PRD, TRD and design brief" (2026-10-07)
 
@@ -22,7 +22,7 @@ Turn the portfolio folder into one pnpm monorepo and install the same spec-drive
 
 - Root scripts: `pnpm dev`, `pnpm build`, `pnpm typecheck`, `pnpm lint`, `pnpm check:workspace`.
 - Workspace packages: `apps/*` (only `web` today).
-- Content contract: `content/{projects,hackathons,posts,milestones}/` (schemas land in Plan 01).
+- Content contract: `content/{projects,competitions,posts,milestones}/` (schemas land in Plan 01).
 
 ## Completion Criteria
 

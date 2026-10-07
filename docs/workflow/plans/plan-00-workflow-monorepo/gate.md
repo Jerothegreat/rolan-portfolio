@@ -1,6 +1,6 @@
 # Plan 00 Gate
 
-**Gate status:** Complete but evidence pending
+**Gate status:** Complete
 
 ## Required Results
 
@@ -10,7 +10,7 @@
 - [x] Skills restored and locked; local agent state ignored.
 - [x] `backend/` archived outside the repo and `frontend/` leftovers removed.
 - [x] Commit on `test` (user-approved 2026-10-07); no push.
-- [ ] Independent review recorded.
+- [x] Independent review recorded (2026-10-08: PASS WITH FIXES, docs only; fixes applied).
 
 ## Blockers
 

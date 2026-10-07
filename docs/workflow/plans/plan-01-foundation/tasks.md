@@ -13,3 +13,5 @@ Detailed tickets live in `.scratch/plan-01-foundation/issues/` (local, git-ignor
 - [x] `FD-08` Ticket 07: terminal command interpreter. Blocked by: 04.
 - [x] `FD-09` Ticket 08: terminal panel. Blocked by: 03, 06, 07.
 - [x] `FD-10` Ticket 09: motion, accessibility, and responsive pass with evidence. Blocked by: 03, 04, 05, 06, 08.
+- [ ] `FD-11` Ticket 10: review fixes, accessibility, motion, and design-brief compliance. Blocked by: none.
+- [ ] `FD-12` Ticket 11: review fixes, content rules and schema tests. Blocked by: none.
