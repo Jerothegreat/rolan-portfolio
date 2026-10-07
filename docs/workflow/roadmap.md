@@ -3,7 +3,7 @@
 **Status:** Active master roadmap
 **Canonical requirements:** `docs/product/requirements-engineering.md`
 
-**Active plan:** [Plan 00 workflow + monorepo](plans/plan-00-workflow-monorepo/plan.md) (awaiting independent review). **Next:** [Plan 01 foundation](plans/plan-01-foundation/plan.md) (spec final; 9 tickets ready; next step `implement` ticket 01).
+**Active plan:** [Plan 01 foundation](plans/plan-01-foundation/plan.md): all 9 tickets done, ready for independent review. [Plan 00](plans/plan-00-workflow-monorepo/plan.md) also awaits independent review. **Next:** Plan 02 proof (packet not written yet; needs `grill-with-docs` on the high-reasoning tier).
 
 ## Goal
 

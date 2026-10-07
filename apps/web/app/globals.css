@@ -132,3 +132,27 @@
     display: none;
   }
 }
+
+/* Section reveal: fade + 12px rise, once. Classes are added by components/reveal.tsx only
+   when motion is allowed, so content is visible without JS. */
+.reveal-ready {
+  transition:
+    opacity 300ms ease-out,
+    transform 300ms ease-out;
+}
+
+.reveal-hidden {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-ready {
+    transition: none;
+  }
+
+  .reveal-hidden {
+    opacity: 1;
+    transform: none;
+  }
+}

@@ -2,6 +2,15 @@
 
 Record recurring bugs and setup issues once, newest first: symptom, root cause, fix, prevention.
 
+## 2026-10-08
+
+### Layout utilities passed to `Button` through `className` are ignored
+
+- Symptom: at 375 px the page scrolled sideways by about 110 px. Desktop-only nav buttons and the theme toggle showed on phones despite `hidden sm:inline-flex`.
+- Root cause: `Button` always includes `inline-flex` and its own padding. Tailwind emits `.inline-flex` after `.hidden`, and `px-6` after `px-4`, so equal-specificity overrides in `className` lose silently.
+- Fix (Plan 01 ticket 09): hide or show buttons with a wrapper element instead of `className` on `Button`; the theme toggle moved into the mobile sheet.
+- Prevention: never pass display or padding overrides to `Button`; wrap it. The terminal close button's `px-3 py-1` is a known no-op. The browser pass (no horizontal scroll at 375 px) catches regressions.
+
 ## 2026-10-07
 
 ### Moving `frontend/` failed with "Device or resource busy"

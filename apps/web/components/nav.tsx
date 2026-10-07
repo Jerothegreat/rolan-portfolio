@@ -43,9 +43,12 @@ export function Nav() {
           ))}
         </nav>
         <div className="flex items-center gap-3">
-          <TerminalButton className="hidden px-4 py-2 sm:inline-flex" />
-          <AskButton className="hidden px-4 py-2 sm:inline-flex" />
-          <ThemeToggle className="px-4 py-2" />
+          {/* Display utilities on Button lose to its own inline-flex, so hide via this wrapper. */}
+          <div className="hidden items-center gap-3 sm:flex">
+            <TerminalButton />
+            <AskButton />
+            <ThemeToggle />
+          </div>
           <MobileMenu>
             {links.map((link) => (
               <Link key={link.href} href={link.href} className="py-2 text-h3 font-display font-extrabold">
@@ -54,6 +57,7 @@ export function Nav() {
             ))}
             <TerminalButton />
             <AskButton />
+            <ThemeToggle />
           </MobileMenu>
         </div>
       </div>
