@@ -11,15 +11,27 @@ This policy routes work through the smallest reliable process while keeping one 
 
 ## Model Routing
 
-| Work | Claude Code | Codex | Reasoning |
-| --- | --- | --- | --- |
-| Normal implementation, tests, and documentation | `claude-sonnet-5-5` | `gpt-5.6-terra` | `medium` |
-| Small mechanical changes | `claude-haiku-4-5` | `gpt-5.6-terra` | `low` |
-| Wayfinder, security, chat guardrails, or cross-cutting architecture | `claude-opus-5-5` | `gpt-5.6-sol` | `high` |
-| Independent code review and gate audit | `claude-opus-5-5` | `gpt-5.6-sol` | `high` |
-| Exceptional work that remains unresolved | `claude-fable-5-1` | `gpt-6-astra` | `high` |
+| Work | Claude Code | Codex | Flash tier (optional) | Reasoning |
+| --- | --- | --- | --- | --- |
+| One ready ticket from `.scratch/` with explicit acceptance criteria | `claude-sonnet-5-5` | `gpt-5.6-terra` | `deepseek-v4-flash` or GLM Flash | `medium` |
+| Content edits (front matter facts in `content/`) and small mechanical changes | `claude-haiku-4-5` | `gpt-5.6-terra` | `deepseek-v4-flash` or GLM Flash | `low` |
+| Grilling, `to-spec`, `to-tickets`, new plans, ADRs | `claude-opus-5-5` | `gpt-5.6-sol` | not allowed | `high` |
+| Wayfinder, security, chat guardrails (Plan 04), or cross-cutting architecture | `claude-opus-5-5` | `gpt-5.6-sol` | not allowed | `high` |
+| Independent code review and gate audit | `claude-opus-5-5` | `gpt-5.6-sol` | not allowed | `high` |
+| Exceptional work that remains unresolved | `claude-fable-5-1` | `gpt-6-astra` | not allowed | `high` |
 
-The medium-reasoning default is normal. Stronger models are explicit task-level overrides, not permanent defaults. Independent review should use a different session (and ideally a different model family) from the one that implemented the work.
+The medium-reasoning default is normal. Stronger models are explicit task-level overrides, not permanent defaults. Independent review should use a different session (and ideally a different model family) from the one that implemented the work. Connection setup for flash-tier models lives in `docs/agents/model-setup.md`.
+
+### Flash-Tier Rules
+
+Flash-tier models implement; they do not plan, decide, or approve.
+
+- One ticket per session. Read `AGENTS.md`, the ticket, and only the files the ticket or `plan.md` names.
+- If the ticket is ambiguous, a fact is missing, or the change would touch a file outside the ticket's scope, stop and report instead of guessing. Never invent content facts; leave the file a draft.
+- Follow `tdd` at the agreed seams (content model, terminal interpreter); keep the smallest correct diff and no new dependencies.
+- Finish with `pnpm check:workspace` and paste its result lines into the report.
+- Do not commit, push, edit `docs/` (other than appending the ticket's evidence row), or change `AGENTS.md`, `CONTEXT.md`, ADRs, or the design brief.
+- A stronger model (review tier) checks the diff against the ticket before it is committed.
 
 ## Trigger Matrix
 

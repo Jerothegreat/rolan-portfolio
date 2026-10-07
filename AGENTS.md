@@ -56,7 +56,7 @@ Archived documents under `docs/workflow/archive/` are history, not input.
 
 ## Agent Skills
 
-Use the task trigger matrix, model routing, and completion gates in `docs/agents/skill-policy.md`.
+Use the task trigger matrix, model routing, and completion gates in `docs/agents/skill-policy.md`. Cheaper flash-tier models (DeepSeek V4 Flash, GLM Flash) follow its "Flash-Tier Rules"; connection setup is in `docs/agents/model-setup.md`.
 
 ### Issue tracker
 
