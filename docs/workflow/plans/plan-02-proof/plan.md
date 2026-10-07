@@ -1,6 +1,6 @@
 # Plan 02: Proof
 
-**Status:** Planned (spec final; next: `to-tickets`)
+**Status:** Planned (spec final; 9 tickets indexed in `tasks.md`; blocked by Plan 01 fix tickets 10 and 11)
 **Owner:** apps/web, content
 **Dependencies:** Plan 01 review fix tickets 10 and 11 done (they touch the same files)
 **Requirements:** PG-01 (skills, AI toolbox, In the news), PG-02, PG-03, PG-04, PG-07 (list only), CM-02, CM-04, CM-05, NFR-05
