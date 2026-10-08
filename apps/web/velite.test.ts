@@ -57,3 +57,25 @@ describe("velite project schema", () => {
     ).toThrow();
   });
 });
+
+describe("velite project schema: tags", () => {
+  it("rejects a tag outside the enum", () => {
+    expect(() =>
+      projectSchema.parse({
+        title: "Handa",
+        spotlight: false,
+        tags: ["fullstack"],
+      }),
+    ).toThrow();
+  });
+
+  it("accepts the tag enum values", () => {
+    const parsed = projectSchema.parse({
+      title: "Handa",
+      spotlight: false,
+      tags: ["ai", "full-stack", "hackathon"],
+    });
+
+    expect(parsed.tags).toEqual(["ai", "full-stack", "hackathon"]);
+  });
+});

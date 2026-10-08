@@ -1,0 +1,152 @@
+skills:
+  - id: java
+    name: Java
+    kind: skill
+    group: backend
+    level: experimenting
+  - id: javascript
+    name: JavaScript
+    kind: skill
+    group: backend
+    level: experimenting
+  - id: typescript
+    name: TypeScript
+    kind: skill
+    group: frontend
+    level: used in project
+  - id: python
+    name: Python
+    kind: skill
+    group: ai
+    level: experimenting
+  - id: php
+    name: PHP
+    kind: skill
+    group: backend
+    level: used in project
+  - id: c-sharp
+    name: "C#"
+    kind: skill
+    group: backend
+    level: used in project
+  - id: kotlin
+    name: Kotlin
+    kind: skill
+    group: mobile
+    level: experimenting
+  - id: react
+    name: React
+    kind: skill
+    group: frontend
+    level: used in project
+  - id: capacitor
+    name: Capacitor
+    kind: skill
+    group: mobile
+    level: used in project
+  - id: flutter
+    name: Flutter
+    kind: skill
+    group: mobile
+    level: experimenting
+  - id: node-js
+    name: Node.js
+    kind: skill
+    group: backend
+    level: used in project
+  - id: express-js
+    name: Express.js
+    kind: skill
+    group: backend
+    level: used in project
+  - id: nestjs
+    name: NestJS
+    kind: skill
+    group: backend
+    level: experimenting
+  - id: rest-apis
+    name: REST APIs
+    kind: skill
+    group: backend
+    level: used in project
+  - id: prompt-engineering
+    name: Prompt Engineering
+    kind: skill
+    group: ai
+    level: experimenting
+  - id: rag
+    name: RAG
+    kind: skill
+    group: ai
+    level: experimenting
+  - id: langchain
+    name: LangChain
+    kind: skill
+    group: ai
+    level: experimenting
+  - id: qdrant
+    name: Qdrant
+    kind: tool
+    group: ai
+    level: experimenting
+    usedFor: Semantic vector search for RAG
+  - id: guardrails
+    name: Guardrails
+    kind: skill
+    group: ai
+    level: experimenting
+  - id: dot-net
+    name: ".NET"
+    kind: skill
+    group: backend
+    level: used in project
+  - id: wpf
+    name: WPF
+    kind: skill
+    group: frontend
+    level: used in project
+  - id: mysql
+    name: MySQL
+    kind: tool
+    group: backend
+    level: used in project
+  - id: vite
+    name: Vite
+    kind: tool
+    group: frontend
+    level: used in project
+  - id: supabase
+    name: Supabase
+    kind: tool
+    group: backend
+    level: used in project
+  - id: tailwind-css
+    name: Tailwind CSS
+    kind: skill
+    group: frontend
+    level: used in project
+  - id: oidc-sso
+    name: OIDC SSO
+    kind: skill
+    group: backend
+    level: used in project
+  - id: html
+    name: HTML
+    kind: skill
+    group: frontend
+    level: used in project
+  - id: css
+    name: CSS
+    kind: skill
+    group: frontend
+    level: used in project
+  - id: firebase
+    name: Firebase
+    kind: tool
+    group: backend
+    level: used in project
+  - id: firestore
+    name: Firestore
+    kind: tool
+    group: backend
+    level: used in project

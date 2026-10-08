@@ -8,7 +8,7 @@ const projectFactsShape = {
   title: s.string().max(99),
   // Facts a draft may omit are optional here; the content model requires them for non-drafts.
   oneLiner: s.string().max(160).optional(),
-  tags: s.array(s.string()).default([]),
+  tags: s.array(s.enum(["ai", "full-stack", "hackathon"])).default([]),
   skills: s.array(s.string()).default([]),
   status: s.enum(["live", "building", "archived"]).optional(),
   started: month.optional(),
@@ -117,6 +117,22 @@ const milestones = defineCollection({
   }),
 });
 
+// The single skills registry; project `skills[]` hold these ids.
+const skillShape = {
+  id: s.string().regex(/^[a-z][a-z0-9-]*$/, "use lowercase kebab-case ids"),
+  name: s.string().max(99),
+  kind: s.enum(["skill", "tool"]),
+  group: s.enum(["ai", "frontend", "backend", "mobile", "tools"]),
+  level: s.enum(["daily", "used in project", "experimenting"]),
+  usedFor: s.string().optional(),
+};
+
+const skills = defineCollection({
+  name: "Skill",
+  pattern: "skills.yaml",
+  schema: s.object({ skills: s.array(s.object(skillShape)) }),
+});
+
 export default defineConfig({
   root: "../../content",
   output: {
@@ -125,5 +141,5 @@ export default defineConfig({
     base: "/static/",
     clean: true,
   },
-  collections: { projects, competitions, milestones, posts },
+  collections: { projects, competitions, milestones, posts, skills },
 });

@@ -1,7 +1,12 @@
-import { competitions, milestones, projects } from "#site/content";
+import { competitions, milestones, projects, skills } from "#site/content";
 import { createContentModel } from "./content-model";
 
-export const site = createContentModel({ projects, competitions, milestones });
+export const site = createContentModel({
+  projects,
+  competitions,
+  milestones,
+  skills: skills[0]?.skills ?? [],
+});
 
 // Build-time report: drafts stay hidden, and this tells Rolan what each one still needs.
 if (site.missingFacts.length > 0) {

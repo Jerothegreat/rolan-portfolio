@@ -12,6 +12,14 @@ import { siteConfig } from "@/lib/site-config";
 const lift =
   "motion-safe:transition-[transform,box-shadow] motion-safe:duration-120 motion-safe:ease-out motion-safe:hover:-translate-x-0.5 motion-safe:hover:-translate-y-0.5 motion-safe:hover:shadow-hover motion-safe:active:translate-x-1 motion-safe:active:translate-y-1 motion-safe:active:shadow-pressed";
 
+const groupLabels = {
+  ai: "AI",
+  frontend: "Frontend",
+  backend: "Backend",
+  mobile: "Mobile",
+  tools: "Tools",
+};
+
 export default function Home() {
   const { spotlight, projectCount, latestInternship } = site;
   const recent = site.recentProjects(2);
@@ -108,6 +116,38 @@ export default function Home() {
               See all {projectCount} {projectCount === 1 ? "project" : "projects"} →
             </Button>
           </p>
+        </section>
+      </Reveal>
+
+      <Reveal className="mt-16 lg:mt-24">
+        <section id="skills" aria-labelledby="skills-heading">
+          <h2 id="skills-heading" className="text-h2">
+            Skills
+          </h2>
+          {site.skillGroups.map((group) => (
+            <div key={group.group} className="mt-10">
+              <h3 className="text-h3">{groupLabels[group.group]}</h3>
+              <ul className="mt-4 flex flex-col gap-3">
+                {group.skills.map((skill) => (
+                  <li key={skill.id} className="flex flex-wrap items-center gap-x-3 gap-y-2">
+                    <Pill variant="neutral">{`${skill.name} · ${skill.level}`}</Pill>
+                    {skill.usedIn.length > 0 ? (
+                      <span className="text-body text-ink-muted">
+                        {skill.usedIn.map((used, index) => (
+                          <span key={used.slug}>
+                            {index > 0 ? ", " : ""}
+                            <a href="#projects" className="underline-offset-4 hover:underline">
+                              {used.title}
+                            </a>
+                          </span>
+                        ))}
+                      </span>
+                    ) : null}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </section>
       </Reveal>
 

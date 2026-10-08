@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { createContentModel, internshipBadge, type CompetitionInput, type MilestoneInput, type ProjectInput } from "./content-model";
+import { createContentModel, internshipBadge, type CompetitionInput, type MilestoneInput, type ProjectInput, type SkillInput } from "./content-model";
 
 function project(overrides: Partial<ProjectInput> & Pick<ProjectInput, "slug">): ProjectInput {
   return {
@@ -396,6 +396,85 @@ describe("content model: missingFacts for competitions", () => {
       { path: "projects/handa", missing: ["role"] },
       { path: "competitions/agora", missing: ["date", "placement"] },
       { path: "competitions/devkada", missing: ["placement"] },
+    ]);
+  });
+});
+
+const registry: SkillInput[] = [
+  { id: "react", name: "React", kind: "skill", group: "frontend", level: "used in project" },
+  { id: "python", name: "Python", kind: "skill", group: "ai", level: "experimenting" },
+  { id: "node-js", name: "Node.js", kind: "skill", group: "backend", level: "used in project" },
+  { id: "qdrant", name: "Qdrant", kind: "tool", group: "ai", level: "experimenting", usedFor: "Semantic vector search" },
+];
+
+describe("content model: skills registry", () => {
+  it("rejects an unknown skill id on a listed project, naming the file and id", () => {
+    expect(() =>
+      createContentModel({
+        skills: registry,
+        projects: [alunsina(), project({ slug: "handa", skills: ["react", "nope"] })],
+      }),
+    ).toThrow(/projects\/handa: unknown skill id "nope"/);
+  });
+
+  it("rejects an unknown skill id on a draft project too", () => {
+    expect(() =>
+      createContentModel({
+        skills: registry,
+        projects: [
+          alunsina(),
+          project({
+            slug: "half-done",
+            draft: true,
+            oneLiner: undefined,
+            role: undefined,
+            status: undefined,
+            started: undefined,
+            ended: undefined,
+            skills: ["nope"],
+          }),
+        ],
+      }),
+    ).toThrow(/projects\/half-done: unknown skill id "nope"/);
+  });
+
+  it("computes usedIn from listed projects only, drafts and unlisted excluded, newest first", () => {
+    const model = createContentModel({
+      skills: registry,
+      projects: [
+        project({ slug: "ehanda", started: "2026-08", skills: ["react"] }),
+        alunsina(),
+        project({ slug: "cced", started: "2025-09", skills: ["react"] }),
+        project({ slug: "kalinga", title: "UMak Kalinga App", started: "2025-09", skills: ["react"] }),
+        project({ slug: "restaurant", started: "2024-05", skills: ["react"] }),
+        project({ slug: "rag-pipeline", draft: true, skills: ["react"] }),
+        project({ slug: "secret", unlisted: true, skills: ["react"] }),
+      ],
+    });
+
+    expect(model.skills.find((s) => s.id === "react")?.usedIn).toEqual([
+      { slug: "ehanda", title: "ehanda" },
+      { slug: "cced", title: "cced" },
+      { slug: "kalinga", title: "UMak Kalinga App" },
+      { slug: "restaurant", title: "restaurant" },
+    ]);
+    expect(model.skills.find((s) => s.id === "qdrant")?.usedIn).toEqual([]);
+  });
+
+  it("groups skills by group in fixed order, omitting empty groups", () => {
+    const model = createContentModel({
+      skills: [
+        { id: "node-js", name: "Node.js", kind: "skill", group: "backend", level: "used in project" },
+        { id: "react", name: "React", kind: "skill", group: "frontend", level: "used in project" },
+        { id: "qdrant", name: "Qdrant", kind: "tool", group: "ai", level: "experimenting" },
+      ],
+      projects: [alunsina()],
+    });
+
+    expect(model.skillGroups.map((g) => [g.group, ...g.skills.map((s) => s.id)])).toEqual([
+      ["ai", "qdrant"],
+      ["frontend", "react"],
+      ["backend", "node-js"],
     ]);
   });
 });

@@ -13,6 +13,22 @@ export interface ProjectInput {
   /** Build span, "YYYY-MM". */
   started?: string;
   ended?: string;
+  skills?: string[];
+}
+
+export type SkillGroup = "ai" | "frontend" | "backend" | "mobile" | "tools";
+
+export interface SkillInput {
+  id: string;
+  name: string;
+  kind: "skill" | "tool";
+  group: SkillGroup;
+  level: "daily" | "used in project" | "experimenting";
+  usedFor?: string;
+}
+
+export interface Skill extends SkillInput {
+  usedIn: { slug: string; title: string }[];
 }
 
 export interface CompetitionInput {
@@ -69,7 +85,16 @@ export function internshipBadge(internship: MilestoneInput | undefined): string 
   return `${internship.ended ? "ex-" : ""}intern @ ${internship.company}`;
 }
 
-export function createContentModel<P extends ProjectInput>(input: { projects: P[]; competitions?: CompetitionInput[]; milestones?: MilestoneInput[] }) {
+const GROUP_ORDER: SkillGroup[] = ["ai", "frontend", "backend", "mobile", "tools"];
+
+export function createContentModel<P extends ProjectInput>(input: {
+  projects: P[];
+  competitions?: CompetitionInput[];
+  milestones?: MilestoneInput[];
+  skills?: SkillInput[];
+}) {
+  const skills = input.skills ?? [];
+  const skillById = new Map(skills.map((skill) => [skill.id, skill]));
   const milestones = input.milestones ?? [];
   for (const m of milestones) {
     if (m.points < 0) {
@@ -96,6 +121,13 @@ export function createContentModel<P extends ProjectInput>(input: { projects: P[
       throw new ContentRuleError(`duplicate slug "${p.slug}" in ${first} and ${p.path}`);
     }
     seen.set(p.slug, p.path);
+  }
+  for (const p of input.projects) {
+    for (const id of p.skills ?? []) {
+      if (!skillById.has(id)) {
+        throw new ContentRuleError(`${p.path}: unknown skill id "${id}"`);
+      }
+    }
   }
   for (const p of input.projects) {
     if (p.draft) continue;
@@ -143,6 +175,16 @@ export function createContentModel<P extends ProjectInput>(input: { projects: P[
   >).sort((a, b) => b.date.localeCompare(a.date));
   const sortedMilestones = [...milestones].sort((a, b) => b.date.localeCompare(a.date));
   const spotlight = spotlights[0] as unknown as CompleteProject<P>;
+  const skillEntries: Skill[] = skills.map((skill) => ({
+    ...skill,
+    usedIn: listedProjects
+      .filter((p) => (p.skills ?? []).includes(skill.id))
+      .map((p) => ({ slug: p.slug, title: p.title })),
+  }));
+  const skillGroups = GROUP_ORDER.map((group) => ({
+    group,
+    skills: skillEntries.filter((skill) => skill.group === group),
+  })).filter((g) => g.skills.length > 0);
   return {
     spotlight,
     listedProjects,
@@ -155,6 +197,10 @@ export function createContentModel<P extends ProjectInput>(input: { projects: P[
     milestones: sortedMilestones,
     /** The most recent internship milestone, for the hero badge. */
     latestInternship: sortedMilestones.find((m) => m.type === "internship"),
+    /** Registry entries in file order, with their listed projects. */
+    skills: skillEntries,
+    /** Non-empty groups in fixed order. */
+    skillGroups,
     recentProjects: (n: number) => listedProjects.filter((p) => p.slug !== spotlight.slug).slice(0, n),
   };
 }
