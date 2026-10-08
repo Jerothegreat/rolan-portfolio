@@ -20,7 +20,8 @@ Use `docs/agents/skill-policy.md` for skill routing, model routing, and completi
 5. Do not mark a requirement implemented from placeholder UI, hard-coded content, or an untested happy path.
 6. Update `traceability/requirements-map.md` only after the relevant evidence passes.
 7. Commit and push only when the user explicitly authorizes those git operations.
-8. A plan packet beyond the next one is written only after its dependencies pass their gate; internal steps may adapt to the verified code at that gate.
+8. Plans 03 and 04 were written ahead (owner request, 2026-10-09) so flash-tier sessions can run in parallel; tickets may adapt to the verified code at each gate. Plans 05 and 06 stay outlines until their dependencies pass.
+9. Parallel flash-tier sessions each run in their own git worktree and branch (`../1mil-wt/<branch>`); the review tier merges each branch into `test`.
 
 ## Plan Sequence
 
@@ -44,27 +45,31 @@ Use `docs/agents/skill-policy.md` for skill routing, model routing, and completi
 
 ### Plan 03: Voice
 
+**Detailed plan:** `plans/plan-03-voice/plan.md` (6 tickets)
 **Requirements supported:** PG-05, PG-06, PG-07 (counter), SF-02, NFR-03
 **Outcome:** Blog with til/thoughts, RSS, OG images; first 3 posts (a hackathon recap, a RAG til, why 1mil); About page with timeline and now-learning box; 1mil tracker + `/1mil`.
 
 ### Plan 04: Chat Security
 
+**Detailed plan:** `plans/plan-04-chat-security/plan.md` (5 tickets; needs an Upstash Redis database)
 **Requirements supported:** AI-04, NFR-05
 **Outcome:** The hardening layer from `docs/adr/0003-site-chat-same-origin-agent-protocols-separate.md` exists and is tested before any LLM is reachable: same-origin chat route skeleton, per-visitor rate limit, daily spend cap kill switch, message size limits, prompt-injection defenses, anonymized abuse/cost counters, no stored IPs or transcripts.
 
 ### Plan 05: AI And Polish
 
+**Outline:** `plans/plan-05-ai-polish/plan.md` (tickets after Plan 04 gate and owner LLM / vector-store choice)
 **Requirements supported:** SF-01, SF-07, AI-01..AI-05, NFR-01, NFR-02, NFR-06
 **Outcome:** Ask my AI in the terminal and the `/ask` recruiter page (ingest, retrieve, stream, source chips); 20-question chat eval in CI; motion pass with reduced motion; dark mode check; Lighthouse 90+; mobile test on iOS Safari + Android Chrome; link check; the 30-second test with 2 friends + 1 recruiter.
 
 ### Plan 06: Agent Protocol Showcase
 
+**Outline:** `plans/plan-06-agent-showcase/plan.md`
 **Requirements supported:** none in v1 (learning showcase, governed by ADR 0003)
 **Outcome:** A read-only, rate-limited MCP server over public site content, then a key-gated A2A agent (manually issued keys, small quotas), with its own project page.
 
 ## Content Owed By The Owner
 
-Hidden until supplied (never invented): eGovPH award photo; Alunsina screenshots and architecture image; which skills are `daily`; Problem / What I built / Lessons write-ups per project; remaining competition months, placements, and results; certification months; "Sumakses" (May 2025).
+Hidden until supplied (never invented): blog posts; "why 1mil" (3 sentences, `content/1mil.mdx`); eGovPH award photo; Alunsina screenshots and architecture image; which skills are `daily`; Problem / What I built / Lessons write-ups per project; remaining competition months, placements, and results; certification months; "Sumakses" (May 2025).
 
 ## Deferred
 
