@@ -1,6 +1,6 @@
 # Plan 01: Foundation
 
-**Status:** Partial (tickets 01–09 done; independent review passed with fixes; fix tickets 10–11 open)
+**Status:** Complete but evidence pending (all tickets done; promotion to `master` pending)
 **Owner:** apps/web
 **Dependencies:** Plan 00 gate passed
 **Requirements:** PG-01, SF-03, SF-04, CM-01, CM-02, CM-03, CM-04, NFR-02, NFR-04

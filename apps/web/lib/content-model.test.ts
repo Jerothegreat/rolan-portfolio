@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { createContentModel, type CompetitionInput, type MilestoneInput, type ProjectInput } from "./content-model";
+import { createContentModel, internshipBadge, type CompetitionInput, type MilestoneInput, type ProjectInput } from "./content-model";
 
 function project(overrides: Partial<ProjectInput> & Pick<ProjectInput, "slug">): ProjectInput {
   return {
@@ -152,6 +152,30 @@ describe("content model: recentProjects", () => {
     const model = createContentModel({ projects });
 
     expect(model.recentProjects(2).map((p) => p.slug)).toEqual(["handa", "kalinga"]);
+  });
+
+  it("breaks ties on equal started by title, A to Z", () => {
+    const model = createContentModel({
+      projects: [
+        alunsina(),
+        project({ slug: "umak-kalinga-app", title: "UMak Kalinga App", started: "2024-09" }),
+        project({ slug: "cced-admin-web", title: "CCED-Admin-web", started: "2024-09" }),
+      ],
+    });
+
+    expect(model.recentProjects(5).map((p) => p.slug)).toEqual(["cced-admin-web", "umak-kalinga-app"]);
+  });
+
+  it("orders tied projects the same way from reversed input order", () => {
+    const model = createContentModel({
+      projects: [
+        alunsina(),
+        project({ slug: "cced-admin-web", title: "CCED-Admin-web", started: "2024-09" }),
+        project({ slug: "umak-kalinga-app", title: "UMak Kalinga App", started: "2024-09" }),
+      ],
+    });
+
+    expect(model.recentProjects(5).map((p) => p.slug)).toEqual(["cced-admin-web", "umak-kalinga-app"]);
   });
 
   it("returns fewer when fewer qualify", () => {
@@ -330,6 +354,30 @@ describe("content model: latestInternship", () => {
     });
 
     expect(model.latestInternship).toBeUndefined();
+  });
+});
+
+describe("content model: internshipBadge", () => {
+  const internshipAt = (ended: string | undefined): MilestoneInput =>
+    milestone({
+      label: "Intern @ Globe Telecom",
+      type: "internship",
+      company: "Globe Telecom",
+      date: "2026-07",
+      points: 150000,
+      ended,
+    });
+
+  it("reads ex-intern when the internship has an ended month", () => {
+    expect(internshipBadge(internshipAt("2026-09"))).toBe("ex-intern @ Globe Telecom");
+  });
+
+  it("reads intern when the internship has not ended", () => {
+    expect(internshipBadge(internshipAt(undefined))).toBe("intern @ Globe Telecom");
+  });
+
+  it("reads nothing when there is no internship", () => {
+    expect(internshipBadge(undefined)).toBeUndefined();
   });
 });
 

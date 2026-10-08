@@ -1,18 +1,18 @@
 # Plan 01 Gate
 
-**Gate status:** Partial (independent review done: pass with fixes; fix tickets 10 and 11 open)
+**Gate status:** Complete but evidence pending (all results met; promotion to `master` awaits owner authorization; terminal-input focus ring gets browser confirmation in Plan 02 ticket 09)
 
 ## Required Results
 
-- [ ] Plan 00 gate passed (its independent review passed with doc fixes, now applied).
+- [x] Plan 00 gate passed (Complete, 2026-10-08).
 - [x] Scope finalized through `to-spec`.
 - [x] Requirements PG-01 (Plan 01 slice), SF-03 (browser-only slice), SF-04, CM-01..CM-04, NFR-02 (Plan 01 slice), NFR-04 have evidence (`evidence.md`, FD-02..FD-10), subject to the review fixes below.
-- [x] Vitest seams (content model, terminal interpreter) pass via `pnpm test`: 55/55.
+- [x] Vitest seams (content model, schemas, terminal interpreter) pass via `pnpm test`: 70/70.
 - [x] Legacy site tagged `legacy-terminal-site` before removal.
 - [x] `pnpm check:workspace` passes.
 - [x] Browser pass: 47/47 checks (FD-10). It did not cover focus inside the terminal input; the review found that gap.
 - [x] Independent review recorded (below).
-- [ ] Review fix tickets 10 and 11 done and verified.
+- [x] Review fix tickets 10 and 11 done and verified (FD-11, FD-12; implemented by GLM Flash, 1 review fix each).
 
 ## Known Limitations (not blockers)
 

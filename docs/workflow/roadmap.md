@@ -3,7 +3,7 @@
 **Status:** Active master roadmap
 **Canonical requirements:** `docs/product/requirements-engineering.md`
 
-**Active plan:** [Plan 01 foundation](plans/plan-01-foundation/plan.md): tickets 01–09 done; review fix tickets 10–11 open. [Plan 00](plans/plan-00-workflow-monorepo/plan.md) complete. **Next:** [Plan 02 proof](plans/plan-02-proof/plan.md) (spec final; 9 tickets ready after Plan 01 fix tickets 10–11).
+**Active plan:** [Plan 02 proof](plans/plan-02-proof/plan.md): 9 tickets ready, none started. [Plan 01](plans/plan-01-foundation/plan.md) complete pending promotion to `master`; [Plan 00](plans/plan-00-workflow-monorepo/plan.md) complete.
 
 ## Goal
 

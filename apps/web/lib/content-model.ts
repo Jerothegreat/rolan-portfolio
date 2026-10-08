@@ -63,6 +63,12 @@ export class ContentRuleError extends Error {
   name = "ContentRuleError";
 }
 
+/** Text for the hero internship badge: "ex-intern" only once the stint has an end month. */
+export function internshipBadge(internship: MilestoneInput | undefined): string | undefined {
+  if (!internship?.company) return undefined;
+  return `${internship.ended ? "ex-" : ""}intern @ ${internship.company}`;
+}
+
 export function createContentModel<P extends ProjectInput>(input: { projects: P[]; competitions?: CompetitionInput[]; milestones?: MilestoneInput[] }) {
   const milestones = input.milestones ?? [];
   for (const m of milestones) {
@@ -117,7 +123,7 @@ export function createContentModel<P extends ProjectInput>(input: { projects: P[
     );
   }
   const listedProjects = (input.projects.filter((p) => !p.draft && !p.unlisted) as unknown as CompleteProject<P>[]).sort(
-    (a, b) => b.started.localeCompare(a.started),
+    (a, b) => b.started.localeCompare(a.started) || a.title.localeCompare(b.title),
   );
   const missingFacts = input.projects
     .filter((p) => p.draft)

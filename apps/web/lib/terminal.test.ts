@@ -1,5 +1,5 @@
-import { describe, expect, it } from "vitest";
-import { run, type TerminalContext } from "./terminal";
+import { describe, expect, expectTypeOf, it } from "vitest";
+import { run, type TerminalContext, type TerminalProject } from "./terminal";
 
 const ctx: TerminalContext = {
   name: "Ada Tester",
@@ -13,7 +13,7 @@ const ctx: TerminalContext = {
   projects: [
     { slug: "alpha", title: "Alpha", oneLiner: "First", status: "live", demoUrl: "https://alpha.example.com", repoUrl: "https://github.com/ada/alpha" },
     { slug: "beta", title: "Beta", oneLiner: "Second", status: "building", repoUrl: "https://github.com/ada/beta" },
-    { slug: "gamma", title: "Gamma", oneLiner: "Third", status: "shipped" },
+    { slug: "gamma", title: "Gamma", oneLiner: "Third", status: "archived" },
   ],
   hiddenSlugs: new Set(["secret"]),
 };
@@ -49,12 +49,18 @@ describe("contact", () => {
   });
 });
 
+describe("TerminalProject type", () => {
+  it("carries only the real project statuses", () => {
+    expectTypeOf<TerminalProject["status"]>().toEqualTypeOf<"live" | "building" | "archived">();
+  });
+});
+
 describe("projects", () => {
   it("lists listed projects as slug — title (status)", () => {
     expect(run("projects", ctx).lines).toEqual([
       "alpha — Alpha (live)",
       "beta — Beta (building)",
-      "gamma — Gamma (shipped)",
+      "gamma — Gamma (archived)",
     ]);
   });
 
@@ -87,7 +93,7 @@ describe("open", () => {
     expect(run("open secret", ctx)).toEqual({
       lines: ["No project called \"secret\". Try `projects` to see what's here."],
     });
-    const leaky = {
+    const leaky: TerminalContext = {
       ...ctx,
       projects: [...ctx.projects, { slug: "secret", title: "Secret", oneLiner: "x", status: "live", demoUrl: "https://s.example.com" }],
     };

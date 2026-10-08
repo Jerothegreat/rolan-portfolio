@@ -5,7 +5,8 @@ export type TerminalProject = {
   slug: string;
   title: string;
   oneLiner: string;
-  status: string;
+  // A real project status; contexts pass listed projects only.
+  status: "live" | "building" | "archived";
   demoUrl?: string;
   repoUrl?: string;
 };

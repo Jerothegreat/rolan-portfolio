@@ -4,6 +4,7 @@ import { Pill } from "@/components/pill";
 import { CopyEmail } from "@/components/copy-email";
 import { Reveal } from "@/components/reveal";
 import { RoleTyper } from "@/components/role-typer";
+import { internshipBadge } from "@/lib/content-model";
 import { site } from "@/lib/site";
 import { siteConfig } from "@/lib/site-config";
 
@@ -14,15 +15,16 @@ const lift =
 export default function Home() {
   const { spotlight, projectCount, latestInternship } = site;
   const recent = site.recentProjects(2);
+  const badge = internshipBadge(latestInternship);
 
   return (
     <main className="mx-auto max-w-page px-4 py-16 sm:px-6 lg:py-24">
       <header>
         <h1 className="text-h1">{siteConfig.name}</h1>
         <RoleTyper role={siteConfig.role} />
-        {latestInternship?.company ? (
+        {badge ? (
           <p className="mt-4">
-            <Pill variant="neutral">ex-intern @ {latestInternship.company}</Pill>
+            <Pill variant="neutral">{badge}</Pill>
           </p>
         ) : null}
         <Button href="#projects" className="mt-8">
