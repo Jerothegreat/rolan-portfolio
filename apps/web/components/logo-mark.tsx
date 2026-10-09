@@ -27,7 +27,8 @@ function pixels() {
   return { rim: rim.join(""), face: face.join(""), shine: shine.join(""), glyph: glyph.join("") };
 }
 
-const P = pixels();
+/** The coin's pixel paths; the tab icon (`app/icon.tsx`) draws the same coin. */
+export const P = pixels();
 
 export function LogoMark({ className = "" }: { className?: string }) {
   return (

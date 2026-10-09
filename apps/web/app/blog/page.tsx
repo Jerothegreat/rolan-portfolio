@@ -5,7 +5,7 @@ import { Window } from "@/components/window";
 import { publishedPosts } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Blog · 1mil.dev",
+  title: "Blog",
   description: "What broke, what I learned, and the road to 1,000,000.",
 };
 

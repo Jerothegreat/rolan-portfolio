@@ -20,6 +20,7 @@ import { TrackerWindow } from "@/components/tracker-window";
 import { MediaSlot } from "@/components/media-slot";
 import { ContributionGraph } from "@/components/contribution-graph";
 import { ExperienceWindow, type Job } from "@/components/experience-window";
+import { SectionTitle } from "@/components/section-title";
 import { ProjectsCarousel, type CarouselHackathon, type CarouselProject } from "@/components/projects-carousel";
 import { Window } from "@/components/window";
 import { internshipBadge, type SkillGroup } from "@/lib/content-model";
@@ -137,6 +138,7 @@ export default async function Home() {
 
   return (
     <main className="desk">
+      <SectionTitle />
       <div className="mx-auto max-w-page px-4 py-12 sm:px-6 lg:py-16">
         {/* Hero pile. DOM order is reading order; the overlap on lg is visual only. */}
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-x-6 lg:gap-y-0">

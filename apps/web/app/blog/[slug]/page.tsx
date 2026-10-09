@@ -20,7 +20,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const post = publishedPosts.find((p) => p.slug === slug);
-  return post ? { title: `${post.title} · 1mil.dev`, description: post.summary } : {};
+  return post ? { title: post.title, description: post.summary } : {};
 }
 
 // A post as a maximized notepad window.

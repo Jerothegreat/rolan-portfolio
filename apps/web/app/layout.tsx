@@ -40,7 +40,8 @@ const silkscreen = Silkscreen({
 });
 
 export const metadata: Metadata = {
-  title: `${siteConfig.name} · ${siteConfig.role}`,
+  // Tabs read "1mil | Home", "1mil | Blog", ...; Home switches by section (SectionTitle).
+  title: { default: "1mil | Home", template: "1mil | %s" },
   description: siteConfig.tagline,
 };
 
