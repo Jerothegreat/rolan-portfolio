@@ -4,7 +4,7 @@ Detailed tickets live in `.scratch/plan-02-proof/issues/` (local, git-ignored). 
 
 - [x] `PR-00` Resolve decisions (`grill-with-docs`, 2026-10-08) and finalize `plan.md` (`to-spec`).
 - [x] `PR-01` Slice `plan.md` into tickets (`to-tickets`).
-- [ ] `PR-02` Ticket 01: skills registry and tags. Blocked by: P01-10, P01-11.
+- [x] `PR-02` Ticket 01: skills registry and tags (commit c7bed2e). Blocked by: P01-10, P01-11.
 - [ ] `PR-03` Ticket 02: AI toolbox flip cards. Blocked by: 01.
 - [ ] `PR-04` Ticket 03: `/work` grid and tag filters. Blocked by: 01.
 - [ ] `PR-05` Ticket 04: `/work` timeline view. Blocked by: 03.

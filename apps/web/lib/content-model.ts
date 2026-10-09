@@ -1,3 +1,5 @@
+import { buildRoad } from "./road";
+
 export interface ProjectInput {
   slug: string;
   title: string;
@@ -41,6 +43,7 @@ export interface CompetitionInput {
   /** Facts a draft may omit; non-draft competitions must carry date and placement. */
   date?: string;
   placement?: string;
+  photo?: string;
   /** Hackathon-only fields; a contest must not carry them. */
   hours?: number;
   teamSize?: number;
@@ -48,6 +51,8 @@ export interface CompetitionInput {
   built?: string;
   demoUrl?: string;
   recapPost?: string;
+  /** Slug of the listed project built at this hackathon; the carousel shows them as one card. */
+  project?: string;
 }
 
 export interface MilestoneInput {
@@ -63,9 +68,19 @@ export interface MilestoneInput {
   /** "YYYY-MM" end month, for milestones that span time (internships). */
   ended?: string;
   link?: string;
+  /** Photo shown in the news window when the milestone is the featured one. */
+  photo?: string;
+  /** Shown on the Home road; every milestone shows on the full road. */
+  highlight?: boolean;
+  summary?: string;
+  stamp?: string;
+  /** What the role involved, one line each; shown when the experience window is maximized. */
+  details?: string[];
+  /** The one milestone shown as "In the news" on Home. */
+  featured?: boolean;
 }
 
-const HACKATHON_ONLY = ["hours", "teamSize", "role", "built", "demoUrl", "recapPost"] as const;
+const HACKATHON_ONLY = ["hours", "teamSize", "role", "built", "demoUrl", "recapPost", "project"] as const;
 
 const COMPETITION_FACTS = ["date", "placement"] as const;
 
@@ -87,9 +102,9 @@ export function internshipBadge(internship: MilestoneInput | undefined): string 
 
 const GROUP_ORDER: SkillGroup[] = ["ai", "frontend", "backend", "mobile", "tools"];
 
-export function createContentModel<P extends ProjectInput>(input: {
+export function createContentModel<P extends ProjectInput, C extends CompetitionInput = CompetitionInput>(input: {
   projects: P[];
-  competitions?: CompetitionInput[];
+  competitions?: C[];
   milestones?: MilestoneInput[];
   skills?: SkillInput[];
 }) {
@@ -100,6 +115,12 @@ export function createContentModel<P extends ProjectInput>(input: {
     if (m.points < 0) {
       throw new ContentRuleError(`${m.path}: points cannot be negative (points: ${m.points})`);
     }
+  }
+  const featured = milestones.filter((m) => m.featured);
+  if (featured.length > 1) {
+    throw new ContentRuleError(
+      `Content needs at most one featured milestone, found ${featured.length}: ${featured.map((m) => m.path).join(", ")}`,
+    );
   }
   const competitions = input.competitions ?? [];
   for (const c of competitions) {
@@ -157,6 +178,12 @@ export function createContentModel<P extends ProjectInput>(input: {
   const listedProjects = (input.projects.filter((p) => !p.draft && !p.unlisted) as unknown as CompleteProject<P>[]).sort(
     (a, b) => b.started.localeCompare(a.started) || a.title.localeCompare(b.title),
   );
+  const listedSlugs = new Set(listedProjects.map((p) => p.slug));
+  for (const c of competitions) {
+    if (c.project && !listedSlugs.has(c.project)) {
+      throw new ContentRuleError(`${c.path}: project "${c.project}" is not a listed project`);
+    }
+  }
   const missingFacts = input.projects
     .filter((p) => p.draft)
     .map((p) => {
@@ -171,9 +198,9 @@ export function createContentModel<P extends ProjectInput>(input: {
     )
     .filter((d) => d.missing.length > 0);
   const listedCompetitions = (competitions.filter((c) => !c.draft) as Array<
-    CompetitionInput & Required<Pick<CompetitionInput, (typeof COMPETITION_FACTS)[number]>>
+    C & Required<Pick<CompetitionInput, (typeof COMPETITION_FACTS)[number]>>
   >).sort((a, b) => b.date.localeCompare(a.date));
-  const sortedMilestones = [...milestones].sort((a, b) => b.date.localeCompare(a.date));
+  const sortedMilestones = [...milestones].sort((a, b) => b.date.localeCompare(a.date) || a.label.localeCompare(b.label));
   const spotlight = spotlights[0] as unknown as CompleteProject<P>;
   const skillEntries: Skill[] = skills.map((skill) => ({
     ...skill,
@@ -195,6 +222,12 @@ export function createContentModel<P extends ProjectInput>(input: {
     competitions: listedCompetitions,
     /** Milestones, newest first. */
     milestones: sortedMilestones,
+    /** The featured milestone for "In the news", if one is marked. */
+    featuredHighlight: featured[0],
+    /** The n most recent milestones other than the featured one, newest first. */
+    otherHighlights: (n: number) => sortedMilestones.filter((m) => !m.featured).slice(0, n),
+    /** The road to 1mil: tracker total and stops oldest first (SF-02). */
+    road: buildRoad(milestones),
     /** The most recent internship milestone, for the hero badge. */
     latestInternship: sortedMilestones.find((m) => m.type === "internship"),
     /** Registry entries in file order, with their listed projects. */

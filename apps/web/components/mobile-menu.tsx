@@ -3,7 +3,7 @@
 import { useRef, useState, type MouseEvent, type ReactNode } from "react";
 import { Button } from "@/components/button";
 
-// Bottom-sheet menu below 640px. The native modal <dialog> supplies the focus trap,
+// Bottom-sheet menu below 1024px. The native modal <dialog> supplies the focus trap,
 // Escape handling, and the backdrop; this wires aria state and focus return.
 export function MobileMenu({ children }: { children: ReactNode }) {
   const dialog = useRef<HTMLDialogElement>(null);
@@ -29,7 +29,7 @@ export function MobileMenu({ children }: { children: ReactNode }) {
   }
 
   return (
-    <div ref={root} className="sm:hidden">
+    <div ref={root} className="lg:hidden">
       <Button
         variant="secondary"
         aria-expanded={open}

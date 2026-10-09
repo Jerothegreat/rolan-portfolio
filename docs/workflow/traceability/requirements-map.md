@@ -8,11 +8,11 @@ Current requirement-to-implementation status. Update a row only after the owning
 | PG-02 | Work + timeline | 02 | Planned | |
 | PG-03 | Project page | 02 | Planned | |
 | PG-04 | Hackathons & contests | 02 | Planned | |
-| PG-05 | Blog | 03 | Planned | |
+| PG-05 | Blog | 02a, 03 | Partial | `/blog` list with tag filter and `/blog/[slug]` MDX post page; plan-02a evidence RO-15. Dates, reading time, related project, prev/next, RSS pending Plan 03. |
 | PG-06 | About | 03 | Planned | |
 | PG-07 | 1mil page | 02 (list), 03 (counter) | Planned | |
-| SF-01 | Ask my AI | 05 | Planned | |
-| SF-02 | 1mil tracker | 03 | Planned | |
+| SF-01 | Ask my AI | 05 | Planned | Terminal shows an "under construction" sign until Plan 05 (plan-02a RO-15). |
+| SF-02 | 1mil tracker | 02a | Implemented | Hero `1mil.exe`, menu-bar tray, road with highlights and maximize; plan-02a evidence RO-02, RO-08. `/1mil` page reuse pending Plan 03. |
 | SF-03 | Terminal easter egg | 01, 05 | Partial | Browser-only commands verified (plan-01 FD-08, FD-09, FD-10); AI chat inside it is Plan 05. |
 | SF-04 | Dark mode | 01 | Complete but evidence pending | plan-01 FD-04, FD-10. |
 | SF-05 | Command palette | — | Deferred | |

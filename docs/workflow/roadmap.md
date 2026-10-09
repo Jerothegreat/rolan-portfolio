@@ -3,7 +3,8 @@
 **Status:** Active master roadmap
 **Canonical requirements:** `docs/product/requirements-engineering.md`
 
-**Active plan:** [Plan 02 proof](plans/plan-02-proof/plan.md): 9 tickets ready, none started. [Plan 01](plans/plan-01-foundation/plan.md) complete pending promotion to `master`; [Plan 00](plans/plan-00-workflow-monorepo/plan.md) complete.
+**Active plan:** [Plan 02 proof](plans/plan-02-proof/plan.md): ticket 01 done, 8 tickets ready, built on the [Plan 02a](plans/plan-02a-retro-os/plan.md) retro-OS look (promoted to `master` 2026-10-09; independent review owed).
+**Build loop:** [`playbook.md`](playbook.md). [Plan 01](plans/plan-01-foundation/plan.md) complete pending promotion to `master`; [Plan 00](plans/plan-00-workflow-monorepo/plan.md) complete.
 
 ## Goal
 
@@ -43,10 +44,16 @@ Use `docs/agents/skill-policy.md` for skill routing, model routing, and completi
 **Requirements supported:** PG-01 (skills, AI toolbox, In the news), PG-02, PG-03, PG-04, PG-07 (list), CM-02, CM-04, CM-05, NFR-05
 **Outcome:** Skills registry with computed "used in"; `/work` with tag filters and a dots-and-line timeline; case studies that appear once written (Alunsina with screenshots, architecture, and evals); `/hackathons` with results, year-only dates, and flip cards; highlights with a featured "In the news" card on Home and the full list on `/1mil`. SF-06 deferred.
 
+### Plan 02a: Retro-OS Redesign
+
+**Detailed plan:** `plans/plan-02a-retro-os/plan.md`
+**Requirements supported:** PG-01 (hero tracker, look), SF-02, CM-04 (highlight, summary, stamp, education), NFR-02
+**Outcome:** Promoted 2026-10-09. The site re-skinned as a retro desktop of tilted, overlapping neobrutal windows with pixel chrome (ADR 0004). The 1mil tracker appears as `1mil.exe`, and `road_to_1M.map` shows the road from UMak to 1,000,000 with a maximize view of every milestone. It runs after Plan 02 ticket 01, so the rest of Plan 02 is built on the new look.
+
 ### Plan 03: Voice
 
 **Detailed plan:** `plans/plan-03-voice/plan.md` (6 tickets)
-**Requirements supported:** PG-05, PG-06, PG-07 (counter), SF-02, NFR-03
+**Requirements supported:** PG-05, PG-06, PG-07 (counter), NFR-03 (SF-02 moved to Plan 02a)
 **Outcome:** Blog with til/thoughts, RSS, OG images; first 3 posts (a hackathon recap, a RAG til, why 1mil); About page with timeline and now-learning box; 1mil tracker + `/1mil`.
 
 ### Plan 04: Chat Security
@@ -67,9 +74,11 @@ Use `docs/agents/skill-policy.md` for skill routing, model routing, and completi
 **Requirements supported:** none in v1 (learning showcase, governed by ADR 0003)
 **Outcome:** A read-only, rate-limited MCP server over public site content, then a key-gated A2A agent (manually issued keys, small quotas), with its own project page.
 
-## Content Owed By The Owner
+## Content And Setup Owed
 
-Hidden until supplied (never invented): blog posts; "why 1mil" (3 sentences, `content/1mil.mdx`); eGovPH award photo; Alunsina screenshots and architecture image; which skills are `daily`; Problem / What I built / Lessons write-ups per project; remaining competition months, placements, and results; certification months; "Sumakses" (May 2025).
+Setup: Vercel Root Directory `apps/web`; Upstash Redis env vars for the visitor counter (`apps/web/.env.example`).
+
+Content hidden or shown as a labeled placeholder until supplied (never invented): Globe Telecom `details` (`content/milestones/2026-07-internship-globe-telecom.mdx`); confirm the policy bot belongs under Sofi AI; project covers and videos; hackathon photos; news photo; blog posts; "why 1mil" (3 sentences, `content/1mil.mdx`); eGovPH award photo; Alunsina screenshots and architecture image; which skills are `daily`; Problem / What I built / Lessons write-ups per project; remaining competition months, placements, and results; certification months; "Sumakses" (May 2025).
 
 ## Deferred
 

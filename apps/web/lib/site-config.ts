@@ -8,4 +8,8 @@ export const siteConfig = {
   github: "https://github.com/Jerothegreat",
   linkedin: "https://www.linkedin.com/in/rolan-jero-pinton-3aa046391/",
   resume: "/resume.pdf",
+  /** The sticker on the hero. */
+  status: "open to work!",
+  /** Words that loop in the ticker under the menu bar. */
+  tickerWords: ["welcome to 1mil.dev", "AI engineer", "full-stack developer", "top 10 · eGovPH hackathon 2026", "java champion · infotechnolympics 2025"],
 };

@@ -121,9 +121,9 @@ describe("actions", () => {
     expect(run("theme", ctx)).toEqual({ lines: ["Toggling theme."], action: { type: "toggle-theme" } });
   });
 
-  it("ask replies that the AI chat is coming soon", () => {
+  it("ask replies that the AI chat is under construction", () => {
     expect(run("ask what do you build?", ctx)).toEqual({
-      lines: ["The AI chat is coming soon. For now, try `projects` or `contact`."],
+      lines: ["The AI chat is under construction. For now, try `projects` or `contact`."],
     });
   });
 

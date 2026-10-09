@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, Inter, JetBrains_Mono } from "next/font/google";
+import { Bricolage_Grotesque, Inter, JetBrains_Mono, Silkscreen } from "next/font/google";
 import { Footer } from "@/components/footer";
 import { Nav } from "@/components/nav";
 import { Terminal } from "@/components/terminal";
+import { Ticker } from "@/components/ticker";
+import { githubContributions } from "@/lib/contributions";
 import { site } from "@/lib/site";
 import { siteConfig } from "@/lib/site-config";
 import type { TerminalContext } from "@/lib/terminal";
@@ -29,6 +31,14 @@ const jetbrainsMono = JetBrains_Mono({
   fallback: ["ui-monospace", "monospace"],
 });
 
+// Pixel face for title bars, the menu and status bars, stamps, and icon labels only.
+const silkscreen = Silkscreen({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-silkscreen",
+  fallback: ["ui-monospace", "monospace"],
+});
+
 export const metadata: Metadata = {
   title: `${siteConfig.name} · ${siteConfig.role}`,
   description: siteConfig.tagline,
@@ -51,10 +61,27 @@ const terminalContext: TerminalContext = {
   })),
 };
 
+const updated = new Date(process.env.SITE_UPDATED ?? Date.now()).toLocaleDateString("en-US", {
+  month: "long",
+  day: "numeric",
+  year: "numeric",
+  timeZone: "Asia/Manila",
+});
+
+async function tickerItems() {
+  const contributions = await githubContributions(new URL(siteConfig.github).pathname.split("/")[1]);
+  return [
+    ...siteConfig.tickerWords,
+    `last updated ${updated.toLowerCase()}`,
+    ...(contributions ? [`${contributions.total.toLocaleString("en-US")} github contributions this year`] : []),
+    `${site.road.total.toLocaleString("en-US")} / ${site.road.goal.toLocaleString("en-US")} to the dream`,
+  ];
+}
+
 // Runs before first paint so the page never flashes the wrong theme.
 const themeScript = `(function(){var s=null;try{s=localStorage.getItem("theme")}catch(e){}var d=s==="dark"||(s!=="light"&&matchMedia("(prefers-color-scheme: dark)").matches);document.documentElement.classList.toggle("dark",d)})()`;
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -63,13 +90,14 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${bricolage.variable} ${inter.variable} ${jetbrainsMono.variable}`}
+      className={`${bricolage.variable} ${inter.variable} ${jetbrainsMono.variable} ${silkscreen.variable}`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body className="min-h-screen antialiased">
         <Nav />
+        <Ticker items={await tickerItems()} />
         {children}
         <Footer />
         <Terminal context={terminalContext} />

@@ -125,14 +125,22 @@ export function Terminal({ context }: { context: TerminalContext }) {
       onClose={onClose}
       onClick={onDialogClick}
       // Top-anchored on phones so the on-screen keyboard never covers the panel.
-      className="fixed inset-x-0 top-0 m-0 h-[min(26rem,55dvh)] w-full max-w-none rounded-b-card border-2 border-t-0 border-ink bg-bg p-0 font-mono text-mono text-ink shadow-rest backdrop:bg-ink/50 sm:inset-0 sm:m-auto sm:h-[28rem] sm:max-w-2xl sm:rounded-card sm:border-t-2"
+      className="fixed inset-x-0 top-0 m-0 h-[min(26rem,55dvh)] w-full max-w-none border-[3px] border-t-0 border-ink bg-bg p-0 font-mono text-mono text-ink shadow-window backdrop:bg-ink/50 sm:inset-0 sm:m-auto sm:h-[28rem] sm:max-w-2xl sm:border-t-[3px]"
     >
       <div className="flex h-full flex-col">
-        <div className="flex items-center justify-between border-b-2 border-ink px-4 py-2">
-          <span className="font-bold">Terminal</span>
+        <div className="flex items-center justify-between gap-2 border-b-[3px] border-ink bg-lilac px-2 py-1 text-on-accent">
+          <span className="font-pixel text-[13px]">terminal.exe</span>
+          <span aria-hidden="true" className="title-stripes h-2.5 min-w-3 flex-1" />
           <Button variant="secondary" onClick={() => dialog.current?.close()} aria-label="Close terminal">
             Close
           </Button>
+        </div>
+        {/* The AI chat (Plan 04/05) is not built yet; the other commands work. */}
+        <div className="hazard border-b-[3px] border-ink p-1.5">
+          <p className="flex flex-wrap items-center justify-center gap-x-2 border-2 border-ink bg-gold px-2 py-1 text-center text-on-accent">
+            <span className="font-pixel text-[12px] font-bold">under construction</span>
+            <span className="text-[13px]">The AI chat is being built. The other commands work.</span>
+          </p>
         </div>
         <div ref={log} role="log" aria-label="Terminal output" className="min-h-0 flex-1 overflow-y-auto px-4 py-3">
           {lines.map((line, i) => (

@@ -43,12 +43,14 @@ const competitionFactsShape = {
   built: s.string().optional(),
   demoUrl: s.string().url().optional(),
   recapPost: s.string().optional(),
+  // Slug of the listed project built here; the carousel merges the two into one card.
+  project: s.string().optional(),
 };
 
-const HACKATHON_ONLY = ["hours", "teamSize", "role", "built", "demoUrl", "recapPost"] as const;
+const HACKATHON_ONLY = ["hours", "teamSize", "role", "built", "demoUrl", "recapPost", "project"] as const;
 
 /** A contest is an individual skills competition with no build. */
-const contestRefinement = (competition: { kind: "hackathon" | "contest" } & { hours?: number; teamSize?: number; role?: string; built?: string; demoUrl?: string; recapPost?: string }) =>
+const contestRefinement = (competition: { kind: "hackathon" | "contest" } & { hours?: number; teamSize?: number; role?: string; built?: string; demoUrl?: string; recapPost?: string; project?: string }) =>
   competition.kind !== "contest" || HACKATHON_ONLY.every((field) => competition[field] === undefined);
 
 const CONTEST_REFINEMENT_MESSAGE = "a contest cannot have hackathon-only fields";
@@ -56,12 +58,23 @@ const CONTEST_REFINEMENT_MESSAGE = "a contest cannot have hackathon-only fields"
 const milestoneFactsShape = {
   date: month,
   ended: month.optional(),
-  type: s.enum(["internship", "competition", "certification", "event", "project", "post", "graduation"]),
+  type: s.enum(["education", "internship", "competition", "certification", "event", "project", "post", "graduation"]),
   label: s.string().max(99),
   // Organisation behind an internship or job; the hero badge reads it.
   company: s.string().optional(),
   points: s.number().int().min(0),
   link: s.string().url().optional(),
+  // Photo shown in the news window when the milestone is the featured one.
+  photo: s.string().optional(),
+  // Shown on the Home road; every milestone shows on the full road.
+  highlight: s.boolean().default(false),
+  summary: s.string().max(160).optional(),
+  // Short rubber-stamp word on the road stop, e.g. "TOP 10".
+  stamp: s.string().max(12).optional(),
+  // What the role involved, one line each; the maximized experience window lists them.
+  details: s.array(s.string()).default([]),
+  // The one milestone shown as "In the news" on Home.
+  featured: s.boolean().default(false),
 };
 
 const posts = defineCollection({
@@ -94,6 +107,8 @@ const projects = defineCollection({
     ...projectFactsShape,
     path: s.path(),
     body: s.mdx(),
+    // Plain prose bodies as HTML, for the project popup.
+    html: s.markdown(),
   }),
 });
 
@@ -105,6 +120,7 @@ const competitions = defineCollection({
     ...competitionFactsShape,
     path: s.path(),
     body: s.mdx(),
+    html: s.markdown(),
   }).refine(contestRefinement, { message: CONTEST_REFINEMENT_MESSAGE }),
 });
 

@@ -1,4 +1,4 @@
-import { competitions, milestones, projects, skills } from "#site/content";
+import { competitions, milestones, posts, projects, skills } from "#site/content";
 import { createContentModel } from "./content-model";
 
 export const site = createContentModel({
@@ -14,3 +14,11 @@ if (site.missingFacts.length > 0) {
     ["Drafts missing facts:", ...site.missingFacts.map((d) => `  ${d.path}: ${d.missing.join(", ")}`)].join("\n"),
   );
 }
+
+/** Published posts, newest first (ties by title), for /blog. */
+export const publishedPosts = posts
+  .filter((p) => !p.draft)
+  .sort((a, b) => b.date.localeCompare(a.date) || a.title.localeCompare(b.title));
+
+/** The 3 newest published posts for the Home blog window. */
+export const latestPosts = publishedPosts.slice(0, 3);

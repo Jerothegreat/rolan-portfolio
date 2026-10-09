@@ -51,7 +51,7 @@ Every page shall offer a next step (no dead ends). Navigation: Home, Work, Hacka
 | ID | Feature | Requirements |
 | --- | --- | --- |
 | SF-01 | Ask my AI | The system shall provide a floating chat button on every page and a teaser on Home. The system shall answer from site content only (see AI-01..AI-05) and show source chips linking to the cited pages. The panel shall offer suggested-question chips. |
-| SF-02 | 1mil tracker | The system shall sum milestone points (rules below) into a counter with a milestone line, shown small in the hero and linked to `/1mil`. |
+| SF-02 | 1mil tracker | The system shall sum milestone points (rules below) into a counter shown in the hero (`1mil.exe`) and the menu bar. The system shall draw the road to 1,000,000: milestones oldest first on a winding path with each stop's points and running total. Home shall show the `highlight` stops, and a maximize control shall open every stop. |
 | SF-03 | Terminal easter egg | Pressing `~`, a visible `>_` nav button, or Ask my AI (until SF-01 ships) shall open a soft-neobrutal terminal panel (cream panel, ink border, mono font). The footer shall hint "press ~" on desktop. Browser-only commands (`help`, `whoami`, `projects`, `open`, `theme`, `contact`, `clear`) shall work before the chat exists; `ask` shall reply that chat is coming. Once SF-01 ships, the chat runs inside it. The old terminal UI is retired. |
 | SF-04 | Dark mode | The system shall follow the system color scheme and provide a toggle. |
 | SF-05 | Command palette | *Deferred (later):* `Ctrl/Cmd + K` jumps anywhere. |
@@ -65,23 +65,33 @@ One content file feeds every surface: adding one file updates pages, cards, trac
 | ID | Type | Fields |
 | --- | --- | --- |
 | CM-01 | Project | slug, title, oneLiner, tags[] (`ai` / `full-stack` / `hackathon`), skills[] (skills registry ids), role, team (bool), status (`live` / `building` / `archived`), started (month), ended (month; required unless `building`, forbidden when `building`), spotlight (bool; exactly one project), unlisted (bool), draft (bool), demoUrl, repoUrl, cover (gif/png), screenshots[] (co-located images), video (optional), siteUrl (optional product site), architectureImg, evals (optional); case-study sections live in the MDX body |
-| CM-02 | Competition | slug, name, kind (`hackathon` / `contest`), date (`YYYY-MM` or `YYYY`), placement (display text), result (`won` / `placed` / `finalist` / `joined`), prize (optional, with amount), prizeSourceUrl (optional), photo, draft; hackathon only: hours, teamSize, role, built, demoUrl, recapPost |
+| CM-02 | Competition | slug, name, kind (`hackathon` / `contest`), date (`YYYY-MM` or `YYYY`), placement (display text), result (`won` / `placed` / `finalist` / `joined`), prize (optional, with amount), prizeSourceUrl (optional), photo, draft; hackathon only: hours, teamSize, role, built, demoUrl, recapPost, project (slug of the listed project built there; the build fails on an unknown or unlisted slug, and the project card carries the result) |
 | CM-03 | Post | slug, title, tag (til / thoughts), date, summary, related[], draft |
-| CM-04 | Milestone (Highlight) | date, ended (optional), type, label, company (optional), points (0 or more; 0 for certifications and events), link, photo (optional, co-located), summary (optional), featured (bool; exactly one) |
+| CM-04 | Milestone (Highlight) | date, ended (optional), type (education / internship / competition / certification / event / project / post / graduation), label, company (optional), points (0 or more; 0 for certifications and events), link, photo (optional, co-located), summary (optional), featured (bool; exactly one), highlight (bool; shown on the Home road), stamp (optional short word, e.g. "TOP 10"), details[] (optional lines on what the role involved, shown when the experience window is maximized) |
 | CM-05 | Skill / Tool | One registry entry each: id, name, kind (`skill` / `tool`), group (ai / frontend / backend / mobile / tools), level (daily / used in project / experimenting), usedFor (tools), usedIn[] (computed from listed projects). An unknown skill id on a project fails the build. |
 
 Content files shall be validated against these schemas at build time; an invalid file fails the build. Draft files shall be hidden from every page and the chat, and the build shall report their missing facts. Unlisted projects shall be reachable only by direct link and marked noindex.
 
 ### 1mil Tracker Point Rules (tunable)
 
-| Milestone | Points |
+Competitions score by level and result:
+
+| Level | Competed | Top 10 / finalist | Won |
+| --- | --- | --- | --- |
+| School / regional | 5,000 | 10,000 | 20,000 |
+| National | 15,000 | 70,000 | 120,000 |
+| International | 30,000 | 120,000 | 200,000 |
+
+| Other milestone | Points |
 | --- | --- |
 | Blog post | 1,000 |
-| Hackathon joined | 10,000 |
-| Competition (hackathon or contest) placed or finalist / won (from `result`) | 50,000 / 100,000 |
-| Project shipped with live demo | 50,000 |
-| Internship / job | 150,000 |
-| Graduation | 200,000 |
+| University enrollment | 10,000 |
+| Project shipped with live demo | 20,000 |
+| Internship | 30,000 |
+| Graduation | 50,000 |
+| Full-time job | 100,000 |
+
+Hackathons joined with no known level count as school / regional, competed.
 
 ### AI Chat (RAG Over The Site)
 

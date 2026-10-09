@@ -6,7 +6,7 @@ Rolan Jero Pinton is a Computer Science student at the University of Makati, maj
 
 He is currently building his path toward AI engineering, ML engineering, and backend development by working on real projects involving web applications, AI chatbots, RAG systems, APIs, and full-stack development.
 
-He is currently a QA/Builder Intern at Sofi AI Tech Solutions. His current focus is QA work, with the goal of transitioning into Builder work later on.
+He was an AI & QA Intern at Sofi AI Tech Solutions.
 
 ## Current Focus
 
@@ -30,7 +30,7 @@ His project experience includes full-stack systems, admin portals, donation plat
 
 ## Current Internship
 
-Rolan is currently a QA/Builder Intern at Sofi AI Tech Solutions.
+Rolan was an AI & QA Intern at Sofi AI Tech Solutions.
 
 Current role status:
 

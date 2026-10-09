@@ -1,6 +1,8 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
+import { Moon } from "pixelarticons/react/Moon";
+import { Sun } from "pixelarticons/react/Sun";
 import { Button } from "@/components/button";
 
 const KEY = "theme";
@@ -50,17 +52,18 @@ export function toggleTheme() {
   applyTheme();
 }
 
-export function ThemeToggle({ className = "" }: { className?: string }) {
+export function ThemeToggle({ className = "", variant = "secondary" }: { className?: string; variant?: "secondary" | "chip" }) {
   const dark = useSyncExternalStore(subscribe, isDark, () => false);
 
   return (
     <Button
-      variant="secondary"
+      variant={variant}
       className={className}
       onClick={toggleTheme}
       aria-label={dark ? "Switch to light theme" : "Switch to dark theme"}
     >
-      {dark ? "Light" : "Dark"}
+      {/* Pixel sun in dark mode (go light), pixel moon in light mode (go dark). */}
+      {dark ? <Sun className="size-5" aria-hidden="true" /> : <Moon className="size-5" aria-hidden="true" />}
     </Button>
   );
 }

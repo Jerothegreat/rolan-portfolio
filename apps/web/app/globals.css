@@ -12,6 +12,8 @@
   --lilac: #b9a7ff;
   --mint: #7ee0b5;
   --coral: #ff7a59;
+  --sky: #7cc8ff;
+  --pink: #ff9ecd;
   /* Text on gold, mint, or lilac is always #111111, in both themes. */
   --on-accent: #111111;
 
@@ -35,6 +37,8 @@
   --lilac: #8f7bea;
   --mint: #4cc495;
   --coral: #ff8a6c;
+  --sky: #4ba8e8;
+  --pink: #e87db0;
 }
 
 @media (min-width: 640px) {
@@ -56,11 +60,14 @@
   --color-lilac: var(--lilac);
   --color-mint: var(--mint);
   --color-coral: var(--coral);
+  --color-sky: var(--sky);
+  --color-pink: var(--pink);
   --color-on-accent: var(--on-accent);
 
   --font-display: var(--font-bricolage), system-ui, sans-serif;
   --font-sans: var(--font-inter), system-ui, sans-serif;
   --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+  --font-pixel: var(--font-silkscreen), ui-monospace, monospace;
 
   --text-h1: var(--fs-h1);
   --text-h1--line-height: 1.1;
@@ -73,14 +80,17 @@
   --text-mono: var(--fs-mono);
   --text-mono--line-height: 1.5;
 
-  --radius-card: 16px;
-  --radius-button: 12px;
-  --radius-input: 10px;
+  /* Retro-OS windows: square corners everywhere except pills. */
+  --radius-card: 0px;
+  --radius-button: 0px;
+  --radius-input: 0px;
   --radius-pill: 999px;
 
   --shadow-rest: 4px 4px 0 var(--ink);
   --shadow-hover: 6px 6px 0 var(--ink);
   --shadow-pressed: 0 0 0 var(--ink);
+  --shadow-window: 6px 6px 0 var(--ink);
+  --shadow-window-hover: 8px 8px 0 var(--ink);
 
   --container-page: 1120px;
 }
@@ -155,4 +165,243 @@
     opacity: 1;
     transform: none;
   }
+}
+
+/* Retro-OS desktop: a dithered dot pattern drawn from the ink token (a pattern, not a gradient fill). */
+.desk {
+  background-color: var(--bg);
+  background-image: radial-gradient(color-mix(in srgb, var(--ink) 16%, transparent) 1px, transparent 1.2px);
+  background-size: 6px 6px;
+}
+
+/* Tilted windows (±2°). Hover or keyboard focus straightens a window and brings it to the front. */
+.tilt {
+  transform: rotate(var(--tilt, 0deg));
+}
+
+.tilt:hover,
+.tilt:focus-within {
+  transform: rotate(0deg) translate(-2px, -2px);
+  box-shadow: var(--shadow-window-hover);
+  z-index: 30;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .tilt {
+    transition:
+      transform 120ms ease-out,
+      box-shadow 120ms ease-out;
+  }
+}
+
+/* Title bar stripes, as on classic Mac windows. */
+/* Blog post prose: tokens only, square corners, ink rules. */
+.post {
+  display: grid;
+  gap: 1.1rem;
+  line-height: 1.7;
+}
+.post h2 {
+  margin-top: 1rem;
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  line-height: 1.2;
+}
+.post h3 {
+  margin-top: 0.5rem;
+  font-weight: 700;
+}
+.post a {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+.post a:hover {
+  text-decoration-color: var(--coral);
+}
+.post ul,
+.post ol {
+  display: grid;
+  gap: 0.4rem;
+  padding-left: 1.4rem;
+}
+.post ul {
+  list-style: square;
+}
+.post ol {
+  list-style: decimal;
+}
+.post blockquote {
+  border-left: 3px solid var(--ink);
+  padding-left: 1rem;
+  color: var(--ink-muted);
+}
+.post code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background: var(--bg);
+  border: 2px solid var(--ink);
+  padding: 0 0.25rem;
+}
+.post pre {
+  overflow-x: auto;
+  border: 3px solid var(--ink);
+  background: var(--bg);
+  padding: 1rem;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.post pre code {
+  border: 0;
+  padding: 0;
+  background: none;
+}
+.post img {
+  border: 3px solid var(--ink);
+}
+
+/* Construction tape: hard-stop gold and ink stripes, no blending. */
+.hazard {
+  background: repeating-linear-gradient(-45deg, var(--gold) 0 10px, var(--ink) 10px 20px);
+}
+
+.title-stripes {
+  background: repeating-linear-gradient(to bottom, var(--on-accent) 0 2px, transparent 2px 4px);
+  opacity: 0.55;
+}
+
+/* 1mil.exe progress: blocks fill one by one once on load, like an old installer. */
+@media (prefers-reduced-motion: no-preference) {
+  .meter-on {
+    animation: meter-fill 1ms steps(1) calc(var(--i) * 70ms) both;
+  }
+}
+
+@keyframes meter-fill {
+  from {
+    background: transparent;
+  }
+  to {
+    background: var(--ink);
+  }
+}
+
+/* Road to 1mil: draws top to bottom in chunky steps, and stops pop in as the line reaches them.
+   `road-armed` is added by components/road-window.tsx only when motion is allowed. */
+.road-armed svg {
+  clip-path: inset(0 0 100% 0);
+}
+
+.road-armed .road-node {
+  opacity: 0;
+  scale: 0.85;
+}
+
+.road-play svg {
+  animation: road-draw 1.6s steps(24) forwards;
+}
+
+.road-play .road-node {
+  animation: road-pop 260ms steps(4) var(--d, 0s) forwards;
+}
+
+@keyframes road-draw {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes road-pop {
+  from {
+    opacity: 0;
+    scale: 0.85;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .road-armed svg {
+    clip-path: none;
+  }
+
+  .road-armed .road-node {
+    opacity: 1;
+    scale: 1;
+  }
+
+  .road-play svg,
+  .road-play .road-node {
+    animation: none;
+  }
+}
+
+/* Ticker under the menu bar: one copy's width per loop, paused on hover/focus, still under reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  .ticker {
+    overflow: hidden;
+  }
+
+  .ticker-track {
+    animation: ticker 40s linear infinite;
+  }
+
+  .ticker:hover .ticker-track,
+  .ticker:focus-within .ticker-track {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes ticker {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* 16-point starburst for stickers. */
+.sticker-burst {
+  clip-path: polygon(50% 0%, 59% 12%, 73% 4%, 76% 19%, 91% 17%, 87% 32%, 100% 38%, 90% 50%, 100% 62%, 87% 68%, 91% 83%, 76% 81%, 73% 96%, 59% 88%, 50% 100%, 41% 88%, 27% 96%, 24% 81%, 9% 83%, 13% 68%, 0% 62%, 10% 50%, 0% 38%, 13% 32%, 9% 17%, 24% 19%, 27% 4%, 41% 12%);
+}
+
+/* Retro-OS scrollbars: square gold thumb with an ink border on a dithered track. */
+/* Firefox only: in Chromium a standard scrollbar-color would switch off the ::-webkit styles below. */
+@supports (-moz-appearance: none) {
+  html {
+    scrollbar-color: var(--gold) var(--surface);
+  }
+}
+
+::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--surface);
+  background-image: radial-gradient(color-mix(in srgb, var(--ink) 22%, transparent) 1px, transparent 1.2px);
+  background-size: 4px 4px;
+  border-left: 3px solid var(--ink);
+}
+
+::-webkit-scrollbar-track:horizontal {
+  border-left: 0;
+  border-top: 3px solid var(--ink);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gold);
+  border: 3px solid var(--ink);
+  box-shadow: inset -3px -3px 0 color-mix(in srgb, var(--gold) 60%, #111111);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--coral);
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--ink);
 }

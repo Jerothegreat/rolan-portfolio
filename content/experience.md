@@ -1,16 +1,16 @@
 # Experience
 
-## QA/Builder Intern — Sofi AI Tech Solutions
+## AI & QA Intern — Sofi AI Tech Solutions
 
 ### Overview
 
-Rolan is currently a QA/Builder Intern at Sofi AI Tech Solutions.
+Rolan is an AI & QA Intern at Sofi AI Tech Solutions.
 
 He is currently focused on QA responsibilities and is expected to transition into Builder-related work later on.
 
 ### Current Role Status
 
-- Current position: QA/Builder Intern
+- Current position: AI & QA Intern
 - Current focus: QA
 - Future direction: Builder role responsibilities
 - Company: Sofi AI Tech Solutions

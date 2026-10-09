@@ -38,7 +38,7 @@ const HELP_LINES = [
   "  open <slug>  open a project's demo or repo",
   "  theme        toggle light/dark",
   "  contact      how to reach me",
-  "  ask <text>   ask the AI chat",
+  "  ask <text>   ask the AI chat (under construction)",
   "  clear        clear the screen",
   "  exit         close the terminal",
 ];
@@ -62,7 +62,7 @@ const commands: Record<string, (args: string, ctx: TerminalContext) => TerminalR
     return { lines: [`Opening ${project.title}…`], action: { type: "open-url", url } };
   },
   theme: () => ({ lines: ["Toggling theme."], action: { type: "toggle-theme" } }),
-  ask: () => ({ lines: ["The AI chat is coming soon. For now, try `projects` or `contact`."] }),
+  ask: () => ({ lines: ["The AI chat is under construction. For now, try `projects` or `contact`."] }),
   exit: () => ({ lines: [], action: { type: "close" } }),
   clear: () => ({ lines: [], action: { type: "clear" } }),
   contact: (_args, { contact }) => ({

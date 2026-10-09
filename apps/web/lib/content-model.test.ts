@@ -235,7 +235,7 @@ function competition(overrides: Partial<CompetitionInput> & Pick<CompetitionInpu
 }
 
 describe("content model: competition kinds", () => {
-  it.each(["hours", "teamSize", "role", "built", "demoUrl", "recapPost"] as const)(
+  it.each(["hours", "teamSize", "role", "built", "demoUrl", "recapPost", "project"] as const)(
     "rejects a contest carrying hackathon-only field %s, naming the file and field",
     (field) => {
       expect(() =>
@@ -246,6 +246,26 @@ describe("content model: competition kinds", () => {
       ).toThrow(new RegExp(`competitions/java-cup.*contest.*${field}`));
     },
   );
+});
+
+describe("content model: hackathon project link", () => {
+  it("rejects a hackathon linking a project that is not listed, naming the file and slug", () => {
+    expect(() =>
+      createContentModel({
+        projects: [...withSpotlight(), project({ slug: "ehanda", draft: true })],
+        competitions: [competition({ slug: "egov", project: "ehanda" })],
+      }),
+    ).toThrow(/competitions\/egov.*project "ehanda"/);
+  });
+
+  it("accepts a hackathon linking a listed project", () => {
+    const model = createContentModel({
+      projects: [...withSpotlight(), project({ slug: "ehanda" })],
+      competitions: [competition({ slug: "egov", project: "ehanda" })],
+    });
+
+    expect(model.competitions[0].project).toBe("ehanda");
+  });
 });
 
 describe("content model: competition required facts", () => {
@@ -330,6 +350,39 @@ describe("content model: milestones", () => {
     });
 
     expect(model.milestones.map((m) => m.label)).toEqual(["c", "b", "a"]);
+  });
+});
+
+describe("content model: featured highlight", () => {
+  it("returns the featured milestone and the most recent others, newest first", () => {
+    const model = createContentModel({
+      projects: withSpotlight(),
+      milestones: [
+        milestone({ label: "UMak", date: "2023-08" }),
+        milestone({ label: "eGovPH", date: "2026-07", featured: true }),
+        milestone({ label: "Globe", date: "2026-07" }),
+        milestone({ label: "Sofi", date: "2026-05" }),
+        milestone({ label: "Java", date: "2025-10" }),
+      ],
+    });
+
+    expect(model.featuredHighlight?.label).toBe("eGovPH");
+    expect(model.otherHighlights(3).map((m) => m.label)).toEqual(["Globe", "Sofi", "Java"]);
+  });
+
+  it("is undefined when no milestone is featured", () => {
+    const model = createContentModel({ projects: withSpotlight(), milestones: [milestone({ label: "a" })] });
+
+    expect(model.featuredHighlight).toBeUndefined();
+  });
+
+  it("rejects two featured milestones, naming both files", () => {
+    expect(() =>
+      createContentModel({
+        projects: withSpotlight(),
+        milestones: [milestone({ label: "a", featured: true }), milestone({ label: "b", featured: true })],
+      }),
+    ).toThrow(/at most one featured milestone, found 2: milestones\/a, milestones\/b/);
   });
 });
 
