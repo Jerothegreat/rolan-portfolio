@@ -100,12 +100,20 @@
     scroll-padding-top: calc(var(--spacing) * 24); /* 96px, on the 4px scale */
   }
 
+  /* Column layout keeps the status bar (footer) on the bottom edge when a page is short. */
   body {
+    display: flex;
+    flex-direction: column;
     background: var(--bg);
     color: var(--ink);
     font-family: var(--font-sans);
     font-size: var(--fs-body);
     line-height: 1.6;
+  }
+
+  /* Page main grows so the footer lands on the bottom edge of short pages. */
+  body > main {
+    flex: 1;
   }
 
   h1,
