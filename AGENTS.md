@@ -68,7 +68,7 @@ This is a single-context repository. See `docs/agents/domain.md` for the domain-
 
 ### Workflow docs
 
-Start at `docs/workflow/README.md`. Follow `roadmap.md` to the active plan, then read that plan's `plan.md`, `tasks.md`, `evidence.md`, and `gate.md` before changing code or documentation.
+Start at `docs/workflow/README.md`. Follow `roadmap.md` to the active plan, then read that plan's `plan.md`, `tasks.md`, `evidence.md`, and `gate.md` before changing code or documentation. The build loop (design first, feedback passes, verify, promote) is `docs/workflow/playbook.md`.
 
 ## Skill Override
 

@@ -57,6 +57,8 @@ The handoff also includes the review-tier prompt the owner pastes into Claude Co
 | A behavior change or bug fix has an executable test seam | Use `tdd` before implementation. |
 | A bug is non-trivial, intermittent, unclear, or hard to reproduce | Use `diagnosing-bugs` before `tdd`. |
 | A runnable state, logic, or UI question blocks a decision | Use `prototype` before production implementation. |
+| A new page, redesign, or new visual direction | Before any plan or code: ASCII wireframes in the plan, then a rendered reference board (2–3 directions, light and dark) for the owner to pick from (`docs/workflow/playbook.md` step 2). |
+| The owner sends notes on a running build | Run one feedback pass: restate, task line, build, verify, evidence row, report in the owner's order (playbook step 6). |
 | Web UI/UX design or visual polish in `apps/web` | Use `frontend-design` (or `design-taste-frontend`) constrained by `docs/standards/design-brief.md`. The brief's tokens and rules win over any skill default. |
 | Primary-source research is required | Use `research`; delegation is read-only and only when the user explicitly requests a subagent. |
 | A human-only dashboard, credential, DNS, or provisioning step blocks work | Use `wizard`. |
