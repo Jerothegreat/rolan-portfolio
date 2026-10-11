@@ -50,3 +50,15 @@ Record recurring bugs and setup issues once, newest first: symptom, root cause, 
 ### Production deploy after the monorepo move
 
 - `master` before Plan 02a was the root-level Next app. After promotion the app lives in `apps/web`, so the Vercel project's Root Directory must be `apps/web` (set once in Vercel settings) or the build fails. Vercel keeps serving the last good deploy until then.
+
+### Upstash env names from the Vercel integration
+
+- Symptom: visit counter stayed blank after connecting Upstash in Vercel.
+- Root cause: the Vercel Marketplace integration injects `KV_REST_API_URL` / `KV_REST_API_TOKEN`; the code read only `UPSTASH_REDIS_REST_URL` / `UPSTASH_REDIS_REST_TOKEN`.
+- Fix: `app/api/visits/route.ts` accepts either pair. Locally, `vercel env pull apps/web/.env.local` (or copy the two REST values). `KV_URL`, `REDIS_URL`, and the read-only token are unused.
+
+### `content/` moved to `apps/content/`
+
+- Symptom: `ContentRuleError: Content needs exactly one spotlight project, found 0`.
+- Root cause: Velite reads `root: "../../content"`; the folder had been moved under `apps/`.
+- Fix: keep content at the repo root `content/`.

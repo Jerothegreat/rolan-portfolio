@@ -1,11 +1,12 @@
 // Site-wide visit counter (one number in Upstash Redis). No IPs, cookies, or visitor data are
-// stored. Until UPSTASH_REDIS_REST_URL and UPSTASH_REDIS_REST_TOKEN are set it answers
-// { count: null } and the ticker leaves the counter out.
+// stored. Until UPSTASH_REDIS_REST_URL and UPSTASH_REDIS_REST_TOKEN (or the KV_REST_API_URL and
+// KV_REST_API_TOKEN names the Vercel Upstash integration injects) are set it answers { count: null }
+// and the ticker leaves the counter out.
 const KEY = "visits";
 
 async function redis(command: "incr" | "get") {
-  const url = process.env.UPSTASH_REDIS_REST_URL;
-  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
+  const url = process.env.UPSTASH_REDIS_REST_URL ?? process.env.KV_REST_API_URL;
+  const token = process.env.UPSTASH_REDIS_REST_TOKEN ?? process.env.KV_REST_API_TOKEN;
   if (!url || !token) return null;
   const res = await fetch(`${url}/${command}/${KEY}`, {
     method: command === "incr" ? "POST" : "GET",
