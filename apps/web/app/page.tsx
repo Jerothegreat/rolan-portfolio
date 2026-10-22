@@ -377,7 +377,7 @@ export default async function Home() {
                 )}
                 <p>
                   <Link href="/blog" className={link}>
-                    Open C:log →
+                    Open C:\blog →
                   </Link>
                 </p>
               </Window>
