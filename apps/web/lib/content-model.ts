@@ -55,6 +55,8 @@ export interface CompetitionInput {
   built?: string;
   demoUrl?: string;
   repoUrl?: string;
+  /** Skills registry ids, as on a project. */
+  skills?: string[];
   recapPost?: string;
   /** Slug of the listed project built at this hackathon; the carousel shows them as one card. */
   project?: string;
@@ -85,7 +87,7 @@ export interface MilestoneInput {
   featured?: boolean;
 }
 
-const HACKATHON_ONLY = ["hours", "teamSize", "role", "built", "demoUrl", "repoUrl", "recapPost", "project"] as const;
+const HACKATHON_ONLY = ["hours", "teamSize", "role", "built", "demoUrl", "repoUrl", "skills", "recapPost", "project"] as const;
 
 const COMPETITION_FACTS = ["date", "placement"] as const;
 
@@ -156,6 +158,11 @@ export function createContentModel<P extends ProjectInput, C extends Competition
     const extra = c.kind === "contest" ? HACKATHON_ONLY.filter((field) => c[field] !== undefined) : [];
     if (extra.length > 0) {
       throw new ContentRuleError(`${c.path}: a contest cannot have hackathon-only fields (${extra.join(", ")})`);
+    }
+    for (const id of c.skills ?? []) {
+      if (!skillById.has(id)) {
+        throw new ContentRuleError(`${c.path}: unknown skill id "${id}"`);
+      }
     }
   }
   const seen = new Map<string, string>();

@@ -91,6 +91,7 @@ const toHackathon = (c: (typeof site.competitions)[number]): CarouselHackathon =
   html: c.html,
   demoUrl: c.demoUrl,
   repoUrl: c.repoUrl,
+  skills: (c.skills ?? []).map((id) => skillName.get(id) ?? id),
   photo: c.photo,
   wip: site.wip.get(c.path),
 });

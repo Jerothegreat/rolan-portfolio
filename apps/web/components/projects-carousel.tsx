@@ -50,6 +50,7 @@ export type CarouselHackathon = {
   html: string;
   demoUrl?: string;
   repoUrl?: string;
+  skills: string[];
   photo?: string;
   /** Preview only: a draft shown as WIP, with what it still needs. */
   wip?: string[];
@@ -185,7 +186,7 @@ function Detail({ item }: { item: Item }) {
           </>
         ) : null}
       </dl>
-      {item.kind === "project" && item.skills.length > 0 ? (
+      {item.skills.length > 0 ? (
         <ul className="flex flex-wrap gap-2" aria-label="Built with">
           {item.skills.map((skill) => (
             <li key={skill} className="border-2 border-ink bg-surface px-2 font-mono text-mono">

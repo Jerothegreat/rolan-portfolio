@@ -6,8 +6,11 @@ date: "2026-05"
 built: Mayari Voice Agent (combined with Haliya)
 placement: Participant
 photo: /mayari-demo.jpg
+skills: [next-js, react, typescript, tailwind-css, express-js, drizzle-orm, postgresql, groq, agora-conversational-ai, azure-speech, leaflet]
 demoUrl: https://agora-mayari-frontend.vercel.app/
 repoUrl: https://github.com/Jerothegreat/Agora-Mayari
 ---
 
-Mayari is a real-time bilingual (Taglish) AI voice agent for Philippine medical clinics. It collects symptoms for patient intake, assesses urgency with Groq-powered LLMs under strict safety guardrails, and routes appointments.
+Mayari is a real-time bilingual (Taglish) AI voice agent for Philippine medical clinics. Patients talk to it through Agora Conversational AI, which runs the live speech-to-LLM-to-speech loop. It collects symptoms for intake, assesses urgency, and books the right specialty's slot, while deterministic safety rules override the model for high-risk symptom patterns.
+
+After the hackathon, the voice pipeline moved from Agora to LiveKit.

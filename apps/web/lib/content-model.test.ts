@@ -240,7 +240,7 @@ function competition(overrides: Partial<CompetitionInput> & Pick<CompetitionInpu
 }
 
 describe("content model: competition kinds", () => {
-  it.each(["hours", "teamSize", "role", "built", "demoUrl", "repoUrl", "recapPost", "project"] as const)(
+  it.each(["hours", "teamSize", "role", "built", "demoUrl", "repoUrl", "skills", "recapPost", "project"] as const)(
     "rejects a contest carrying hackathon-only field %s, naming the file and field",
     (field) => {
       expect(() =>
@@ -569,6 +569,16 @@ describe("content model: skills registry", () => {
         ],
       }),
     ).toThrow(/projects\/half-done: unknown skill id "nope"/);
+  });
+
+  it("rejects an unknown skill id on a hackathon, naming the file and id", () => {
+    expect(() =>
+      createContentModel({
+        skills: registry,
+        projects: withSpotlight(),
+        competitions: [competition({ slug: "devkada", skills: ["react", "nope"] })],
+      }),
+    ).toThrow(/competitions\/devkada: unknown skill id "nope"/);
   });
 
   it("computes usedIn from listed projects only, drafts and unlisted excluded, newest first", () => {

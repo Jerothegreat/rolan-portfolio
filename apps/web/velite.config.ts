@@ -44,15 +44,16 @@ const competitionFactsShape = {
   built: s.string().optional(),
   demoUrl: s.string().url().optional(),
   repoUrl: s.string().url().optional(),
+  skills: s.array(s.string()).optional(),
   recapPost: s.string().optional(),
   // Slug of the listed project built here; the carousel merges the two into one card.
   project: s.string().optional(),
 };
 
-const HACKATHON_ONLY = ["hours", "teamSize", "role", "built", "demoUrl", "repoUrl", "recapPost", "project"] as const;
+const HACKATHON_ONLY = ["hours", "teamSize", "role", "built", "demoUrl", "repoUrl", "skills", "recapPost", "project"] as const;
 
 /** A contest is an individual skills competition with no build. */
-const contestRefinement = (competition: { kind: "hackathon" | "contest" } & { hours?: number; teamSize?: number; role?: string; built?: string; demoUrl?: string; repoUrl?: string; recapPost?: string; project?: string }) =>
+const contestRefinement = (competition: { kind: "hackathon" | "contest" } & { hours?: number; teamSize?: number; role?: string; built?: string; demoUrl?: string; repoUrl?: string; skills?: string[]; recapPost?: string; project?: string }) =>
   competition.kind !== "contest" || HACKATHON_ONLY.every((field) => competition[field] === undefined);
 
 const CONTEST_REFINEMENT_MESSAGE = "a contest cannot have hackathon-only fields";

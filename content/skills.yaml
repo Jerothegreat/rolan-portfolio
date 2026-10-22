@@ -49,6 +49,17 @@ skills:
     kind: tool
     group: mobile
     level: used in project
+  - id: next-js
+    name: Next.js
+    kind: skill
+    group: frontend
+    level: used in project
+  - id: leaflet
+    name: Leaflet
+    kind: tool
+    group: frontend
+    level: used in project
+    usedFor: Interactive maps
   - id: capacitor
     name: Capacitor
     kind: skill
@@ -105,6 +116,30 @@ skills:
     group: ai
     level: used in project
     usedFor: Vector index for RAG retrieval
+  - id: gemini
+    name: Gemini
+    kind: tool
+    group: ai
+    level: used in project
+    usedFor: LLM for answers and query understanding
+  - id: groq
+    name: Groq
+    kind: tool
+    group: ai
+    level: used in project
+    usedFor: Fast Llama inference
+  - id: agora-conversational-ai
+    name: Agora Conversational AI
+    kind: tool
+    group: ai
+    level: used in project
+    usedFor: Real-time voice agent (speech to LLM to speech)
+  - id: azure-speech
+    name: Azure Speech
+    kind: tool
+    group: ai
+    level: used in project
+    usedFor: Text-to-speech
   - id: qdrant
     name: Qdrant
     kind: tool
@@ -126,6 +161,43 @@ skills:
     kind: skill
     group: frontend
     level: used in project
+  - id: postgresql
+    name: PostgreSQL
+    kind: tool
+    group: backend
+    level: used in project
+  - id: fastapi
+    name: FastAPI
+    kind: tool
+    group: backend
+    level: used in project
+  - id: sqlite
+    name: SQLite
+    kind: tool
+    group: backend
+    level: used in project
+  - id: telegram-bot-api
+    name: Telegram Bot API
+    kind: tool
+    group: backend
+    level: used in project
+  - id: drizzle-orm
+    name: Drizzle ORM
+    kind: tool
+    group: backend
+    level: used in project
+  - id: clerk
+    name: Clerk
+    kind: tool
+    group: backend
+    level: used in project
+    usedFor: Sign-in and user management
+  - id: socket-io
+    name: Socket.IO
+    kind: tool
+    group: backend
+    level: used in project
+    usedFor: Real-time updates
   - id: mysql
     name: MySQL
     kind: tool
