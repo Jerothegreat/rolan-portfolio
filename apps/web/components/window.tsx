@@ -20,7 +20,7 @@ type WindowProps = {
   color?: WindowColor;
   /** Degrees, within ±2 (design brief). Straightens on hover and focus. */
   tilt?: number;
-  /** Replaces the decorative _ □ × controls, for windows with real controls. */
+  /** Title-bar buttons, only for windows where they do something (e.g. □ maximize). */
   controls?: ReactNode;
   /** Optional menu row under the title bar. */
   menu?: ReactNode;
@@ -51,15 +51,7 @@ export function Window({
           <span className="truncate">{title}</span>
         </span>
         <span aria-hidden="true" className="title-stripes h-2.5 min-w-3 flex-1" />
-        {controls ?? (
-          <span aria-hidden="true" className="flex gap-1">
-            {["_", "□", "×"].map((c) => (
-              <span key={c} className="grid size-4 place-items-center border-2 border-current bg-surface font-mono text-[10px] leading-none text-ink">
-                {c}
-              </span>
-            ))}
-          </span>
-        )}
+        {controls}
       </div>
       {menu ? <div className="flex flex-wrap gap-x-4 border-b-[3px] border-ink px-3 py-1 text-mono">{menu}</div> : null}
       <div className={bodyClassName}>{children}</div>

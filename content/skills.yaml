@@ -39,6 +39,16 @@ skills:
     kind: skill
     group: frontend
     level: used in project
+  - id: react-native
+    name: React Native
+    kind: skill
+    group: mobile
+    level: used in project
+  - id: expo
+    name: Expo
+    kind: tool
+    group: mobile
+    level: used in project
   - id: capacitor
     name: Capacitor
     kind: skill
@@ -63,7 +73,7 @@ skills:
     name: NestJS
     kind: skill
     group: backend
-    level: experimenting
+    level: used in project
   - id: rest-apis
     name: REST APIs
     kind: skill
@@ -84,6 +94,17 @@ skills:
     kind: skill
     group: ai
     level: experimenting
+  - id: langgraph
+    name: LangGraph
+    kind: skill
+    group: ai
+    level: used in project
+  - id: faiss
+    name: FAISS
+    kind: tool
+    group: ai
+    level: used in project
+    usedFor: Vector index for RAG retrieval
   - id: qdrant
     name: Qdrant
     kind: tool

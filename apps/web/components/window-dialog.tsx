@@ -90,9 +90,6 @@ export function WindowDialog({ state, label, title, icon, color = "gold", width 
         {icon}
         <span className="truncate">{title}</span>
         <span aria-hidden="true" className="title-stripes h-2.5 min-w-3 flex-1" />
-        <button type="button" className={ctl} onClick={close} aria-label="Restore the window">
-          ▣
-        </button>
         <button type="button" className={ctl} onClick={close} aria-label="Close">
           ×
         </button>

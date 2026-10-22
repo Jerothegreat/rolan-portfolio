@@ -16,6 +16,10 @@ export interface ProjectInput {
   started?: string;
   ended?: string;
   skills?: string[];
+  cover?: string;
+  video?: string;
+  demoUrl?: string;
+  repoUrl?: string;
 }
 
 export type SkillGroup = "ai" | "frontend" | "backend" | "mobile" | "tools";
@@ -50,6 +54,7 @@ export interface CompetitionInput {
   role?: string;
   built?: string;
   demoUrl?: string;
+  repoUrl?: string;
   recapPost?: string;
   /** Slug of the listed project built at this hackathon; the carousel shows them as one card. */
   project?: string;
@@ -80,7 +85,7 @@ export interface MilestoneInput {
   featured?: boolean;
 }
 
-const HACKATHON_ONLY = ["hours", "teamSize", "role", "built", "demoUrl", "recapPost", "project"] as const;
+const HACKATHON_ONLY = ["hours", "teamSize", "role", "built", "demoUrl", "repoUrl", "recapPost", "project"] as const;
 
 const COMPETITION_FACTS = ["date", "placement"] as const;
 
@@ -93,6 +98,20 @@ export type CompleteProject<P extends ProjectInput> = P & Required<Pick<ProjectI
 export class ContentRuleError extends Error {
   name = "ContentRuleError";
 }
+
+/** What a card still needs before it can show: an image or video, and a demo or code link. */
+function showcaseGaps(media: string | undefined, links: (string | undefined)[]): string[] {
+  return [...(media ? [] : ["image"]), ...(links.some(Boolean) ? [] : ["link"])];
+}
+
+const projectGaps = (p: ProjectInput) => showcaseGaps(p.cover ?? p.video, [p.demoUrl, p.repoUrl]);
+
+/** A hackathon linked to a project shows as that project's card, so only an unlinked one needs its own. */
+const hackathonGaps = (c: CompetitionInput) =>
+  c.kind === "hackathon" && !c.project ? showcaseGaps(c.photo, [c.demoUrl, c.repoUrl]) : [];
+
+const notReady = (path: string, gaps: string[]) =>
+  new ContentRuleError(`${path}: not ready to show, missing ${gaps.join(", ")} (add them or set draft: true)`);
 
 /** Text for the hero internship badge: "ex-intern" only once the stint has an end month. */
 export function internshipBadge(internship: MilestoneInput | undefined): string | undefined {
@@ -107,6 +126,8 @@ export function createContentModel<P extends ProjectInput, C extends Competition
   competitions?: C[];
   milestones?: MilestoneInput[];
   skills?: SkillInput[];
+  /** Preview and local dev: list drafts that have their facts, marked WIP. Production leaves this off. */
+  showDrafts?: boolean;
 }) {
   const skills = input.skills ?? [];
   const skillById = new Map(skills.map((skill) => [skill.id, skill]));
@@ -129,6 +150,8 @@ export function createContentModel<P extends ProjectInput, C extends Competition
       if (missing.length > 0) {
         throw new ContentRuleError(`${c.path}: missing ${missing.join(", ")} (add them or set draft: true)`);
       }
+      const gaps = hackathonGaps(c);
+      if (gaps.length > 0) throw notReady(c.path, gaps);
     }
     const extra = c.kind === "contest" ? HACKATHON_ONLY.filter((field) => c[field] !== undefined) : [];
     if (extra.length > 0) {
@@ -162,6 +185,8 @@ export function createContentModel<P extends ProjectInput, C extends Competition
     if ((p.status === "live" || p.status === "archived") && !p.ended) {
       throw new ContentRuleError(`${p.path}: a ${p.status} project needs an end month (ended)`);
     }
+    const gaps = p.unlisted ? [] : projectGaps(p);
+    if (gaps.length > 0) throw notReady(p.path, gaps);
   }
   for (const p of input.projects) {
     if (p.spotlight && (p.unlisted || p.draft)) {
@@ -175,7 +200,25 @@ export function createContentModel<P extends ProjectInput, C extends Competition
       `Content needs exactly one spotlight project, found ${spotlights.length}. Check: ${files.join(", ")}`,
     );
   }
-  const listedProjects = (input.projects.filter((p) => !p.draft && !p.unlisted) as unknown as CompleteProject<P>[]).sort(
+  // Every draft, with what it still needs; an empty list means it is ready to publish.
+  const missingFacts = input.projects
+    .filter((p) => p.draft)
+    .map((p) => {
+      const missing: string[] = REQUIRED_FACTS.filter((field) => !p[field]);
+      if (p.status !== "building" && !p.ended) missing.push("ended");
+      missing.push(...projectGaps(p));
+      return { path: p.path, missing };
+    })
+    .concat(
+      competitions
+        .filter((c) => c.draft)
+        .map((c) => ({ path: c.path, missing: [...COMPETITION_FACTS.filter((field) => !c[field]), ...hackathonGaps(c)] })),
+    );
+  // A draft missing only its image or link can still render as a card, so preview shows it as WIP.
+  const wip = new Map(
+    input.showDrafts ? missingFacts.filter((d) => d.missing.every((m) => m === "image" || m === "link")).map((d) => [d.path, d.missing]) : [],
+  );
+  const listedProjects = (input.projects.filter((p) => (!p.draft || wip.has(p.path)) && !p.unlisted) as unknown as CompleteProject<P>[]).sort(
     (a, b) => b.started.localeCompare(a.started) || a.title.localeCompare(b.title),
   );
   const listedSlugs = new Set(listedProjects.map((p) => p.slug));
@@ -184,20 +227,7 @@ export function createContentModel<P extends ProjectInput, C extends Competition
       throw new ContentRuleError(`${c.path}: project "${c.project}" is not a listed project`);
     }
   }
-  const missingFacts = input.projects
-    .filter((p) => p.draft)
-    .map((p) => {
-      const missing: string[] = REQUIRED_FACTS.filter((field) => !p[field]);
-      if (p.status !== "building" && !p.ended) missing.push("ended");
-      return { path: p.path, missing };
-    })
-    .concat(
-      competitions
-        .filter((c) => c.draft)
-        .map((c) => ({ path: c.path, missing: COMPETITION_FACTS.filter((field) => !c[field]) as string[] })),
-    )
-    .filter((d) => d.missing.length > 0);
-  const listedCompetitions = (competitions.filter((c) => !c.draft) as Array<
+  const listedCompetitions = (competitions.filter((c) => !c.draft || wip.has(c.path)) as Array<
     C & Required<Pick<CompetitionInput, (typeof COMPETITION_FACTS)[number]>>
   >).sort((a, b) => b.date.localeCompare(a.date));
   const sortedMilestones = [...milestones].sort((a, b) => b.date.localeCompare(a.date) || a.label.localeCompare(b.label));
@@ -218,7 +248,9 @@ export function createContentModel<P extends ProjectInput, C extends Competition
     /** Listed projects, spotlight included (it is listed). */
     projectCount: listedProjects.length,
     missingFacts,
-    /** Listed competitions (non-drafts), newest first. */
+    /** Drafts listed as WIP (showDrafts only): path to what each still needs. */
+    wip,
+    /** Listed competitions (non-drafts, plus WIP drafts), newest first. */
     competitions: listedCompetitions,
     /** Milestones, newest first. */
     milestones: sortedMilestones,

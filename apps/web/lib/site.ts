@@ -6,14 +6,9 @@ export const site = createContentModel({
   competitions,
   milestones,
   skills: skills[0]?.skills ?? [],
+  // Vercel previews (the test branch) and local dev show drafts as WIP; production never does.
+  showDrafts: process.env.VERCEL_ENV === "preview" || process.env.NODE_ENV === "development",
 });
-
-// Build-time report: drafts stay hidden, and this tells Rolan what each one still needs.
-if (site.missingFacts.length > 0) {
-  console.warn(
-    ["Drafts missing facts:", ...site.missingFacts.map((d) => `  ${d.path}: ${d.missing.join(", ")}`)].join("\n"),
-  );
-}
 
 /** Published posts, newest first (ties by title), for /blog. */
 export const publishedPosts = posts

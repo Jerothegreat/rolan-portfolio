@@ -11,6 +11,8 @@ function project(overrides: Partial<ProjectInput> & Pick<ProjectInput, "slug">):
     status: "live",
     started: "2025-01",
     ended: "2025-06",
+    cover: "/cover.jpg",
+    demoUrl: "https://demo.example",
     ...overrides,
   };
 }
@@ -230,12 +232,15 @@ function competition(overrides: Partial<CompetitionInput> & Pick<CompetitionInpu
     kind: "hackathon",
     date: "2026-01",
     placement: "Participant",
+    photo: "/photo.jpg",
+    // A contest has no build, so no demo link.
+    ...(overrides.kind === "contest" ? {} : { demoUrl: "https://demo.example" }),
     ...overrides,
   };
 }
 
 describe("content model: competition kinds", () => {
-  it.each(["hours", "teamSize", "role", "built", "demoUrl", "recapPost", "project"] as const)(
+  it.each(["hours", "teamSize", "role", "built", "demoUrl", "repoUrl", "recapPost", "project"] as const)(
     "rejects a contest carrying hackathon-only field %s, naming the file and field",
     (field) => {
       expect(() =>
@@ -431,6 +436,81 @@ describe("content model: internshipBadge", () => {
 
   it("reads nothing when there is no internship", () => {
     expect(internshipBadge(undefined)).toBeUndefined();
+  });
+});
+
+describe("content model: showcase-ready cards", () => {
+  it("rejects a listed project with no image or video and no demo or code link, naming the file and gaps", () => {
+    expect(() =>
+      createContentModel({
+        projects: [alunsina(), project({ slug: "restaurant", cover: undefined, demoUrl: undefined })],
+      }),
+    ).toThrow("projects/restaurant: not ready to show, missing image, link (add them or set draft: true)");
+  });
+
+  it("accepts a video for the image and a repo for the link", () => {
+    expect(() =>
+      createContentModel({
+        projects: [alunsina(), project({ slug: "kalinga", cover: undefined, demoUrl: undefined, video: "https://youtu.be/x", repoUrl: "https://github.com/x" })],
+      }),
+    ).not.toThrow();
+  });
+
+  it("rejects a listed hackathon with no photo, unless it links a project", () => {
+    expect(() =>
+      createContentModel({ projects: withSpotlight(), competitions: [competition({ slug: "devcamp", photo: undefined })] }),
+    ).toThrow("competitions/devcamp: not ready to show, missing image (add them or set draft: true)");
+    expect(() =>
+      createContentModel({
+        projects: [alunsina(), project({ slug: "ehanda" })],
+        competitions: [competition({ slug: "egov", photo: undefined, demoUrl: undefined, project: "ehanda" })],
+      }),
+    ).not.toThrow();
+  });
+
+  it("lists a draft's missing image and link with its missing facts", () => {
+    const model = createContentModel({
+      projects: [alunsina(), project({ slug: "cced", draft: true, cover: undefined, demoUrl: undefined })],
+      competitions: [competition({ slug: "zero", draft: true, placement: undefined, demoUrl: undefined })],
+    });
+
+    expect(model.missingFacts).toEqual([
+      { path: "projects/cced", missing: ["image", "link"] },
+      { path: "competitions/zero", missing: ["placement", "link"] },
+    ]);
+  });
+
+  it("with showDrafts, lists drafts that have their facts as WIP with what they need, and keeps the rest hidden", () => {
+    const model = createContentModel({
+      showDrafts: true,
+      projects: [
+        alunsina(),
+        project({ slug: "cced", draft: true, cover: undefined, demoUrl: undefined }),
+        project({ slug: "restaurant", draft: true }),
+        project({ slug: "agentic", draft: true, role: undefined }),
+      ],
+      competitions: [competition({ slug: "zero", draft: true, photo: undefined }), competition({ slug: "devcamp", draft: true, placement: undefined })],
+    });
+
+    expect(model.listedProjects.map((p) => p.slug)).toEqual(["alunsina", "cced", "restaurant"]);
+    expect(model.competitions.map((c) => c.slug)).toEqual(["zero"]);
+    expect(model.wip.get("projects/cced")).toEqual(["image", "link"]);
+    expect(model.wip.get("projects/restaurant")).toEqual([]);
+    expect(model.wip.get("competitions/zero")).toEqual(["image"]);
+    expect(model.wip.has("projects/alunsina")).toBe(false);
+  });
+
+  it("without showDrafts, lists no drafts and marks nothing WIP", () => {
+    const model = createContentModel({ projects: [alunsina(), project({ slug: "restaurant", draft: true })] });
+
+    expect(model.listedProjects.map((p) => p.slug)).toEqual(["alunsina"]);
+    expect(model.wip.size).toBe(0);
+  });
+
+  it("still lists a draft with nothing missing, so it can be published", () => {
+    const model = createContentModel({ projects: [alunsina(), project({ slug: "restaurant", draft: true })] });
+
+    expect(model.missingFacts).toEqual([{ path: "projects/restaurant", missing: [] }]);
   });
 });
 

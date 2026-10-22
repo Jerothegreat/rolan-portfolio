@@ -36,14 +36,9 @@ export function ExperienceWindow({ jobs }: { jobs: Job[] }) {
         tilt={-1}
         bodyClassName=""
         controls={
-          <span className="flex gap-1">
-            <span aria-hidden="true" className={`${ctl} cursor-default hover:bg-surface hover:text-ink`}>
-              _
-            </span>
-            <button type="button" className={ctl} onClick={maximize} aria-label="Maximize: show everything I did in each role">
-              □
-            </button>
-          </span>
+          <button type="button" className={ctl} onClick={maximize} aria-label="Maximize: show everything I did in each role">
+            □
+          </button>
         }
       >
         <div className="grid gap-4 p-6">

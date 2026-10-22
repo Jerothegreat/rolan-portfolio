@@ -6,8 +6,9 @@ import { ChevronRight } from "pixelarticons/react/ChevronRight";
 import { Folder } from "pixelarticons/react/Folder";
 import { MediaSlot } from "@/components/media-slot";
 import { Pill } from "@/components/pill";
+import { Stamp } from "@/components/stamp";
 import { Window, type WindowColor } from "@/components/window";
-import { WindowDialog, useWindowDialog } from "@/components/window-dialog";
+import { WindowDialog, ctl, useWindowDialog } from "@/components/window-dialog";
 import { monthLabel } from "@/lib/month";
 import { prefersReducedMotion } from "@/lib/use-reduced-motion";
 
@@ -32,6 +33,8 @@ export type CarouselProject = {
   cover?: string;
   video?: string;
   builtAt?: BuiltAt;
+  /** Preview only: a draft shown as WIP, with what it still needs. */
+  wip?: string[];
 };
 
 export type CarouselHackathon = {
@@ -46,7 +49,10 @@ export type CarouselHackathon = {
   built?: string;
   html: string;
   demoUrl?: string;
+  repoUrl?: string;
   photo?: string;
+  /** Preview only: a draft shown as WIP, with what it still needs. */
+  wip?: string[];
 };
 
 type Item = ({ kind: "project" } & CarouselProject) | ({ kind: "hackathon" } & CarouselHackathon);
@@ -80,7 +86,7 @@ const btn =
   "grid size-9 cursor-pointer place-items-center border-2 border-ink bg-surface shadow-[2px_2px_0_var(--ink)] hover:bg-gold hover:text-on-accent active:translate-x-0.5 active:translate-y-0.5 active:shadow-none";
 
 function Links({ item }: { item: Item }) {
-  const repoUrl = item.kind === "project" ? item.repoUrl : undefined;
+  const { repoUrl } = item;
   if (!item.demoUrl && !repoUrl) return null;
   return (
     <p className="flex flex-wrap gap-4 text-[15px]">
@@ -221,6 +227,12 @@ export function ProjectsCarousel({ projects, hackathons }: { projects: CarouselP
   }
 
   // Switching items inside the popup starts the next write-up at its top.
+  // Opens the popup for card i, growing out of that card.
+  function details(event: React.MouseEvent<HTMLButtonElement>, i: number) {
+    setActive(i);
+    max.open(event, event.currentTarget.closest("li"));
+  }
+
   function show(i: number) {
     setActive(i);
     max.dialog.current?.querySelector(".desk")?.scrollTo({ top: 0 });
@@ -285,8 +297,23 @@ export function ProjectsCarousel({ projects, hackathons }: { projects: CarouselP
                 tilt={TILTS[i % TILTS.length]}
                 className="flex h-full flex-col"
                 bodyClassName="flex flex-1 flex-col gap-3 p-4"
+                controls={
+                  <button type="button" className={ctl} onClick={(event) => details(event, i)} aria-label={`Maximize: details for ${name(item)}`}>
+                    □
+                  </button>
+                }
               >
                 <Media item={item} />
+                {item.wip ? (
+                  <>
+                    <Stamp color="coral" tilt={6} className="-right-3 top-12">
+                      WIP
+                    </Stamp>
+                    <p className="border-2 border-dashed border-ink px-2 py-1 font-mono text-mono">
+                      {item.wip.length > 0 ? `draft · needs ${item.wip.join(", ")}` : "draft · ready: remove draft: true"}
+                    </p>
+                  </>
+                ) : null}
                 <p className="font-pixel text-[12px] text-ink-muted">{period(item)}</p>
                 <h3 className="text-h3">{name(item)}</h3>
                 {item.kind === "project" ? (
@@ -311,10 +338,7 @@ export function ProjectsCarousel({ projects, hackathons }: { projects: CarouselP
                   <button
                     type="button"
                     aria-label={`Details: ${name(item)}`}
-                    onClick={(event) => {
-                      setActive(i);
-                      max.open(event, event.currentTarget.closest("li"));
-                    }}
+                    onClick={(event) => details(event, i)}
                     className="cursor-pointer border-2 border-ink bg-surface px-3 py-0.5 font-pixel text-[12px] shadow-[2px_2px_0_var(--ink)] hover:bg-gold hover:text-on-accent active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
                   >
                     <span aria-hidden="true">□ </span>Details
@@ -322,6 +346,11 @@ export function ProjectsCarousel({ projects, hackathons }: { projects: CarouselP
                   {item.demoUrl ? (
                     <a href={item.demoUrl} className={`${link} text-[15px]`}>
                       Demo ↗
+                    </a>
+                  ) : null}
+                  {item.repoUrl ? (
+                    <a href={item.repoUrl} className={`${link} text-[15px]`}>
+                      Code ↗
                     </a>
                   ) : null}
                 </p>

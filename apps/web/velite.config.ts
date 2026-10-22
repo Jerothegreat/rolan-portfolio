@@ -1,4 +1,5 @@
 import { defineCollection, defineConfig, s } from "velite";
+import { createContentModel } from "./lib/content-model";
 
 const month = s.string().regex(/^\d{4}-(0[1-9]|1[0-2])$/, "use YYYY-MM");
 
@@ -42,15 +43,16 @@ const competitionFactsShape = {
   role: s.string().optional(),
   built: s.string().optional(),
   demoUrl: s.string().url().optional(),
+  repoUrl: s.string().url().optional(),
   recapPost: s.string().optional(),
   // Slug of the listed project built here; the carousel merges the two into one card.
   project: s.string().optional(),
 };
 
-const HACKATHON_ONLY = ["hours", "teamSize", "role", "built", "demoUrl", "recapPost", "project"] as const;
+const HACKATHON_ONLY = ["hours", "teamSize", "role", "built", "demoUrl", "repoUrl", "recapPost", "project"] as const;
 
 /** A contest is an individual skills competition with no build. */
-const contestRefinement = (competition: { kind: "hackathon" | "contest" } & { hours?: number; teamSize?: number; role?: string; built?: string; demoUrl?: string; recapPost?: string; project?: string }) =>
+const contestRefinement = (competition: { kind: "hackathon" | "contest" } & { hours?: number; teamSize?: number; role?: string; built?: string; demoUrl?: string; repoUrl?: string; recapPost?: string; project?: string }) =>
   competition.kind !== "contest" || HACKATHON_ONLY.every((field) => competition[field] === undefined);
 
 const CONTEST_REFINEMENT_MESSAGE = "a contest cannot have hackathon-only fields";
@@ -158,4 +160,13 @@ export default defineConfig({
     clean: true,
   },
   collections: { projects, competitions, milestones, posts, skills },
+  // Checks the content rules on every content build and lists what each hidden draft still needs.
+  complete: ({ projects, competitions, milestones, skills }) => {
+    const { missingFacts } = createContentModel({ projects, competitions, milestones, skills: skills[0]?.skills ?? [] });
+    if (missingFacts.length > 0) {
+      console.warn(
+        ["Hidden drafts (add what is missing, then remove draft: true):", ...missingFacts.map((d) => `  ${d.path}: ${d.missing.length > 0 ? `missing ${d.missing.join(", ")}` : "ready"}`)].join("\n"),
+      );
+    }
+  },
 });

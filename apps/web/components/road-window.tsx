@@ -88,7 +88,7 @@ function RoadMap({ stops, total, goal, full }: { stops: Stop[]; total: number; g
       <ol className="contents">
         {stops.map((s, i) => (
           <li key={s.path} className={`road-node absolute ${width}`} style={place(i)}>
-            <Window title={monthLabel(s.date)} controls={<span />} color={colors[i]} tilt={TILTS[i % TILTS.length]} bodyClassName="grid gap-1 px-3 py-2 text-[14px] leading-snug">
+            <Window title={monthLabel(s.date)} color={colors[i]} tilt={TILTS[i % TILTS.length]} bodyClassName="grid gap-1 px-3 py-2 text-[14px] leading-snug">
               <span className="font-medium">
                 {s.link ? (
                   <a href={s.link} className="underline underline-offset-4 decoration-2 hover:decoration-coral">
@@ -173,14 +173,9 @@ export function RoadWindow({ highlights, stops, total, goal }: RoadProps) {
         icon={<MapIcon className="size-4" aria-hidden="true" />}
         bodyClassName=""
         controls={
-          <span className="flex gap-1">
-            <span aria-hidden="true" className={`${ctl} cursor-default hover:bg-surface hover:text-ink`}>
-              _
-            </span>
-            <button type="button" className={ctl} onClick={maximize} aria-label={`Maximize: show the full road, all ${stops.length} stops`}>
-              □
-            </button>
-          </span>
+          <button type="button" className={ctl} onClick={maximize} aria-label={`Maximize: show the full road, all ${stops.length} stops`}>
+            □
+          </button>
         }
       >
         <h2 className="sr-only">Road to 1,000,000</h2>

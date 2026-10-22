@@ -75,6 +75,7 @@ const toCarousel = (p: (typeof site.listedProjects)[number]): CarouselProject =>
   cover: p.cover,
   video: p.video,
   builtAt: builtAt.get(p.slug),
+  wip: site.wip.get(p.path),
 });
 
 const toHackathon = (c: (typeof site.competitions)[number]): CarouselHackathon => ({
@@ -89,7 +90,9 @@ const toHackathon = (c: (typeof site.competitions)[number]): CarouselHackathon =
   built: c.built,
   html: c.html,
   demoUrl: c.demoUrl,
+  repoUrl: c.repoUrl,
   photo: c.photo,
+  wip: site.wip.get(c.path),
 });
 
 // Only the fields the experience window draws reach the client bundle.

@@ -76,7 +76,7 @@ Overlap, tilt, and offsets are visual only. DOM order is reading order and tab o
 
 ## Components
 
-- **Window:** title bar (pixel icon, filename-style title, stripes, decorative `_ □ ×`), optional menu row, body. Real controls replace the decorative ones only where the window does something (the road's maximize).
+- **Window:** title bar (pixel icon, filename-style title, stripes), optional menu row, body. No decorative `_ □ ×`: a title-bar button appears only when it works (□ maximizes the road, experience, and project cards; × closes a maximized window).
 - **Home order:** hero pile, experience + tech stack, projects carousel, road, In the news + blog, GitHub, contact.
 - **Scrollbars:** square gold thumb with a 3px ink border on a dithered track (WebKit/Chromium); gold on surface in Firefox.
 - **Menu bar** (sticky nav, above every window): logo, links (Experience, Projects, Road, Blog, Contact), the 1mil tray readout, `Ask my AI` (lilac), and a pixel sun/moon theme toggle, all as compact pixel chips. There is no separate terminal button: the terminal opens from the desktop icon or `~`, and the `~` hint lives only in the status bar. **Status bar** (footer): links, terminal hint, tracker total.

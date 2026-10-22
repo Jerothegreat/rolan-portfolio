@@ -1,35 +1,33 @@
 # Experience
 
-## AI & QA Intern — Sofi AI Tech Solutions
+## AI Solutions Engineer Intern — Sofi AI Tech Solution Inc.
+
+May 2026 - July 2026
 
 ### Overview
 
-Rolan is an AI & QA Intern at Sofi AI Tech Solutions.
+Rolan was an AI Solutions Engineer Intern at Sofi AI Tech Solution Inc., building AI backends and automation for client operations.
 
-He is currently focused on QA responsibilities and is expected to transition into Builder-related work later on.
+### What He Built
 
-### Current Role Status
-
-- Current position: AI & QA Intern
-- Current focus: QA
-- Future direction: Builder role responsibilities
-- Company: Sofi AI Tech Solutions
-
-### Current Learning From This Role
-
-This internship is helping Rolan understand:
-
-- How AI-powered products are tested
-- How product behavior is validated
-- How QA helps improve reliability
-- How to identify issues in AI-assisted systems
-- How Builder work may connect product logic, AI workflows, and implementation
+- Refactored a client chatbot's legacy backend with LangGraph, FAISS, Google Cloud Storage, and Cloud Run
+- Cut the chatbot's response latency from 2 minutes to 4-10 seconds (30x speedup)
+- Scaled retrieval across thousands of internal documents so admin staff and 80+ distributed branches can find enterprise files instantly
+- Built an AI onboarding website that converts property PDFs into Markdown and dynamic templates
+- Automated contract generation with Google Apps Script and Sheets, processing 100+ page document batches in minutes
 
 ### How This Connects to His AI Engineering Path
 
-The internship supports Rolan's AI engineering path by exposing him to real AI product workflows.
+The internship put Rolan on real AI solutions work: retrieval architecture, agent orchestration with LangGraph, cloud deployment on Google Cloud, and automation that removes manual work for a client's operations team.
 
-It also helps him understand that building AI applications is not only about generating answers, but also about testing, validation, reliability, user experience, and continuous improvement.
+---
+
+## Intern — Globe Telecom PH
+
+July 2026 - September 2026
+
+- Built operational dashboards and automated workflows in Google Workspace to track critical VIP service metrics across enterprise teams
+- Engineered data pipelines with Google Colab and Google Apps Script to aggregate, transform, and sync CSV datasets across master spreadsheets with over 30 million data cells
 
 ---
 

@@ -15,11 +15,12 @@ const hackathonOnlyValues = {
   role: "Full Stack Developer",
   built: "eHanda, incident reporting for the eGovPH Super App",
   demoUrl: "https://e-handa.vercel.app/",
+  repoUrl: "https://github.com/Jerothegreat/Agora-Mayari",
   recapPost: "2026-08-competition-egovph-hackathon",
 } as const;
 
 describe("velite competition schema", () => {
-  it.each(["hours", "teamSize", "role", "built", "demoUrl", "recapPost"] as const)(
+  it.each(["hours", "teamSize", "role", "built", "demoUrl", "repoUrl", "recapPost"] as const)(
     "rejects a contest carrying hackathon-only field %s",
     (field) => {
       expect(() => competitionSchema.parse({ ...contest(), [field]: hackathonOnlyValues[field] })).toThrow(

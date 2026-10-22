@@ -6,6 +6,7 @@
 - `master` is the promotion target and the branch the production deploy tracks.
 - Feature branches are optional isolation, not a requirement.
 - Do not use a heavy GitFlow process.
+- Work in progress lives in content files as `draft: true`, never on a separate branch, so `master` stays a fast-forward of `test`. Production hides drafts; the `test` preview deploy and local dev show them as WIP cards. Keep Vercel Deployment Protection on for previews so only the owner sees them.
 
 ## Promotion
 

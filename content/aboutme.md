@@ -6,7 +6,7 @@ Rolan Jero Pinton is a Computer Science student at the University of Makati, maj
 
 He is currently building his path toward AI engineering, ML engineering, and backend development by working on real projects involving web applications, AI chatbots, RAG systems, APIs, and full-stack development.
 
-He was an AI & QA Intern at Sofi AI Tech Solutions.
+He was an AI Solutions Engineer Intern at Sofi AI Tech Solution Inc., then an intern at Globe Telecom PH.
 
 ## Current Focus
 
@@ -28,16 +28,15 @@ He has also represented the University of Makati in the Java Programming categor
 
 His project experience includes full-stack systems, admin portals, donation platforms, reservation systems, and AI-assisted chatbot development.
 
-## Current Internship
+## Internships
 
-Rolan was an AI & QA Intern at Sofi AI Tech Solutions.
+Rolan was an AI Solutions Engineer Intern at Sofi AI Tech Solution Inc. (May 2026 - July 2026):
 
-Current role status:
+- Refactored a client chatbot's legacy backend with LangGraph, FAISS, Google Cloud Storage, and Cloud Run, cutting response latency from 2 minutes to 4-10 seconds (30x speedup)
+- Scaled retrieval across thousands of internal documents for admin staff and 80+ distributed branches
+- Built an AI onboarding website that converts property PDFs into Markdown and dynamic templates, with Google Apps Script and Sheets automating contract generation
 
-- Currently focused on QA tasks
-- Expected to transition into Builder responsibilities later
-- Learning how AI-based products are tested, validated, and improved
-- Building stronger understanding of quality assurance, product behavior, and AI-assisted workflows
+He then interned at Globe Telecom PH (July 2026 - September 2026), building Google Workspace dashboards for VIP service metrics and data pipelines over master spreadsheets with 30 million+ data cells.
 
 ## Career Direction
 
