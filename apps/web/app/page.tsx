@@ -17,11 +17,12 @@ import { Reveal } from "@/components/reveal";
 import { RoadWindow } from "@/components/road-window";
 import { Stamp } from "@/components/stamp";
 import { TrackerWindow } from "@/components/tracker-window";
+import { BrandIcon } from "@/components/brand-icon";
 import { MediaSlot } from "@/components/media-slot";
 import { ContributionGraph } from "@/components/contribution-graph";
 import { ExperienceWindow, type Job } from "@/components/experience-window";
 import { SectionTitle } from "@/components/section-title";
-import { ProjectsCarousel, type CarouselHackathon, type CarouselProject } from "@/components/projects-carousel";
+import { ProjectsCarousel, type CarouselHackathon, type CarouselProject, type CarouselSkill } from "@/components/projects-carousel";
 import { Window } from "@/components/window";
 import { internshipBadge, type SkillGroup } from "@/lib/content-model";
 import { githubContributions } from "@/lib/contributions";
@@ -48,7 +49,8 @@ const groupColors: Record<SkillGroup, string> = {
   tools: "bg-gold",
 };
 
-const skillName = new Map(site.skills.map((skill) => [skill.id, skill.name]));
+const skillById = new Map(site.skills.map((skill) => [skill.id, skill]));
+const toSkill = (id: string): CarouselSkill => ({ name: skillById.get(id)?.name ?? id, icon: skillById.get(id)?.icon });
 
 // A hackathon that built a listed project shows as part of that project's card.
 const builtAt = new Map(
@@ -68,7 +70,7 @@ const toCarousel = (p: (typeof site.listedProjects)[number]): CarouselProject =>
   started: p.started,
   ended: p.ended,
   team: p.team,
-  skills: p.skills.map((id) => skillName.get(id) ?? id),
+  skills: p.skills.map(toSkill),
   html: p.html,
   demoUrl: p.demoUrl,
   repoUrl: p.repoUrl,
@@ -91,7 +93,7 @@ const toHackathon = (c: (typeof site.competitions)[number]): CarouselHackathon =
   html: c.html,
   demoUrl: c.demoUrl,
   repoUrl: c.repoUrl,
-  skills: (c.skills ?? []).map((id) => skillName.get(id) ?? id),
+  skills: (c.skills ?? []).map(toSkill),
   photo: c.photo,
   wip: site.wip.get(c.path),
 });
@@ -281,11 +283,7 @@ export default async function Home() {
                             title={used ? `Used in ${skill.usedIn.map((p) => p.title).join(", ")}` : skill.level}
                             className={`inline-flex items-center gap-1.5 border-2 border-ink px-2 font-mono text-mono ${used ? `${groupColors[group.group]} text-on-accent` : "bg-surface"}`}
                           >
-                            {skill.icon ? (
-                              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="size-3.5 shrink-0">
-                                <path d={skill.icon} />
-                              </svg>
-                            ) : null}
+                            <BrandIcon path={skill.icon} />
                             {skill.name}
                             <span className="sr-only">
                               {`, ${skill.level}`}

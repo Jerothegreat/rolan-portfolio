@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { ChevronLeft } from "pixelarticons/react/ChevronLeft";
 import { ChevronRight } from "pixelarticons/react/ChevronRight";
 import { Folder } from "pixelarticons/react/Folder";
+import { BrandIcon } from "@/components/brand-icon";
 import { MediaSlot } from "@/components/media-slot";
 import { Pill } from "@/components/pill";
 import { Stamp } from "@/components/stamp";
@@ -25,7 +26,7 @@ export type CarouselProject = {
   started: string;
   ended?: string;
   team: boolean;
-  skills: string[];
+  skills: CarouselSkill[];
   /** The project body as HTML, shown in the popup. */
   html: string;
   demoUrl?: string;
@@ -50,11 +51,14 @@ export type CarouselHackathon = {
   html: string;
   demoUrl?: string;
   repoUrl?: string;
-  skills: string[];
+  skills: CarouselSkill[];
   photo?: string;
   /** Preview only: a draft shown as WIP, with what it still needs. */
   wip?: string[];
 };
+
+/** A skill chip: its name and, when it has one, its brand logo path. */
+export type CarouselSkill = { name: string; icon?: string };
 
 type Item = ({ kind: "project" } & CarouselProject) | ({ kind: "hackathon" } & CarouselHackathon);
 
@@ -189,8 +193,9 @@ function Detail({ item }: { item: Item }) {
       {item.skills.length > 0 ? (
         <ul className="flex flex-wrap gap-2" aria-label="Built with">
           {item.skills.map((skill) => (
-            <li key={skill} className="border-2 border-ink bg-surface px-2 font-mono text-mono">
-              {skill}
+            <li key={skill.name} className="inline-flex items-center gap-1.5 border-2 border-ink bg-surface px-2 font-mono text-mono">
+              <BrandIcon path={skill.icon} />
+              {skill.name}
             </li>
           ))}
         </ul>
