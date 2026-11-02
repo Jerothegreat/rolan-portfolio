@@ -42,7 +42,7 @@ Silkscreen is only for title bars, the menu bar, the status bar, stamps, and ico
 
 ## Pixel Icons
 
-Icons come from `pixelarticons` (MIT, 24×24 grid, `fill="currentColor"`), imported per icon from `pixelarticons/react/<Name>`. Icons are decorative (`aria-hidden`) next to visible text. There is at most one mascot, made as a pixel sprite on a locked palette.
+Icons come from `pixelarticons` (MIT, 24×24 grid, `fill="currentColor"`), imported per icon from `pixelarticons/react/<Name>`. The one exception is the skills panel: each skill chip may show its brand logo from `simple-icons` (CC0), set by an optional `icon` slug in `content/skills.yaml`, drawn in `currentColor` (never the brand color). Icons are decorative (`aria-hidden`) next to visible text. There is at most one mascot, made as a pixel sprite on a locked palette.
 
 ## Spacing And Layout
 

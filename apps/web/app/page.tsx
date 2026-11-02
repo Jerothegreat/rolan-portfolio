@@ -279,8 +279,13 @@ export default async function Home() {
                           <li
                             key={skill.id}
                             title={used ? `Used in ${skill.usedIn.map((p) => p.title).join(", ")}` : skill.level}
-                            className={`border-2 border-ink px-2 font-mono text-mono ${used ? `${groupColors[group.group]} text-on-accent` : "bg-surface"}`}
+                            className={`inline-flex items-center gap-1.5 border-2 border-ink px-2 font-mono text-mono ${used ? `${groupColors[group.group]} text-on-accent` : "bg-surface"}`}
                           >
+                            {skill.icon ? (
+                              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="size-3.5 shrink-0">
+                                <path d={skill.icon} />
+                              </svg>
+                            ) : null}
                             {skill.name}
                             <span className="sr-only">
                               {`, ${skill.level}`}

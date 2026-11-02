@@ -31,6 +31,8 @@ export interface SkillInput {
   group: SkillGroup;
   level: "daily" | "used in project" | "experimenting";
   usedFor?: string;
+  /** Brand logo as 24x24 SVG path data, resolved from the simple-icons slug in skills.yaml. */
+  icon?: string;
 }
 
 export interface Skill extends SkillInput {

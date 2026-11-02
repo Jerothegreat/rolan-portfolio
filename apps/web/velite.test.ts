@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { competitionSchema, milestoneSchema, projectSchema } from "./velite.config";
+import { competitionSchema, milestoneSchema, projectSchema, skillSchema } from "./velite.config";
 
 const contest = () => ({
   name: "eGovPH Hackathon 2026",
@@ -79,5 +79,21 @@ describe("velite project schema: tags", () => {
     });
 
     expect(parsed.tags).toEqual(["ai", "full-stack", "hackathon"]);
+  });
+});
+
+describe("velite skill schema: icon", () => {
+  const skill = { id: "react", name: "React", kind: "skill", group: "frontend", level: "used in project" } as const;
+
+  it("resolves a simple-icons slug to its 24x24 SVG path", () => {
+    expect(skillSchema.parse({ ...skill, icon: "react" }).icon).toMatch(/^M/);
+  });
+
+  it("rejects an unknown slug, pointing at simpleicons.org", () => {
+    expect(() => skillSchema.parse({ ...skill, icon: "not-a-brand" })).toThrow(/simpleicons\.org/);
+  });
+
+  it("leaves icon empty when the skill has no logo", () => {
+    expect(skillSchema.parse(skill).icon).toBeUndefined();
   });
 });

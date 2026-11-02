@@ -1,26 +1,31 @@
 skills:
   - id: java
     name: Java
+    icon: openjdk
     kind: skill
     group: backend
     level: experimenting
   - id: javascript
     name: JavaScript
+    icon: javascript
     kind: skill
     group: backend
     level: experimenting
   - id: typescript
     name: TypeScript
+    icon: typescript
     kind: skill
     group: frontend
     level: used in project
   - id: python
     name: Python
+    icon: python
     kind: skill
     group: ai
     level: experimenting
   - id: php
     name: PHP
+    icon: php
     kind: skill
     group: backend
     level: used in project
@@ -31,57 +36,68 @@ skills:
     level: used in project
   - id: kotlin
     name: Kotlin
+    icon: kotlin
     kind: skill
     group: mobile
     level: experimenting
   - id: react
     name: React
+    icon: react
     kind: skill
     group: frontend
     level: used in project
   - id: react-native
     name: React Native
+    icon: react
     kind: skill
     group: mobile
     level: used in project
   - id: expo
     name: Expo
+    icon: expo
     kind: tool
     group: mobile
     level: used in project
   - id: next-js
     name: Next.js
+    icon: nextdotjs
     kind: skill
     group: frontend
     level: used in project
   - id: leaflet
     name: Leaflet
+    icon: leaflet
     kind: tool
     group: frontend
     level: used in project
     usedFor: Interactive maps
   - id: capacitor
     name: Capacitor
+    icon: capacitor
     kind: skill
     group: mobile
     level: used in project
   - id: flutter
     name: Flutter
+    icon: flutter
     kind: skill
     group: mobile
     level: experimenting
   - id: node-js
     name: Node.js
+    icon: nodedotjs
     kind: skill
     group: backend
     level: used in project
   - id: express-js
     name: Express.js
+    icon: express
     kind: skill
     group: backend
     level: used in project
   - id: nestjs
     name: NestJS
+    icon: nestjs
     kind: skill
     group: backend
     level: used in project
@@ -102,11 +118,13 @@ skills:
     level: experimenting
   - id: langchain
     name: LangChain
+    icon: langchain
     kind: skill
     group: ai
     level: experimenting
   - id: langgraph
     name: LangGraph
+    icon: langgraph
     kind: skill
     group: ai
     level: used in project
@@ -118,6 +136,7 @@ skills:
     usedFor: Vector index for RAG retrieval
   - id: gemini
     name: Gemini
+    icon: googlegemini
     kind: tool
     group: ai
     level: used in project
@@ -130,6 +149,7 @@ skills:
     usedFor: Fast Llama inference
   - id: agora-conversational-ai
     name: Agora Conversational AI
+    icon: agora
     kind: tool
     group: ai
     level: used in project
@@ -142,6 +162,7 @@ skills:
     usedFor: Text-to-speech
   - id: qdrant
     name: Qdrant
+    icon: qdrant
     kind: tool
     group: ai
     level: experimenting
@@ -153,6 +174,7 @@ skills:
     level: experimenting
   - id: dot-net
     name: ".NET"
+    icon: dotnet
     kind: skill
     group: backend
     level: used in project
@@ -163,83 +185,99 @@ skills:
     level: used in project
   - id: postgresql
     name: PostgreSQL
+    icon: postgresql
     kind: tool
     group: backend
     level: used in project
   - id: fastapi
     name: FastAPI
+    icon: fastapi
     kind: tool
     group: backend
     level: used in project
   - id: sqlite
     name: SQLite
+    icon: sqlite
     kind: tool
     group: backend
     level: used in project
   - id: telegram-bot-api
     name: Telegram Bot API
+    icon: telegram
     kind: tool
     group: backend
     level: used in project
   - id: drizzle-orm
     name: Drizzle ORM
+    icon: drizzle
     kind: tool
     group: backend
     level: used in project
   - id: clerk
     name: Clerk
+    icon: clerk
     kind: tool
     group: backend
     level: used in project
     usedFor: Sign-in and user management
   - id: socket-io
     name: Socket.IO
+    icon: socketdotio
     kind: tool
     group: backend
     level: used in project
     usedFor: Real-time updates
   - id: mysql
     name: MySQL
+    icon: mysql
     kind: tool
     group: backend
     level: used in project
   - id: vite
     name: Vite
+    icon: vite
     kind: tool
     group: frontend
     level: used in project
   - id: supabase
     name: Supabase
+    icon: supabase
     kind: tool
     group: backend
     level: used in project
   - id: tailwind-css
     name: Tailwind CSS
+    icon: tailwindcss
     kind: skill
     group: frontend
     level: used in project
   - id: oidc-sso
     name: OIDC SSO
+    icon: openid
     kind: skill
     group: backend
     level: used in project
   - id: html
     name: HTML
+    icon: html5
     kind: skill
     group: frontend
     level: used in project
   - id: css
     name: CSS
+    icon: css
     kind: skill
     group: frontend
     level: used in project
   - id: firebase
     name: Firebase
+    icon: firebase
     kind: tool
     group: backend
     level: used in project
   - id: firestore
     name: Firestore
+    icon: firebase
     kind: tool
     group: backend
     level: used in project

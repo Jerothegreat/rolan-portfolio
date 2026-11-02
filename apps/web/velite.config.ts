@@ -1,3 +1,4 @@
+import * as simpleIcons from "simple-icons";
 import { defineCollection, defineConfig, s } from "velite";
 import { createContentModel } from "./lib/content-model";
 
@@ -136,6 +137,8 @@ const milestones = defineCollection({
   }),
 });
 
+const brandIcons = new Map(Object.values(simpleIcons).map((icon) => [icon.slug, icon.path]));
+
 // The single skills registry; project `skills[]` hold these ids.
 const skillShape = {
   id: s.string().regex(/^[a-z][a-z0-9-]*$/, "use lowercase kebab-case ids"),
@@ -144,12 +147,20 @@ const skillShape = {
   group: s.enum(["ai", "frontend", "backend", "mobile", "tools"]),
   level: s.enum(["daily", "used in project", "experimenting"]),
   usedFor: s.string().optional(),
+  // A simple-icons slug, resolved here to its 24x24 SVG path so the icon set never reaches the app bundle.
+  icon: s
+    .string()
+    .refine((slug) => brandIcons.has(slug), { message: "unknown logo slug; find the right one at https://simpleicons.org" })
+    .transform((slug) => brandIcons.get(slug)!)
+    .optional(),
 };
+
+export const skillSchema = s.object(skillShape);
 
 const skills = defineCollection({
   name: "Skill",
   pattern: "skills.yaml",
-  schema: s.object({ skills: s.array(s.object(skillShape)) }),
+  schema: s.object({ skills: s.array(skillSchema) }),
 });
 
 export default defineConfig({
